@@ -104,6 +104,12 @@
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\crud-xamarin.Core\crud-xamarin.Core.csproj">
+      <Project>{d0e0f415-d276-44e6-a781-f3837deccd23}</Project>
+      <Name>crud-xamarin.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.
