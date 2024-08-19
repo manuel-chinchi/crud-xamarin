@@ -20,7 +20,6 @@ namespace crud_xamarin
     {
         RecyclerView recyclerView;
         ArticleAdapter adapter;
-        List<Article> articles;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -45,9 +44,8 @@ namespace crud_xamarin
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
 
             var articleService = new ArticleService();
-            articles = articleService.GetArticles();
 
-            adapter = new ArticleAdapter(articles);
+            adapter = new ArticleAdapter(articleService.GetArticles());
             recyclerView.SetAdapter(adapter);
         }
     }
