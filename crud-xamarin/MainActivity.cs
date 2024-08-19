@@ -28,7 +28,15 @@ namespace crud_xamarin
             testText.Text = article.Name;
 
             #endregion
+
+            #region test article view
+
+            Button btnArticles = FindViewById<Button>(Resource.Id.btnArticles);
+            btnArticles.Click += delegate { StartActivity(typeof(ArticlesActivity)); };
+
+            #endregion
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
