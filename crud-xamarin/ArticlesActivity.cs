@@ -7,6 +7,7 @@ using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 using crud_xamarin.Core.Models;
 using crud_xamarin.Core.Services;
+using crud_xamarin.Decorations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,11 @@ namespace crud_xamarin
             var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.articleRecyclerView);
+
+            int color = Android.Graphics.Color.Gray;
+            int dividerHeight = 2;
+            recyclerView.AddItemDecoration(new GridItemDecoration(color, dividerHeight));
+
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
 
 
