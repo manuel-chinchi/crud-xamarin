@@ -9,7 +9,7 @@
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:gravity="center_vertical"
-    android:id="@+id/linearLayout1" >
+    android:id="@+id/linearLayout1">
     <TextView
         android:text="@string/txt_menu"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -29,10 +29,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnCategories" />
-    <TextView
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtTest" />
 </LinearLayout>

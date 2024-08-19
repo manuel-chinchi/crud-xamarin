@@ -14,20 +14,8 @@ namespace crud_xamarin
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            // Set our view from the "main" layout resource
+
             SetContentView(Resource.Layout.activity_main);
-
-            #region test service (crud-xamarin.Core)
-
-            // preliminar logic from back
-            var articleService = new ArticleService();
-            var article = articleService.GetArticleById(1);
-
-            // components
-            var testText = FindViewById<TextView>(Resource.Id.txtTest);
-            testText.Text = article.Name;
-
-            #endregion
 
             #region test article view
 

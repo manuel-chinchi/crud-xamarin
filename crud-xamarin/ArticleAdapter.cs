@@ -50,11 +50,6 @@ namespace crud_xamarin
             Id = itemView.FindViewById<TextView>(Resource.Id.colId);
             Name = itemView.FindViewById<TextView>(Resource.Id.colName);
             Details = itemView.FindViewById<TextView>(Resource.Id.colDetails);
-            
-            //Details = itemView.FindViewById<TextView>(Resource.Id.colDescription);
-            //Id = itemView.FindViewById<TextView>(Resource.Id.column3);
-            //Name = itemView.FindViewById<TextView>(Resource.Id.column1);
-            //Details = itemView.FindViewById<TextView>(Resource.Id.column2);
         }
     }
 }
