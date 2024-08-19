@@ -28,10 +28,6 @@ namespace crud_xamarin
 
             SetContentView(Resource.Layout.articles);
 
-            //Button btnGoBack = FindViewById<Button>(Resource.Id.btnGoBack);
-            //btnGoBack.Click += delegate { StartActivity(typeof(MainActivity)); };
-
-            //var lvwArticles = FindViewById<ListView>(Resource.Id.articleListView);
             var btnCreate = FindViewById<Button>(Resource.Id.btnAgregar);
             var btnEdit = FindViewById<Button>(Resource.Id.btnEditar);
             var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
@@ -48,13 +44,9 @@ namespace crud_xamarin
 
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
 
-
-
             var articleService = new ArticleService();
-            //var articles = articleService.GetArticles();
             articles = articleService.GetArticles();
 
-            //lvwArticles.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, articles.ConvertAll(a => a.Name));
             adapter = new ArticleAdapter(articles);
             recyclerView.SetAdapter(adapter);
         }

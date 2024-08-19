@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
-  este elemento tiene como finalidad simular el borde de una celda de una tabla 
-  creada a partir de los elementos
-  -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle"
     >

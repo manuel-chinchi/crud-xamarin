@@ -39,13 +39,11 @@ namespace crud_xamarin.Decorations
             {
                 View child = parent.GetChildAt(i);
 
-                // Dibujar la línea inferior
                 if (i < childCount - 1)
                 {
                     c.DrawLine(child.Left, child.Bottom, child.Right, child.Bottom, _paint);
                 }
 
-                // Dibujar la línea derecha
                 c.DrawLine(child.Right, child.Top, child.Right, child.Bottom, _paint);
             }
         }
@@ -54,8 +52,8 @@ namespace crud_xamarin.Decorations
         {
             base.GetItemOffsets(outRect, view, parent, state);
 
-            outRect.Bottom = _dividerHeight; // Espacio para la línea inferior
-            outRect.Right = _dividerHeight;  // Espacio para la línea derecha
+            outRect.Bottom = _dividerHeight;
+            outRect.Right = _dividerHeight;
         }
     }
 }
