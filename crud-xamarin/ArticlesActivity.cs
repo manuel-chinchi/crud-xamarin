@@ -38,9 +38,13 @@ namespace crud_xamarin
 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.articleRecyclerView);
 
-            int color = Android.Graphics.Color.Gray;
-            int dividerHeight = 2;
-            recyclerView.AddItemDecoration(new GridItemDecoration(color, dividerHeight));
+            #region old: drawing line separator for data grid
+
+            //int color = Android.Graphics.Color.Gray;
+            //int dividerHeight = 2;
+            //recyclerView.AddItemDecoration(new GridItemDecoration(color, dividerHeight));
+
+            #endregion
 
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
 

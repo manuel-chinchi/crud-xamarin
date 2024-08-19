@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="60dp"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="0dp">
 
     <TextView
         android:id="@+id/colId"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:foreground="@drawable/border_cell_item"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Column 3"
         android:padding="4dp"
@@ -17,7 +18,8 @@
     <TextView
         android:id="@+id/colName"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:foreground="@drawable/border_cell_item"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Column 1"
         android:padding="4dp"
@@ -26,7 +28,8 @@
     <TextView
         android:id="@+id/colDetails"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:foreground="@drawable/border_cell_item"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="Column 2"
         android:padding="4dp"
