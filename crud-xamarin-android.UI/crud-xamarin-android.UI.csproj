@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>crud_xamarin</RootNamespace>
-    <AssemblyName>crud-xamarin-android</AssemblyName>
+    <AssemblyName>crud-xamarin-android.UI</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Deterministic>True</Deterministic>
     <AndroidApplication>True</AndroidApplication>
