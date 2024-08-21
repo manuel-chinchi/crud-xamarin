@@ -28,10 +28,6 @@ namespace crud_xamarin
 
             SetContentView(Resource.Layout.activity_article);
 
-            var btnCreate = FindViewById<Button>(Resource.Id.btnAgregar);
-            var btnEdit = FindViewById<Button>(Resource.Id.btnEditar);
-            var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
-
             recyclerView = FindViewById<RecyclerView>(Resource.Id.lstArticles);
 
             #region old: drawing line separator for data grid
