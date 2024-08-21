@@ -19,8 +19,8 @@ namespace crud_xamarin
 
             #region test article view
 
-            Button btnArticles = FindViewById<Button>(Resource.Id.btnArticles);
-            btnArticles.Click += delegate { StartActivity(typeof(ArticlesActivity)); };
+            Button btnArticles = FindViewById<Button>(Resource.Id.btn_articles);
+            btnArticles.Click += delegate { StartActivity(typeof(ArticleActivity)); };
 
             #endregion
         }

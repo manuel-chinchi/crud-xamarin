@@ -61,8 +61,8 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArticleAdapter.cs" />
-    <Compile Include="ArticlesActivity.cs" />
+    <Compile Include="Adapters\ArticleAdapter.cs" />
+    <Compile Include="ArticleActivity.cs" />
     <Compile Include="Decorations\GridItemDecoration.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -99,7 +99,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
@@ -112,12 +111,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\articles.xml">
+    <AndroidResource Include="Resources\layout\activity_article.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\article_item.xml">
+    <AndroidResource Include="Resources\layout\item_article.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
