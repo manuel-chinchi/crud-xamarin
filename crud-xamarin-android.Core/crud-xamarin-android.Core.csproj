@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>crud_xamarin.Core</RootNamespace>
-    <AssemblyName>crud-xamarin.Core</AssemblyName>
+    <AssemblyName>crud-xamarin-android.Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Deterministic>True</Deterministic>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>

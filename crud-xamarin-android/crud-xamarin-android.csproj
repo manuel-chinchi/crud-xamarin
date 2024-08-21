@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>crud_xamarin</RootNamespace>
-    <AssemblyName>crud-xamarin</AssemblyName>
+    <AssemblyName>crud-xamarin-android</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Deterministic>True</Deterministic>
     <AndroidApplication>True</AndroidApplication>
@@ -105,9 +105,9 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\crud-xamarin.Core\crud-xamarin.Core.csproj">
+    <ProjectReference Include="..\crud-xamarin-android.Core\crud-xamarin-android.Core.csproj">
       <Project>{d0e0f415-d276-44e6-a781-f3837deccd23}</Project>
-      <Name>crud-xamarin.Core</Name>
+      <Name>crud-xamarin-android.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
