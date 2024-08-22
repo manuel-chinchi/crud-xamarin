@@ -8,30 +8,30 @@
     <TextView
         android:id="@+id/colId"
         android:layout_width="0dp"
-        android:foreground="@drawable/border_cell_item"
+        android:foreground="@drawable/border_item_article"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Column 3"
+        android:text="col 1"
         android:padding="4dp"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/colName"
         android:layout_width="0dp"
-        android:foreground="@drawable/border_cell_item"
+        android:foreground="@drawable/border_item_article"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Column 1"
+        android:text="col 2"
         android:padding="4dp"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/colDetails"
         android:layout_width="0dp"
-        android:foreground="@drawable/border_cell_item"
+        android:foreground="@drawable/border_item_article"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Column 2"
+        android:text="col 3"
         android:padding="4dp"
         android:textSize="16sp" />
 

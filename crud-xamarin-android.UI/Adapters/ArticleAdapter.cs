@@ -5,13 +5,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
-using crud_xamarin.Core.Models;
+using crud_xamarin_android.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace crud_xamarin
+namespace crud_xamarin_android.UI.Adapters
 {
     public class ArticleAdapter : RecyclerView.Adapter
     {
@@ -34,7 +34,7 @@ namespace crud_xamarin
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            var view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.article_item, parent, false);
+            var view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.item_article, parent, false);
             return new ArticleViewHolder(view);
         }
     }

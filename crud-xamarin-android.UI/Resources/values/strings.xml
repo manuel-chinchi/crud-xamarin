@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">crud_xamarin</string>
+    <string name="action_settings">Settings</string>
+  <!--activity_main.xml-->
+    <string name="title_main">Menu</string>
+    <string name="action_articles">Articles</string>
+    <string name="action_categories">Categories</string>
+  <!--activity_article.xml-->
+  <string name="col_id_article">ID</string>
+  <string name="col_name_article">Name</string>
+  <string name="col_details_article">Details</string>
+  <string name="action_add_article">Agregar</string>
+  <string name="action_edit_article">Editar</string>
+  <string name="action_delete_article">Eliminar</string>
+  <string name="action_more_article">Más opciones</string>
+
+</resources>

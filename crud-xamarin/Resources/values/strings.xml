@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">crud_xamarin</string>
-    <string name="txt_menu">Menu</string>
-    <string name="txt_articles">Articles</string>
-    <string name="txt_categories">Categories</string>
-    <string name="action_settings">Settings</string>
-</resources>

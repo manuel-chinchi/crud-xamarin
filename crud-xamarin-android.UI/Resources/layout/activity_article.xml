@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ID"
+            android:text="@string/col_id_article"
             android:textStyle="bold"
             android:padding="4dp"
             android:textSize="16sp" />
@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Name"
+            android:text="@string/col_name_article"
             android:textStyle="bold"
             android:padding="4dp"
             android:textSize="16sp" />
@@ -43,14 +43,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Details"
+            android:text="@string/col_details_article"
             android:textStyle="bold"
             android:padding="4dp"
             android:textSize="16sp" />
     </LinearLayout>
 
+    <!--Rendering item_article.xml layout-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/articleRecyclerView" 
+        android:id="@+id/lstArticles" 
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -58,7 +59,7 @@
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"/>
 
-    <!--options buttons on bottom-->
+    <!--Options buttons on bottom-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +73,7 @@
             android:layout_marginEnd="4dp"
             android:padding="3dp"
             android:layout_weight="1"
-            android:text="Agregar" />
+            android:text="@string/action_add_article" />
 
         <Button
             android:id="@+id/btnEditar"
@@ -82,7 +83,7 @@
             android:layout_marginEnd="4dp"
             
             android:layout_weight="1"
-            android:text="Editar" />
+            android:text="@string/action_edit_article" />
 
         <Button
             android:id="@+id/btnEliminar"
@@ -92,7 +93,7 @@
             android:layout_marginEnd="4dp"
             android:padding="3dp"
             android:layout_weight="1"
-            android:text="Eliminar" />
+            android:text="@string/action_delete_article" />
 
         <Button
             android:id="@+id/btnMasOpciones"
@@ -101,7 +102,7 @@
             android:layout_marginStart="4dp"
             android:padding="3dp"
             android:layout_weight="1"
-            android:text="Más Opciones" />
+            android:text="@string/action_more_article" />
 
     </LinearLayout>
 </LinearLayout>
