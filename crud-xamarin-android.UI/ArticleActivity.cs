@@ -20,7 +20,6 @@ namespace crud_xamarin_android.UI
     public class ArticleActivity : Activity
     {
         RecyclerView recyclerView;
-        ArticleAdapter adapter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,11 +38,17 @@ namespace crud_xamarin_android.UI
             #endregion
 
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
+            var articles = new ArticleService().GetArticles();
+            recyclerView.SetAdapter(new ArticleAdapter(articles));
 
-            var articleService = new ArticleService();
+            var btnAdd = FindViewById<Button>(Resource.Id.btnAgregar);
+            btnAdd.Click += BtnAdd_Click;
+        }
 
-            adapter = new ArticleAdapter(articleService.GetArticles());
-            recyclerView.SetAdapter(adapter);
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(CreateArticleActivity));
+            StartActivity(intent);
         }
     }
 }
