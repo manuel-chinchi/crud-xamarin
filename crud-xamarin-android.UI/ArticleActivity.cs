@@ -5,16 +5,16 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
-using crud_xamarin.Adapters;
-using crud_xamarin.Core.Models;
-using crud_xamarin.Core.Services;
-using crud_xamarin.Decorations;
+using crud_xamarin_android.UI.Adapters;
+using crud_xamarin_android.Core.Models;
+using crud_xamarin_android.Core.Services;
+using crud_xamarin_android.UI.Decorations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace crud_xamarin
+namespace crud_xamarin_android.UI
 {
     [Activity(Label = "ArticlesActivity")]
     public class ArticleActivity : Activity

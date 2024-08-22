@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace crud_xamarin.Core.Models
+namespace crud_xamarin_android.Core.Models
 {
     public class Article
     {

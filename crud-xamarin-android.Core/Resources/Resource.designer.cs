@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("crud_xamarin.Core.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("crud_xamarin_android.Core.Resource", IsApplication=false)]
 
-namespace crud_xamarin.Core
+namespace crud_xamarin_android.Core
 {
 	
 	

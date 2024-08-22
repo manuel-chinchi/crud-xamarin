@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace crud_xamarin.Decorations
+namespace crud_xamarin_android.UI.Decorations
 {
     public class GridItemDecoration : RecyclerView.ItemDecoration
     {
