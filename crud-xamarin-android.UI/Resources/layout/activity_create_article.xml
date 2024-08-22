@@ -51,7 +51,7 @@
             android:id="@+id/btnAceptar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Aceptar"
+            android:text="@string/action_accept_create_article"
             android:layout_weight="1"
             android:layout_marginEnd="8dp" />
 
@@ -61,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Cancelar" />
+            android:text="@string/action_cancel_create_article" />
 
     </LinearLayout>
 </LinearLayout>

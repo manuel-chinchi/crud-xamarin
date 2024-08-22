@@ -35,7 +35,7 @@ namespace crud_xamarin_android.UI
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
-            var toast = Toast.MakeText(this, "¡Articulo agregado exitosamente!", ToastLength.Short);
+            var toast = Toast.MakeText(this, Resource.String.message_success_article_created, ToastLength.Short);
             toast.SetGravity(GravityFlags.Top | GravityFlags.CenterHorizontal, 0, 0);
             toast.Show();
 
