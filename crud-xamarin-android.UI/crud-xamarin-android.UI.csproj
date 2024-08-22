@@ -121,7 +121,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\border_cell_item.xml">
+    <AndroidResource Include="Resources\drawable\border_item_article.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

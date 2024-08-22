@@ -4968,7 +4968,7 @@ namespace crud_xamarin_android.UI
 			public const int avd_show_password = 2131165277;
 			
 			// aapt resource value: 0x7F07005E
-			public const int border_cell_item = 2131165278;
+			public const int border_item_article = 2131165278;
 			
 			// aapt resource value: 0x7F07005F
 			public const int btn_checkbox_checked_mtrl = 2131165279;
