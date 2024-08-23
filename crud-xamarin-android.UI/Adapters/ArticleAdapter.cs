@@ -34,6 +34,7 @@ namespace crud_xamarin_android.UI.Adapters
             viewHolder.Id.Text = articles[position].Id.ToString();
 
             viewHolder.Selected.CheckedChange -= null;
+            viewHolder.Selected.Checked = selectedPositions.Contains(holder.Position);
             viewHolder.Selected.CheckedChange += (s, e) =>
             {
                 if (e.IsChecked)
@@ -61,6 +62,22 @@ namespace crud_xamarin_android.UI.Adapters
             // NOTE 23.08.24:If the list of positions ordered from largest to smallest is not returned, deleting rows will present problems
             selectedPositions.Sort((a, b) => b.CompareTo(a));
             return selectedPositions;
+        }
+
+        public void SelectAllItems(bool isSelected)
+        {
+            selectedPositions.Clear();
+
+            if (isSelected)
+            {
+                for (int i = 0; i < articles.Count; i++)
+                {
+                    selectedPositions.Add(i);
+                }
+            }
+
+            // Notifica al adaptador que los datos han cambiado
+            NotifyDataSetChanged();
         }
 
         internal void ClearSelectedPositions()

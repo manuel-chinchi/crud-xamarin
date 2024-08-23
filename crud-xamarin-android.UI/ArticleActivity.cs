@@ -56,6 +56,21 @@ namespace crud_xamarin_android.UI
             var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
             btnDelete.Enabled = false;
             btnDelete.Click += BtnDelete_Click;
+
+            var chkSelectAllItems = FindViewById<CheckBox>(Resource.Id.chkSelectAllItems);
+            chkSelectAllItems.CheckedChange += ChkSelectAllItems_CheckedChange;
+        }
+
+        private void ChkSelectAllItems_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (e.IsChecked)
+            {
+                adapter.SelectAllItems(true);
+            }
+            else
+            {
+                adapter.SelectAllItems(false);
+            }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -69,6 +84,7 @@ namespace crud_xamarin_android.UI
 
             adapter.ClearSelectedPositions();
             ToggleDeleteButton(false);
+            ToogleCheckHeader(false);
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -81,6 +97,12 @@ namespace crud_xamarin_android.UI
         {
             var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
             btnDelete.Enabled = isAnySelected;
+        }
+
+        public void ToogleCheckHeader(bool isChecked)
+        {
+            var chkSelectAllItems = FindViewById<CheckBox>(Resource.Id.chkSelectAllItems);
+            chkSelectAllItems.Checked = false;
         }
     }
 }

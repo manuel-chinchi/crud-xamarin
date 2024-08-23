@@ -21,13 +21,20 @@
         android:padding="0dp"
         android:background="#CCCCCC">
 
-        <TextView
+        <CheckBox
+            android:id="@+id/chkSelectAllItems"
+            android:foreground="@drawable/border_item_header"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:padding="4dp" />
+        <!--<TextView
             android:layout_width="40dp"
             android:foreground="@drawable/border_item_header"
             android:layout_height="match_parent"
             android:text=""
             android:padding="4dp"
-            android:textSize="16sp" />
+            android:textSize="16sp" />-->
 
         <TextView
             android:layout_width="0dp"
