@@ -46,6 +46,7 @@ namespace crud_xamarin_android.UI.Adapters
                     if (selectedPositions.Contains(holder.Position))
                         selectedPositions.Remove(holder.Position);
                 }
+                ((ArticleActivity)holder.ItemView.Context).ToggleDeleteButton(selectedPositions.Count > 0);
             };
         }
 

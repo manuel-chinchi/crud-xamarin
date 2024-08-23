@@ -54,6 +54,7 @@ namespace crud_xamarin_android.UI
             btnAdd.Click += BtnAdd_Click;
 
             var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
+            btnDelete.Enabled = false;
             btnDelete.Click += BtnDelete_Click;
         }
 
@@ -67,12 +68,19 @@ namespace crud_xamarin_android.UI
             }
 
             adapter.ClearSelectedPositions();
+            ToggleDeleteButton(false);
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(CreateArticleActivity));
             StartActivity(intent);
+        }
+
+        public void ToggleDeleteButton(bool isAnySelected)
+        {
+            var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
+            btnDelete.Enabled = isAnySelected;
         }
     }
 }
