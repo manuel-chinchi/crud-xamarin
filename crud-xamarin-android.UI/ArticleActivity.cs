@@ -75,6 +75,25 @@ namespace crud_xamarin_android.UI
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
+            var builder = new AlertDialog.Builder(this);
+            builder.SetTitle("Delete");
+            builder.SetMessage(Resource.String.message_warning_article_delete);
+            builder.SetPositiveButton("Yes", (senderAlert, args) =>
+            {
+                DeleteArticle();
+            });
+
+            builder.SetNegativeButton("No", (senderAlert, args) =>
+            {
+                Toast.MakeText(this, Resource.String.message_cancel_generic, ToastLength.Short).Show();
+            });
+
+            var alertDialog = builder.Create();
+            alertDialog.Show();
+        }
+
+        private void DeleteArticle()
+        {
             var positions = adapter.GetSelectedPositions();
 
             foreach (var pos in positions)

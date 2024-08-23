@@ -17,4 +17,6 @@
   <string name="action_accept_create_article">Accept</string>
   <string name="action_cancel_create_article">Cancel</string>
   <string name="message_success_article_created">Item successfully added!</string>
+  <string name="message_warning_article_delete">Are you sure you want to delete the selected items?</string>
+  <string name="message_cancel_generic">Canceled operation</string>
 </resources>

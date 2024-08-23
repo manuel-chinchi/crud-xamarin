@@ -6345,34 +6345,40 @@ namespace crud_xamarin_android.UI
 			public const int hide_bottom_view_on_scroll_behavior = 2131558451;
 			
 			// aapt resource value: 0x7F0D0034
-			public const int message_success_article_created = 2131558452;
+			public const int message_cancel_generic = 2131558452;
 			
 			// aapt resource value: 0x7F0D0035
-			public const int mtrl_chip_close_icon_content_description = 2131558453;
+			public const int message_success_article_created = 2131558453;
 			
 			// aapt resource value: 0x7F0D0036
-			public const int password_toggle_content_description = 2131558454;
+			public const int message_warning_article_delete = 2131558454;
 			
 			// aapt resource value: 0x7F0D0037
-			public const int path_password_eye = 2131558455;
+			public const int mtrl_chip_close_icon_content_description = 2131558455;
 			
 			// aapt resource value: 0x7F0D0038
-			public const int path_password_eye_mask_strike_through = 2131558456;
+			public const int password_toggle_content_description = 2131558456;
 			
 			// aapt resource value: 0x7F0D0039
-			public const int path_password_eye_mask_visible = 2131558457;
+			public const int path_password_eye = 2131558457;
 			
 			// aapt resource value: 0x7F0D003A
-			public const int path_password_strike_through = 2131558458;
+			public const int path_password_eye_mask_strike_through = 2131558458;
 			
 			// aapt resource value: 0x7F0D003B
-			public const int search_menu_title = 2131558459;
+			public const int path_password_eye_mask_visible = 2131558459;
 			
 			// aapt resource value: 0x7F0D003C
-			public const int status_bar_notification_info_overflow = 2131558460;
+			public const int path_password_strike_through = 2131558460;
 			
 			// aapt resource value: 0x7F0D003D
-			public const int title_main = 2131558461;
+			public const int search_menu_title = 2131558461;
+			
+			// aapt resource value: 0x7F0D003E
+			public const int status_bar_notification_info_overflow = 2131558462;
+			
+			// aapt resource value: 0x7F0D003F
+			public const int title_main = 2131558463;
 			
 			static String()
 			{
