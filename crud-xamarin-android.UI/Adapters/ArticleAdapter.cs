@@ -57,6 +57,8 @@ namespace crud_xamarin_android.UI.Adapters
 
         public List<int> GetSelectedPositions()
         {
+            // NOTE 23.08.24:If the list of positions ordered from largest to smallest is not returned, deleting rows will present problems
+            selectedPositions.Sort((a, b) => b.CompareTo(a));
             return selectedPositions;
         }
 

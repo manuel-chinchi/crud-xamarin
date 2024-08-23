@@ -54,8 +54,6 @@ namespace crud_xamarin_android.UI
         {
             var positions = adapter.GetSelectedPositions();
 
-            positions.Sort((a, b) => b.CompareTo(a));
-            Console.WriteLine(">> positions: " + string.Join(", ", positions));
             foreach (var pos in positions)
             {
                 adapter.RemoveAt(pos);
