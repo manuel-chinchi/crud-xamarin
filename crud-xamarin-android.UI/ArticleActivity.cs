@@ -21,6 +21,13 @@ namespace crud_xamarin_android.UI
     {
         RecyclerView recyclerView;
         ArticleAdapter adapter;
+        ArticleService articleService;
+
+        public ArticleActivity()
+        {
+            articleService = new ArticleService();
+            adapter = new ArticleAdapter(articleService.GetArticles());
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,8 +46,8 @@ namespace crud_xamarin_android.UI
             #endregion
 
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
-            var articles = new ArticleService().GetArticles();
-            adapter = new ArticleAdapter(articles);
+            //var articles = articleService.GetArticles();
+            //adapter = new ArticleAdapter(articles);
             recyclerView.SetAdapter(adapter);
 
             var btnAdd = FindViewById<Button>(Resource.Id.btnAgregar);
