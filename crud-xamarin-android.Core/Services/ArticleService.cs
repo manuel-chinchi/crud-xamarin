@@ -44,9 +44,23 @@ namespace crud_xamarin_android.Core.Services
 
         public void AddArticle(Article article)
         {
-            var id = articles.Max(a => a.Id) + 1;
+            var id = -1;
+            if (articles.Count == 0)
+            {
+                id = 1;
+            }
+            else
+            {
+                id = articles.Max(a => a.Id) + 1;
+            }
             article.Id = id;
             articles.Add(article);
+        }
+
+        public void DeleteArticle(int id)
+        {
+            var article = articles.FirstOrDefault(a => a.Id == id);
+            articles.Remove(article);
         }
     }
 }

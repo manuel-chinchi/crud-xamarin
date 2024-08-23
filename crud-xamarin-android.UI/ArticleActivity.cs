@@ -20,6 +20,7 @@ namespace crud_xamarin_android.UI
     public class ArticleActivity : Activity
     {
         RecyclerView recyclerView;
+        ArticleAdapter adapter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,10 +40,28 @@ namespace crud_xamarin_android.UI
 
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
             var articles = new ArticleService().GetArticles();
-            recyclerView.SetAdapter(new ArticleAdapter(articles));
+            adapter = new ArticleAdapter(articles);
+            recyclerView.SetAdapter(adapter);
 
             var btnAdd = FindViewById<Button>(Resource.Id.btnAgregar);
             btnAdd.Click += BtnAdd_Click;
+
+            var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
+            btnDelete.Click += BtnDelete_Click;
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            var positions = adapter.GetSelectedPositions();
+
+            positions.Sort((a, b) => b.CompareTo(a));
+            Console.WriteLine(">> positions: " + string.Join(", ", positions));
+            foreach (var pos in positions)
+            {
+                adapter.RemoveAt(pos);
+            }
+
+            adapter.ClearSelectedPositions();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
