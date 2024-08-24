@@ -13,7 +13,7 @@ using System.Text;
 namespace crud_xamarin_android.Core.Services
 {
     public class ArticleService
-    { 
+    {
         private static List<Article> articles = new List<Article>()
         {
             new Article{Id=1, Name="zapatilla", Details="talle 40, cuero"},
@@ -61,6 +61,16 @@ namespace crud_xamarin_android.Core.Services
         {
             var article = articles.FirstOrDefault(a => a.Id == id);
             articles.Remove(article);
+        }
+
+        public void UpdateArticle(Article article)
+        {
+            var a = articles.FirstOrDefault(a => a.Id == article.Id);
+            if (a != null)
+            {
+                a.Name = article.Name;
+                a.Details = article.Details;
+            }
         }
     }
 }

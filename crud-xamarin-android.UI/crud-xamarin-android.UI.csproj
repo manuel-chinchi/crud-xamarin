@@ -65,6 +65,7 @@
     <Compile Include="ArticleActivity.cs" />
     <Compile Include="CreateArticleActivity.cs" />
     <Compile Include="Decorations\GridItemDecoration.cs" />
+    <Compile Include="EditArticleActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

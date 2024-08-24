@@ -48,6 +48,7 @@ namespace crud_xamarin_android.UI.Adapters
                         selectedPositions.Remove(holder.Position);
                 }
                 ((ArticleActivity)holder.ItemView.Context).ToggleDeleteButton(selectedPositions.Count > 0);
+                ((ArticleActivity)holder.ItemView.Context).ToggleEditButton(selectedPositions.Count == 1);
             };
         }
 
@@ -78,6 +79,16 @@ namespace crud_xamarin_android.UI.Adapters
 
             // Notifica al adaptador que los datos han cambiado
             NotifyDataSetChanged();
+        }
+
+        internal void UpdateArticles(List<Article> articles)
+        {
+            this.articles = articles;
+        }
+
+        internal Article GetArticleAt(int position)
+        {
+            return articles[position];
         }
 
         internal void ClearSelectedPositions()

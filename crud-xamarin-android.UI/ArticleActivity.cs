@@ -53,12 +53,33 @@ namespace crud_xamarin_android.UI
             var btnAdd = FindViewById<Button>(Resource.Id.btnAgregar);
             btnAdd.Click += BtnAdd_Click;
 
+            var btnEdit = FindViewById<Button>(Resource.Id.btnEditar);
+            btnEdit.Enabled = false;
+            btnEdit.Click += BtnEdit_Click;
+
             var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
             btnDelete.Enabled = false;
             btnDelete.Click += BtnDelete_Click;
 
             var chkSelectAllItems = FindViewById<CheckBox>(Resource.Id.chkSelectAllItems);
             chkSelectAllItems.CheckedChange += ChkSelectAllItems_CheckedChange;
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == 1 && resultCode == Result.Ok)
+            {
+                // Refrescar la grilla de artículos después de la edición
+                adapter.UpdateArticles(articleService.GetArticles());
+                adapter.ClearSelectedPositions();
+                adapter.NotifyDataSetChanged();
+                var btnEdit = FindViewById<Button>(Resource.Id.btnEditar);
+                btnEdit.Enabled = false;
+                var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
+                btnDelete.Enabled = false;
+            }
         }
 
         private void ChkSelectAllItems_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
@@ -70,6 +91,19 @@ namespace crud_xamarin_android.UI
             else
             {
                 adapter.SelectAllItems(false);
+            }
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            if (adapter.GetSelectedPositions().Count == 1)
+            {
+                int position = adapter.GetSelectedPositions()[0];
+                var article = adapter.GetArticleAt(position);
+
+                var intent = new Intent(this, typeof(EditArticleActivity));
+                intent.PutExtra("ArticleId", article.Id);
+                StartActivityForResult(intent, 1);
             }
         }
 
@@ -116,6 +150,12 @@ namespace crud_xamarin_android.UI
         {
             var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
             btnDelete.Enabled = isAnySelected;
+        }
+
+        public void ToggleEditButton(bool isOneItemSelected)
+        {
+            var btnEdit = FindViewById<Button>(Resource.Id.btnEditar);
+            btnEdit.Enabled = isOneItemSelected;
         }
 
         public void ToogleCheckHeader(bool isChecked)
