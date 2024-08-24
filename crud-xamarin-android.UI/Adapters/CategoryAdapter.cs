@@ -16,9 +16,11 @@ namespace crud_xamarin_android.UI.Adapters
     public class CategoryAdapter : RecyclerView.Adapter
     {
         List<Category> categories;
+        List<int> selectedPositions;
         public CategoryAdapter(List<Category> categories)
         {
             this.categories = categories;
+            this.selectedPositions = new List<int>();
         }
 
 
@@ -29,6 +31,22 @@ namespace crud_xamarin_android.UI.Adapters
             var viewHolder = holder as CategoryViewHolder;
             viewHolder.Id.Text = categories[position].Id.ToString();
             viewHolder.Name.Text = categories[position].Name;
+
+            viewHolder.Selected.CheckedChange -= null;
+            viewHolder.Selected.CheckedChange += (s, e) =>
+            {
+                if (e.IsChecked)
+                {
+                    if (!selectedPositions.Contains(holder.Position))
+                        selectedPositions.Add(holder.Position);
+                }
+                else
+                {
+                    if (selectedPositions.Contains(holder.Position))
+                        selectedPositions.Remove(holder.Position);
+                }
+            };
+
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -36,16 +54,31 @@ namespace crud_xamarin_android.UI.Adapters
             var view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.item_category, parent, false);
             return new CategoryViewHolder(view);
         }
+
+        public List<int> GetSelectedPositions()
+        {
+            selectedPositions.Sort((a, b) => b.CompareTo(a));
+            return selectedPositions;
+        }
+
+        internal void RemoveAt(int pos)
+        {
+            categories.RemoveAt(pos);
+            NotifyItemRemoved(pos);
+        }
     }
 
     public class CategoryViewHolder : RecyclerView.ViewHolder
     {
         public TextView Id { get; private set; }
         public TextView Name { get; private set; }
+        public CheckBox Selected { get; private set; }
+
         public CategoryViewHolder(View itemView) : base(itemView)
         {
             Id = ItemView.FindViewById<TextView>(Resource.Id.colIdCategory);
             Name = ItemView.FindViewById<TextView>(Resource.Id.colNameCategory);
+            Selected = ItemView.FindViewById<CheckBox>(Resource.Id.chkSelectedCategory);
         }
     }
 }

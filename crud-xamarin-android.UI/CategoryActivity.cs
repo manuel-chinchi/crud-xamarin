@@ -50,6 +50,30 @@ namespace crud_xamarin_android.UI
 
         private void BtnDeleteCategory_Click(object sender, EventArgs e)
         {
+            var builder = new AlertDialog.Builder(this);
+            builder.SetTitle("Delete");
+            builder.SetMessage("Are you sure you want to delete the selected categories?");
+            builder.SetPositiveButton("Yes", (senderAlert, args) =>
+            {
+                DeleteCategory();
+            });
+
+            builder.SetNegativeButton("No", (senderAlert, args) =>
+            {
+                Toast.MakeText(this, "Cancel action" , ToastLength.Short).Show();
+            });
+
+            var alertDialog = builder.Create();
+            alertDialog.Show();
+        }
+
+        private void DeleteCategory()
+        {
+            var positions = adapter.GetSelectedPositions();
+            foreach (var pos in positions)
+            {
+                adapter.RemoveAt(pos);
+            }
         }
     }
 }
