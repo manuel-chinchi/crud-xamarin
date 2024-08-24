@@ -39,6 +39,7 @@ namespace crud_xamarin_android.UI
             var btnAddCategory = FindViewById<Button>(Resource.Id.btnAddCategory);
             btnAddCategory.Click += BtnAddCategory_Click;
             var btnDeleteCategory = FindViewById<Button>(Resource.Id.btnDeleteCategory);
+            btnDeleteCategory.Enabled = false;
             btnDeleteCategory.Click += BtnDeleteCategory_Click;
 
             var chkSelectAllCategories = FindViewById<CheckBox>(Resource.Id.chkSelectAllCategories);
@@ -90,7 +91,7 @@ namespace crud_xamarin_android.UI
             {
                 adapter.RemoveAt(pos);
             }
-
+            ToogleDeleteButton(false);
             ToogleCheckHeader(false);
         }
 
