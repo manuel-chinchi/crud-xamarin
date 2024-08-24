@@ -94,13 +94,13 @@ namespace crud_xamarin_android.UI
             ToogleCheckHeader(false);
         }
 
-        internal void ToogleDeleteButton(bool isAnySelected)
+        public void ToogleDeleteButton(bool isAnySelected)
         {
             var btnDeleteCategory = FindViewById<Button>(Resource.Id.btnDeleteCategory);
             btnDeleteCategory.Enabled = isAnySelected;
         }
 
-        internal void ToogleCheckHeader(bool isChecked)
+        public void ToogleCheckHeader(bool isChecked)
         {
             var chkSelectAllCategories = FindViewById<CheckBox>(Resource.Id.chkSelectAllCategories);
             chkSelectAllCategories.Checked = isChecked;
