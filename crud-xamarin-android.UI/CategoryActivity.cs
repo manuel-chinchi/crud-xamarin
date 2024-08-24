@@ -91,6 +91,7 @@ namespace crud_xamarin_android.UI
             {
                 adapter.RemoveAt(pos);
             }
+            adapter.ClearSelectedPositions();
             ToogleDeleteButton(false);
             ToogleCheckHeader(false);
         }
