@@ -40,6 +40,16 @@ namespace crud_xamarin_android.Core.Services
 
         public void AddCategory(Category category)
         {
+            int id = -1;
+            if (categories.Count == 0)
+            {
+                id = 1;
+            }
+            else
+            {
+                id = categories.Max(c=>c.Id)+1;
+            }
+            category.Id = id;
             categories.Add(category);
         }
 
