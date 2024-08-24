@@ -33,6 +33,7 @@ namespace crud_xamarin_android.UI.Adapters
             viewHolder.Name.Text = categories[position].Name;
 
             viewHolder.Selected.CheckedChange -= null;
+            viewHolder.Selected.Checked = selectedPositions.Contains(holder.Position);
             viewHolder.Selected.CheckedChange += (s, e) =>
             {
                 if (e.IsChecked)
@@ -45,6 +46,7 @@ namespace crud_xamarin_android.UI.Adapters
                     if (selectedPositions.Contains(holder.Position))
                         selectedPositions.Remove(holder.Position);
                 }
+                ((CategoryActivity)holder.ItemView.Context).ToogleDeleteButton(selectedPositions.Count> 0);
             };
 
         }
@@ -65,6 +67,27 @@ namespace crud_xamarin_android.UI.Adapters
         {
             categories.RemoveAt(pos);
             NotifyItemRemoved(pos);
+        }
+
+        public void SelectAllItems(bool isSelected)
+        {
+            selectedPositions.Clear();
+            if (isSelected)
+            {
+                for (int i = 0; i < categories.Count; i++)
+                {
+                    selectedPositions.Add(i);
+                }
+            }
+            NotifyDataSetChanged();
+        }
+        public void ClearSelectedPositions()
+        {
+            selectedPositions.Clear();
+        }
+        public void UpdateCategories(List<Category> categories)
+        {
+            this.categories = categories;
         }
     }
 

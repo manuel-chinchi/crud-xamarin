@@ -40,6 +40,22 @@ namespace crud_xamarin_android.UI
             btnAddCategory.Click += BtnAddCategory_Click;
             var btnDeleteCategory = FindViewById<Button>(Resource.Id.btnDeleteCategory);
             btnDeleteCategory.Click += BtnDeleteCategory_Click;
+
+            var chkSelectAllCategories = FindViewById<CheckBox>(Resource.Id.chkSelectAllCategories);
+            chkSelectAllCategories.CheckedChange += ChkSelectAllCategories_CheckedChange;
+
+        }
+
+        private void ChkSelectAllCategories_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (e.IsChecked)
+            {
+                adapter.SelectAllItems(true);
+            }
+            else
+            {
+                adapter.SelectAllItems(false);
+            }
         }
 
         private void BtnAddCategory_Click(object sender, EventArgs e)
@@ -74,6 +90,20 @@ namespace crud_xamarin_android.UI
             {
                 adapter.RemoveAt(pos);
             }
+
+            ToogleCheckHeader(false);
+        }
+
+        internal void ToogleDeleteButton(bool isAnySelected)
+        {
+            var btnDeleteCategory = FindViewById<Button>(Resource.Id.btnDeleteCategory);
+            btnDeleteCategory.Enabled = isAnySelected;
+        }
+
+        internal void ToogleCheckHeader(bool isChecked)
+        {
+            var chkSelectAllCategories = FindViewById<CheckBox>(Resource.Id.chkSelectAllCategories);
+            chkSelectAllCategories.Checked = isChecked;
         }
     }
 }
