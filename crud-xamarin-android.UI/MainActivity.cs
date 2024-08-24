@@ -26,6 +26,15 @@ namespace crud_xamarin_android.UI
             btnArticles.Click += BtnArticles_Click;
 
             #endregion
+
+            var btnCategories = FindViewById<Button>(Resource.Id.btn_categories);
+            btnCategories.Click += BtnCategories_Click;
+        }
+
+        private void BtnCategories_Click(object sender, System.EventArgs e)
+        {
+            var intent = new Intent(this, typeof(CategoryActivity));
+            StartActivity(intent);
         }
 
         private void BtnArticles_Click(object sender, System.EventArgs e)

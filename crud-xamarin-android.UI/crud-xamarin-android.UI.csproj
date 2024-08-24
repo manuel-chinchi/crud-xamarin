@@ -62,8 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\ArticleAdapter.cs" />
+    <Compile Include="Adapters\CategoryAdapter.cs" />
     <Compile Include="ArticleActivity.cs" />
+    <Compile Include="CategoryActivity.cs" />
     <Compile Include="CreateArticleActivity.cs" />
+    <Compile Include="CreateCategoryActivity.cs" />
     <Compile Include="Decorations\GridItemDecoration.cs" />
     <Compile Include="EditArticleActivity.cs" />
     <Compile Include="MainActivity.cs" />
@@ -134,6 +137,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\border_item_header.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_category.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_category.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_create_category.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

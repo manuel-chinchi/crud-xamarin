@@ -12,7 +12,7 @@ using System.Text;
 
 namespace crud_xamarin_android.Core.Services
 {
-    class CategoryService
+    public class CategoryService
     {
         static List<Category> categories = new List<Category>
         {

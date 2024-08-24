@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Header Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:padding="0dp"
+        android:background="#CCCCCC">
+
+        <CheckBox
+            android:id="@+id/chkSelectAllCategories"
+            android:foreground="@drawable/border_item_header"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:padding="4dp" />
+        <!--<TextView
+            android:layout_width="40dp"
+            android:foreground="@drawable/border_item_header"
+            android:layout_height="match_parent"
+            android:text=""
+            android:padding="4dp"
+            android:textSize="16sp" />-->
+
+        <TextView
+            android:layout_width="0dp"
+            android:foreground="@drawable/border_item_header"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Id"
+            android:textStyle="bold"
+            android:padding="4dp"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Name"
+            android:textStyle="bold"
+            android:padding="4dp"
+            android:foreground="@drawable/border_item_header"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!--Rendering item_category.xml layout-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lstCategories" 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"/>
+
+    <!--Options buttons categories-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btnAddCategory"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="4dp"
+            android:padding="3dp"
+            android:layout_weight="1"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/btnDeleteCategory"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="3dp"
+            android:layout_weight="1"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/btnMoreOptCategory"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
+            android:padding="3dp"
+            android:layout_weight="1"
+            android:text="More" />
+
+    </LinearLayout>
+</LinearLayout>
