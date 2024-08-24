@@ -21,7 +21,7 @@
       android:layout_width="0dp"
       android:foreground="@drawable/border_item_article"
       android:layout_height="match_parent"
-      android:layout_weight="1"
+      android:layout_weight="0.25"
       android:text="col 1"
       android:padding="4dp"
       android:textSize="16sp" />

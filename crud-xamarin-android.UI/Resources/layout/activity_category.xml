@@ -32,7 +32,7 @@
             android:foreground="@drawable/border_item_header"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="0.25"
             android:text="Id"
             android:textStyle="bold"
             android:padding="4dp"

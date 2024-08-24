@@ -41,7 +41,7 @@
             android:foreground="@drawable/border_item_header"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:text="@string/col_id_article"
             android:textStyle="bold"
             android:padding="4dp"
