@@ -32,6 +32,7 @@ namespace crud_xamarin_android.UI.Adapters
             viewHolder.Name.Text = articles[position].Name;
             viewHolder.Details.Text = articles[position].Details;
             viewHolder.Id.Text = articles[position].Id.ToString();
+            viewHolder.Category.Text = articles[position].Category.Name;
 
             viewHolder.Selected.CheckedChange -= null;
             viewHolder.Selected.Checked = selectedPositions.Contains(holder.Position);
@@ -108,6 +109,7 @@ namespace crud_xamarin_android.UI.Adapters
         public TextView Id { get; private set; }
         public TextView Name { get; private set; }
         public TextView Details { get; private set; }
+        public TextView Category { get; private set; }
         public CheckBox Selected { get; private set; }
 
         public ArticleViewHolder(View itemView):base(itemView)
@@ -115,6 +117,7 @@ namespace crud_xamarin_android.UI.Adapters
             Id = itemView.FindViewById<TextView>(Resource.Id.colId);
             Name = itemView.FindViewById<TextView>(Resource.Id.colName);
             Details = itemView.FindViewById<TextView>(Resource.Id.colDetails);
+            Category = ItemView.FindViewById<TextView>(Resource.Id.colCategory);
             Selected = ItemView.FindViewById<CheckBox>(Resource.Id.chkSelectedArticle);
         }
     }
