@@ -16,5 +16,6 @@ namespace crud_xamarin_android.Core.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Details { get; set; }
+        public Category Category { get; set; }
     }
 }

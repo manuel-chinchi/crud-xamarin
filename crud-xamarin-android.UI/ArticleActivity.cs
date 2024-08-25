@@ -103,6 +103,8 @@ namespace crud_xamarin_android.UI
 
                 var intent = new Intent(this, typeof(EditArticleActivity));
                 intent.PutExtra("ArticleId", article.Id);
+                // TODO check case 'null Category'!!
+                intent.PutExtra("CategoryId", article.Category.Id);
                 StartActivityForResult(intent, 1);
             }
         }
