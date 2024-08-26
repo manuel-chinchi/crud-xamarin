@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.App;
 using AndroidX.RecyclerView.Widget;
 using crud_xamarin_android.Core.Models;
 using crud_xamarin_android.Core.Services;
@@ -15,8 +16,8 @@ using System.Text;
 
 namespace crud_xamarin_android.UI
 {
-    [Activity(Label = "CreateArticleActivity")]
-    public class CreateArticleActivity : Activity
+    [Activity(Label = "")]
+    public class CreateArticleActivity : AppCompatActivity
     {
         private ArticleService articleService = new ArticleService();
         CategoryService categoryService = new CategoryService();
@@ -34,6 +35,9 @@ namespace crud_xamarin_android.UI
 
             SetContentView(Resource.Layout.activity_create_article);
 
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetHomeButtonEnabled(true);
+
             var btnCancel = FindViewById<Button>(Resource.Id.btnCancelar);
             var btnAccept = FindViewById<Button>(Resource.Id.btnAceptar);
 
@@ -50,7 +54,17 @@ namespace crud_xamarin_android.UI
 
             spnCategories.ItemSelected += SpnCategories_ItemSelected;
         }
-
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    OnBackPressed();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
         private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             categorySelected = categories[e.Position];

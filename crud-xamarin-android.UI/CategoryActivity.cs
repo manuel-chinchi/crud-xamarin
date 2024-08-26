@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.App;
 using AndroidX.RecyclerView.Widget;
 using crud_xamarin_android.Core.Services;
 using crud_xamarin_android.UI.Adapters;
@@ -14,8 +15,8 @@ using System.Text;
 
 namespace crud_xamarin_android.UI
 {
-    [Activity(Label = "CategoryActivity")]
-    public class CategoryActivity : Activity
+    [Activity(Label = "Categories")]
+    public class CategoryActivity : AppCompatActivity
     {
         RecyclerView recyclerView;
         CategoryAdapter adapter;
@@ -31,6 +32,9 @@ namespace crud_xamarin_android.UI
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_category);
+            
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetHomeButtonEnabled(true);
 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.lstCategories);
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
@@ -46,7 +50,17 @@ namespace crud_xamarin_android.UI
             chkSelectAllCategories.CheckedChange += ChkSelectAllCategories_CheckedChange;
 
         }
-
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    OnBackPressed();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
         private void ChkSelectAllCategories_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             if (e.IsChecked)
@@ -67,7 +81,7 @@ namespace crud_xamarin_android.UI
 
         private void BtnDeleteCategory_Click(object sender, EventArgs e)
         {
-            var builder = new AlertDialog.Builder(this);
+            var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
             builder.SetTitle("Delete");
             builder.SetMessage("Are you sure you want to delete the selected categories?");
             builder.SetPositiveButton("Yes", (senderAlert, args) =>

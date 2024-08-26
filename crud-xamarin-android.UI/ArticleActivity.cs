@@ -13,11 +13,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AndroidX.AppCompat.App;
 
 namespace crud_xamarin_android.UI
 {
-    [Activity(Label = "ArticlesActivity")]
-    public class ArticleActivity : Activity
+    [Activity(Label = "Articles")]
+    public class ArticleActivity : AppCompatActivity
     {
         RecyclerView recyclerView;
         ArticleAdapter adapter;
@@ -34,6 +35,9 @@ namespace crud_xamarin_android.UI
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_article);
+
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetHomeButtonEnabled(true);
 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.lstArticles);
 
@@ -63,6 +67,17 @@ namespace crud_xamarin_android.UI
 
             var chkSelectAllItems = FindViewById<CheckBox>(Resource.Id.chkSelectAllItems);
             chkSelectAllItems.CheckedChange += ChkSelectAllItems_CheckedChange;
+        }
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    OnBackPressed();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -111,7 +126,7 @@ namespace crud_xamarin_android.UI
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            var builder = new AlertDialog.Builder(this);
+            var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
             builder.SetTitle("Delete");
             builder.SetMessage(Resource.String.message_warning_article_delete);
             builder.SetPositiveButton("Yes", (senderAlert, args) =>

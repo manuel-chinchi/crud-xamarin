@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.App;
 using crud_xamarin_android.Core.Models;
 using crud_xamarin_android.Core.Services;
 using System;
@@ -13,8 +14,8 @@ using System.Text;
 
 namespace crud_xamarin_android.UI
 {
-    [Activity(Label = "CreateCategoryActivity")]
-    public class CreateCategoryActivity : Activity
+    [Activity(Label = "")]
+    public class CreateCategoryActivity : AppCompatActivity
     {
         CategoryService categoryService;
         public CreateCategoryActivity()
@@ -27,12 +28,25 @@ namespace crud_xamarin_android.UI
 
             SetContentView(Resource.Layout.activity_create_category);
 
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetHomeButtonEnabled(true);
+
             var btnCancel = FindViewById<Button>(Resource.Id.btnCancel_Category);
             btnCancel.Click += BtnCancel_Click;
             var btnAccept = FindViewById<Button>(Resource.Id.btnAccept_Category);
             btnAccept.Click += BtnAccept_Click;
         }
-
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    OnBackPressed();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
         private void BtnAccept_Click(object sender, EventArgs e)
         {
             var toast = Toast.MakeText(this, "Category successfully added!", ToastLength.Short);
