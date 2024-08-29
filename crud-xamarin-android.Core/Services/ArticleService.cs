@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using crud_xamarin_android.Core.Models;
+using crud_xamarin_android.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,63 +15,58 @@ namespace crud_xamarin_android.Core.Services
 {
     public class ArticleService
     {
-        private static List<Article> articles = new List<Article>()
-        {
-            new Article{Id=1, Name="zapatilla", Details="talle 40, cuero", Category = new Category { Id = 1, Name="Otro"} },
-            new Article{Id=2, Name="zapatilla", Details="talle 42, cuero, mujer", Category = new Category { Id = 1, Name="Otro"}},
-            new Article{Id=3, Name="camisa", Details="talle L", Category = new Category { Id = 1, Name="Otro"}},
-            new Article{Id=4, Name="camisa", Details="talle M, lisa", Category = new Category { Id = 1, Name="Otro"}},
-            new Article{Id=5, Name="jean", Details="talle 41-43 chupin", Category = new Category { Id = 1, Name="Otro"}},
-            new Article{Id=6, Name="gorra", Details="varios colores lisas", Category = new Category { Id = 1, Name="Otro"}},
-            new Article{Id=7, Name="medias", Details="medianas", Category = new Category { Id = 1, Name="Otro"}},
-            new Article{Id=8, Name="zapato", Details="unisex, talle 40, sintético", Category = new Category { Id = 1, Name="Otro"}},
-            new Article{Id=9, Name="zapato", Details="talle 48", Category = new Category { Id = 1, Name="Otro"}},
-            new Article{Id=10, Name="gorra", Details="lisa blanca", Category = new Category { Id = 1, Name="Otro"}},
-        };
+        ArticleRepository repository;
+        
 
         public ArticleService()
         {
+            repository = new ArticleRepository();
         }
 
-        public List<Article> GetArticles()
+        public IEnumerable<Article> GetArticles()
         {
-            return articles;
+            //return articles;
+            return repository.GetAll();
         }
 
         public Article GetArticleById(int id)
         {
-            return articles.Where(a => a.Id == id).FirstOrDefault();
+            //return articles.Where(a => a.Id == id).FirstOrDefault();
+            return repository.GetById(id);
         }
 
         public void AddArticle(Article article)
         {
-            var id = -1;
-            if (articles.Count == 0)
-            {
-                id = 1;
-            }
-            else
-            {
-                id = articles.Max(a => a.Id) + 1;
-            }
-            article.Id = id;
-            articles.Add(article);
+            //var id = -1;
+            //if (articles.Count == 0)
+            //{
+            //    id = 1;
+            //}
+            //else
+            //{
+            //    id = articles.Max(a => a.Id) + 1;
+            //}
+            //article.Id = id;
+            //articles.Add(article);
+            repository.Insert(article);
         }
 
         public void DeleteArticle(int id)
         {
-            var article = articles.FirstOrDefault(a => a.Id == id);
-            articles.Remove(article);
+            //var article = articles.FirstOrDefault(a => a.Id == id);
+            //articles.Remove(article);
+            repository.Delete(id);
         }
 
         public void UpdateArticle(Article article)
         {
-            var a = articles.FirstOrDefault(a => a.Id == article.Id);
-            if (a != null)
-            {
-                a.Name = article.Name;
-                a.Details = article.Details;
-            }
+            //var a = articles.FirstOrDefault(a => a.Id == article.Id);
+            //if (a != null)
+            //{
+            //    a.Name = article.Name;
+            //    a.Details = article.Details;
+            //}
+            repository.Update(article);
         }
     }
 }

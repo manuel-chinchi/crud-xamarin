@@ -29,7 +29,7 @@ namespace crud_xamarin_android.UI.Activities
         public EditArticleActivity()
         {
             articleService = new ArticleService();
-            categories = new CategoryService().GetCategories();
+            categories = new CategoryService().GetCategories().ToList();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

@@ -27,7 +27,8 @@ namespace crud_xamarin_android.UI.Activities
         public ArticleActivity()
         {
             articleService = new ArticleService();
-            adapter = new ArticleAdapter(articleService.GetArticles());
+            var items = articleService.GetArticles().ToList();
+            adapter = new ArticleAdapter(items);
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -87,7 +88,7 @@ namespace crud_xamarin_android.UI.Activities
             if (requestCode == 1 && resultCode == Result.Ok)
             {
                 // Refrescar la grilla de artículos después de la edición
-                adapter.UpdateArticles(articleService.GetArticles());
+                adapter.UpdateArticles(articleService.GetArticles().ToList());
                 adapter.ClearSelectedPositions();
                 adapter.NotifyDataSetChanged();
                 var btnEdit = FindViewById<Button>(Resource.Id.btnEditar);

@@ -24,7 +24,7 @@ namespace crud_xamarin_android.UI.Activities
         public CategoryActivity()
         {
             categoryService = new CategoryService();
-            adapter = new CategoryAdapter(categoryService.GetCategories());
+            adapter = new CategoryAdapter(categoryService.GetCategories().ToList());
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

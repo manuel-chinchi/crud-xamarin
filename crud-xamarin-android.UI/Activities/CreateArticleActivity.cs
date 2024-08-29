@@ -26,7 +26,7 @@ namespace crud_xamarin_android.UI.Activities
 
         public CreateArticleActivity()
         {
-            this.categories = categoryService.GetCategories();
+            this.categories = categoryService.GetCategories().ToList();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
