@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 using crud_xamarin_android.Core.Models;
+using crud_xamarin_android.UI.Activities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
