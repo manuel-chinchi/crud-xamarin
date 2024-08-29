@@ -6,7 +6,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using crud_xamarin_android.Core.Services;
 
-namespace crud_xamarin_android.UI
+namespace crud_xamarin_android.UI.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity

@@ -63,13 +63,13 @@
   <ItemGroup>
     <Compile Include="Adapters\ArticleAdapter.cs" />
     <Compile Include="Adapters\CategoryAdapter.cs" />
-    <Compile Include="ArticleActivity.cs" />
-    <Compile Include="CategoryActivity.cs" />
-    <Compile Include="CreateArticleActivity.cs" />
-    <Compile Include="CreateCategoryActivity.cs" />
+    <Compile Include="Activities\ArticleActivity.cs" />
+    <Compile Include="Activities\CategoryActivity.cs" />
+    <Compile Include="Activities\CreateArticleActivity.cs" />
+    <Compile Include="Activities\CreateCategoryActivity.cs" />
     <Compile Include="Decorations\GridItemDecoration.cs" />
-    <Compile Include="EditArticleActivity.cs" />
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="Activities\EditArticleActivity.cs" />
+    <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

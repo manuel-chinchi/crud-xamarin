@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace crud_xamarin_android.UI
+namespace crud_xamarin_android.UI.Activities
 {
     [Activity(Label = "")]
     public class CreateCategoryActivity : AppCompatActivity

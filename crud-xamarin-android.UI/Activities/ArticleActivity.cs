@@ -15,7 +15,7 @@ using System.Linq;
 using System.Text;
 using AndroidX.AppCompat.App;
 
-namespace crud_xamarin_android.UI
+namespace crud_xamarin_android.UI.Activities
 {
     [Activity(Label = "Articles")]
     public class ArticleActivity : AppCompatActivity
