@@ -47,7 +47,8 @@ namespace crud_xamarin_android.Core.Repositories
                     Id = article.Id,
                     Name = article.Name,
                     Details = article.Details,
-                    Category = category
+                    Category = category,
+                    CategoryId = category.Id
                 };
             return query ?? null;
         }
@@ -62,10 +63,10 @@ namespace crud_xamarin_android.Core.Repositories
         public void Insert(Article item)
         {
             checkTablesExist();
-            if (item.Category != null)
-            {
-                Connection.Insert(item.Category);
-            }
+            //if (item.Category != null)
+            //{
+            //    Connection.Insert(item.Category);
+            //}
             Connection.Insert(item);
         }
 

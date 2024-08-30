@@ -96,6 +96,12 @@ namespace crud_xamarin_android.UI.Activities
                 var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
                 btnDelete.Enabled = false;
             }
+
+            if (requestCode == 1000 && resultCode == Result.Ok)
+            {
+                adapter.UpdateArticles(articleService.GetArticles().ToList());
+                adapter.NotifyDataSetChanged();
+            }
         }
 
         private void ChkSelectAllItems_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
@@ -150,9 +156,10 @@ namespace crud_xamarin_android.UI.Activities
 
             foreach (var pos in positions)
             {
+                articleService.DeleteArticle(adapter.GetArticleAt(pos).Id);
                 adapter.RemoveAt(pos);
             }
-
+            adapter.UpdateArticles(articleService.GetArticles().ToList());
             adapter.ClearSelectedPositions();
             ToggleDeleteButton(false);
             ToogleCheckHeader(false);
@@ -161,7 +168,8 @@ namespace crud_xamarin_android.UI.Activities
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(CreateArticleActivity));
-            StartActivity(intent);
+            //StartActivity(intent);
+            StartActivityForResult(intent, 1000);
         }
 
         public void ToggleDeleteButton(bool isAnySelected)

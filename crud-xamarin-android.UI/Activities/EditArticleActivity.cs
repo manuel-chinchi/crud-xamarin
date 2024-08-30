@@ -83,6 +83,7 @@ namespace crud_xamarin_android.UI.Activities
             article.Details = inpDetailsArticle.Text;
             var category = categories[spnCategory.SelectedItemPosition];
             article.Category = categories.FirstOrDefault(c => c.Name == category.Name);
+            article.CategoryId = category.Id;
             articleService.UpdateArticle(article);
 
             Intent resultIntent = new Intent();

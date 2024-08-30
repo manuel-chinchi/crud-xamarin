@@ -107,6 +107,7 @@ namespace crud_xamarin_android.UI.Activities
                 categoryService.DeleteCategory(((Category)adapter.GetItemAt(pos)).Id);
                 adapter.RemoveAt(pos);
             }
+            adapter.UpdateCategories(categoryService.GetCategories().ToList());
             adapter.ClearSelectedPositions();
             ToogleDeleteButton(false);
             ToogleCheckHeader(false);

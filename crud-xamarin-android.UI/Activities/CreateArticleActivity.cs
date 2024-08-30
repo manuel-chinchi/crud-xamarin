@@ -27,6 +27,7 @@ namespace crud_xamarin_android.UI.Activities
         public CreateArticleActivity()
         {
             this.categories = categoryService.GetCategories().ToList();
+            this.categories = this.categories.OrderBy(c => c.Name).ToList();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -79,7 +80,16 @@ namespace crud_xamarin_android.UI.Activities
             var inpNameArt = FindViewById<EditText>(Resource.Id.inpNameArticle);
             var inpDetailsArt = FindViewById<EditText>(Resource.Id.inpDetailsArticle);
 
-            articleService.AddArticle(new Article() { Name = inpNameArt.Text, Details = inpDetailsArt.Text, Category = new Category { Name = categorySelected.Name } });
+            //articleService.AddArticle(new Article() { Name = inpNameArt.Text, Details = inpDetailsArt.Text, Category = new Category { Name = categorySelected.Name } });
+            var article = new Article
+            {
+                Name=inpNameArt.Text,
+                Details=inpDetailsArt.Text,
+                CategoryId=categorySelected.Id
+            };
+            articleService.AddArticle(article);
+
+            SetResult(Result.Ok);
 
             Finish();
         }
