@@ -169,12 +169,12 @@ namespace crud_xamarin_android.UI.Activities
             ToogleCheckHeader(false);
         }
 
-        private void ToggleDeleteButton(bool isAnySelected)
+        public void ToggleDeleteButton(bool isAnySelected)
         {
             btnDelete.Enabled = isAnySelected;
         }
 
-        private void ToggleEditButton(bool isOneItemSelected)
+        public void ToggleEditButton(bool isOneItemSelected)
         {
             btnEdit.Enabled = isOneItemSelected;
         }
