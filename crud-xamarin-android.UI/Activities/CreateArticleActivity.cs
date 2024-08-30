@@ -50,8 +50,6 @@ namespace crud_xamarin_android.UI.Activities
             btnCancel = FindViewById<Button>(Resource.Id.btnCancelar);
             btnCancel.Click += BtnCancel_Click;
 
-            //var spnCategories = FindViewById<Spinner>(Resource.Id.spnCate);
-            //var aa = Resource.Id.spnCategories;
             spnCategories = FindViewById<Spinner>(Resource.Id.spnCategories);
             var categories = categoryService.GetCategories().OrderBy(c=>c.Name);
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, categories.Select(c => c.Name).ToList());

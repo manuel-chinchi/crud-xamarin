@@ -27,6 +27,13 @@ namespace crud_xamarin_android.UI.Activities
             btnCategories.Click += BtnCategories_Click;
         }
 
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
         private void BtnCategories_Click(object sender, System.EventArgs e)
         {
             var intent = new Intent(this, typeof(CategoryActivity));
@@ -37,13 +44,6 @@ namespace crud_xamarin_android.UI.Activities
         {
             var intent = new Intent(this, typeof(ArticleActivity));
             StartActivity(intent);
-        }
-
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

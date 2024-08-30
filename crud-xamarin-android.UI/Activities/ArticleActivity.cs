@@ -42,8 +42,6 @@ namespace crud_xamarin_android.UI.Activities
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SupportActionBar.SetHomeButtonEnabled(true);
 
-            recyclerView = FindViewById<RecyclerView>(Resource.Id.lstArticles);
-
             #region old: drawing line separator for data grid
 
             //int color = Android.Graphics.Color.Gray;
@@ -52,9 +50,8 @@ namespace crud_xamarin_android.UI.Activities
 
             #endregion
 
+            recyclerView = FindViewById<RecyclerView>(Resource.Id.lstArticles);
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
-            //var articles = articleService.GetArticles();
-            //adapter = new ArticleAdapter(articles);
             recyclerView.SetAdapter(adapter);
 
             btnAdd = FindViewById<Button>(Resource.Id.btnAgregar);
@@ -90,13 +87,10 @@ namespace crud_xamarin_android.UI.Activities
 
             if (requestCode == 1 && resultCode == Result.Ok)
             {
-                // Refrescar la grilla de artículos después de la edición
                 adapter.UpdateArticles(articleService.GetArticles().ToList());
                 adapter.ClearSelectedPositions();
                 adapter.NotifyDataSetChanged();
-                var btnEdit = FindViewById<Button>(Resource.Id.btnEditar);
                 btnEdit.Enabled = false;
-                var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
                 btnDelete.Enabled = false;
             }
 
@@ -153,6 +147,12 @@ namespace crud_xamarin_android.UI.Activities
             alertDialog.Show();
         }
 
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(CreateArticleActivity));
+            StartActivityForResult(intent, 1000);
+        }
+
         private void DeleteArticle()
         {
             var positions = adapter.GetSelectedPositions();
@@ -169,24 +169,17 @@ namespace crud_xamarin_android.UI.Activities
             ToogleCheckHeader(false);
         }
 
-        private void BtnAdd_Click(object sender, EventArgs e)
-        {
-            var intent = new Intent(this, typeof(CreateArticleActivity));
-            //StartActivity(intent);
-            StartActivityForResult(intent, 1000);
-        }
-
-        public void ToggleDeleteButton(bool isAnySelected)
+        private void ToggleDeleteButton(bool isAnySelected)
         {
             btnDelete.Enabled = isAnySelected;
         }
 
-        public void ToggleEditButton(bool isOneItemSelected)
+        private void ToggleEditButton(bool isOneItemSelected)
         {
             btnEdit.Enabled = isOneItemSelected;
         }
 
-        public void ToogleCheckHeader(bool isChecked)
+        private void ToogleCheckHeader(bool isChecked)
         {
             chkSelectAll.Checked = false;
         }
