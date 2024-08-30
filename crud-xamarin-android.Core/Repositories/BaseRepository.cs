@@ -26,8 +26,12 @@ namespace crud_xamarin_android.Core.Repositories
             var pathDb = System.IO.Path.Combine(GetFolderPath(SpecialFolder.MyDocuments), "crud_xamarin_android.db");
             Connection = new SQLiteConnection(pathDb);
 
+            #region static data
+
             if (loadTestData == true)
                 LoadTestData();
+
+            #endregion
         }
 
         private void LoadTestData()
