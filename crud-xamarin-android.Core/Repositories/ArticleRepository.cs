@@ -24,11 +24,6 @@ namespace crud_xamarin_android.Core.Repositories
             Connection.CreateTable<Article>();
         }
 
-
-
-
-
-
         public void Delete(int id)
         {
             checkTablesExist();

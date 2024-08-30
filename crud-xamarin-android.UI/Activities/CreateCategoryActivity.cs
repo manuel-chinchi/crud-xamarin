@@ -56,6 +56,8 @@ namespace crud_xamarin_android.UI.Activities
             var inpNameCategory = FindViewById<EditText>(Resource.Id.inpNameCategory);
             categoryService.AddCategory(new Category { Name = inpNameCategory.Text });
 
+            SetResult(Result.Ok);
+
             Finish();
         }
 

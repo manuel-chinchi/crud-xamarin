@@ -70,6 +70,11 @@ namespace crud_xamarin_android.UI.Adapters
             NotifyItemRemoved(pos);
         }
 
+        public object GetItemAt(int position)
+        {
+            return categories[position];
+        }
+
         public void SelectAllItems(bool isSelected)
         {
             selectedPositions.Clear();

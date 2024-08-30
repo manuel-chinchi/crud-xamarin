@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.RecyclerView.Widget;
+using crud_xamarin_android.Core.Models;
 using crud_xamarin_android.Core.Services;
 using crud_xamarin_android.UI.Adapters;
 using System;
@@ -76,7 +77,7 @@ namespace crud_xamarin_android.UI.Activities
         private void BtnAddCategory_Click(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(CreateCategoryActivity));
-            StartActivity(intent);
+            StartActivityForResult(intent, 1000);
         }
 
         private void BtnDeleteCategory_Click(object sender, EventArgs e)
@@ -103,6 +104,7 @@ namespace crud_xamarin_android.UI.Activities
             var positions = adapter.GetSelectedPositions();
             foreach (var pos in positions)
             {
+                categoryService.DeleteCategory(((Category)adapter.GetItemAt(pos)).Id);
                 adapter.RemoveAt(pos);
             }
             adapter.ClearSelectedPositions();
@@ -120,6 +122,17 @@ namespace crud_xamarin_android.UI.Activities
         {
             var chkSelectAllCategories = FindViewById<CheckBox>(Resource.Id.chkSelectAllCategories);
             chkSelectAllCategories.Checked = isChecked;
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == 1000 && resultCode ==Result.Ok)
+            {
+                adapter.UpdateCategories(categoryService.GetCategories().ToList());
+                adapter.NotifyDataSetChanged();
+            }
         }
     }
 }

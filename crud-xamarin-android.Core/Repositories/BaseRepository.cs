@@ -18,19 +18,27 @@ namespace crud_xamarin_android.Core.Repositories
     {
         public SQLiteConnection Connection { get; }
         private readonly TestData _data;
+        private static bool loadTestData = true;
 
         public BaseRepository()
         {
             _data = new TestData();
             var pathDb = System.IO.Path.Combine(GetFolderPath(SpecialFolder.MyDocuments), "crud_xamarin_android.db");
             Connection = new SQLiteConnection(pathDb);
-            
+
+            if (loadTestData == true)
+                LoadTestData();
+        }
+
+        private void LoadTestData()
+        {
             Connection.DropTable<Article>();
             Connection.DropTable<Category>();
             Connection.CreateTable<Article>();
             Connection.CreateTable<Category>();
             Connection.InsertAll(_data.GetArticles(), typeof(Article));
             Connection.InsertAll(_data.GetCategories(), typeof(Category));
+            loadTestData = false;
         }
     }
 }

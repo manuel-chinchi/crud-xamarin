@@ -14,7 +14,7 @@ namespace crud_xamarin_android.Core.Repositories
 {
     internal class CategoryRepository : BaseRepository, IBaseRepository<Category>
     {
-        public CategoryRepository() : base()
+        public CategoryRepository()
         {
         }
 
@@ -22,11 +22,6 @@ namespace crud_xamarin_android.Core.Repositories
         {
             Connection.CreateTable<Category>();
         }
-
-
-
-
-
 
         public void Delete(int id)
         {
@@ -56,8 +51,9 @@ namespace crud_xamarin_android.Core.Repositories
 
         public int Update(Category item)
         {
-            checkTablesExist();
-            return Connection.Update(item, typeof(Category));
+            //checkTablesExist();
+            //return Connection.Update(item, typeof(Category));
+            return 0;
         }
     }
 }
