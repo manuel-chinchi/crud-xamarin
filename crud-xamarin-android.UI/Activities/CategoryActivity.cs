@@ -19,9 +19,13 @@ namespace crud_xamarin_android.UI.Activities
     [Activity(Label = "Categories")]
     public class CategoryActivity : AppCompatActivity
     {
+        Button btnAdd, btnDelete;
+        CheckBox chkSelectAll;
+
         RecyclerView recyclerView;
         CategoryAdapter adapter;
         CategoryService categoryService;
+
         public CategoryActivity()
         {
             categoryService = new CategoryService();
@@ -41,16 +45,17 @@ namespace crud_xamarin_android.UI.Activities
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
             recyclerView.SetAdapter(adapter);
 
-            var btnAddCategory = FindViewById<Button>(Resource.Id.btnAddCategory);
-            btnAddCategory.Click += BtnAddCategory_Click;
-            var btnDeleteCategory = FindViewById<Button>(Resource.Id.btnDeleteCategory);
-            btnDeleteCategory.Enabled = false;
-            btnDeleteCategory.Click += BtnDeleteCategory_Click;
+            btnAdd = FindViewById<Button>(Resource.Id.btnAddCategory);
+            btnAdd.Click += BtnAddCategory_Click;
 
-            var chkSelectAllCategories = FindViewById<CheckBox>(Resource.Id.chkSelectAllCategories);
-            chkSelectAllCategories.CheckedChange += ChkSelectAllCategories_CheckedChange;
+            btnDelete = FindViewById<Button>(Resource.Id.btnDeleteCategory);
+            btnDelete.Enabled = false;
+            btnDelete.Click += BtnDeleteCategory_Click;
 
+            chkSelectAll = FindViewById<CheckBox>(Resource.Id.chkSelectAllCategories);
+            chkSelectAll.CheckedChange += ChkSelectAllCategories_CheckedChange;
         }
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -62,6 +67,18 @@ namespace crud_xamarin_android.UI.Activities
                     return base.OnOptionsItemSelected(item);
             }
         }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == 1000 && resultCode ==Result.Ok)
+            {
+                adapter.UpdateCategories(categoryService.GetCategories().ToList());
+                adapter.NotifyDataSetChanged();
+            }
+        }
+
         private void ChkSelectAllCategories_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             if (e.IsChecked)
@@ -115,25 +132,12 @@ namespace crud_xamarin_android.UI.Activities
 
         public void ToogleDeleteButton(bool isAnySelected)
         {
-            var btnDeleteCategory = FindViewById<Button>(Resource.Id.btnDeleteCategory);
-            btnDeleteCategory.Enabled = isAnySelected;
+            btnDelete.Enabled = isAnySelected;
         }
 
         public void ToogleCheckHeader(bool isChecked)
         {
-            var chkSelectAllCategories = FindViewById<CheckBox>(Resource.Id.chkSelectAllCategories);
-            chkSelectAllCategories.Checked = isChecked;
-        }
-
-        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
-
-            if (requestCode == 1000 && resultCode ==Result.Ok)
-            {
-                adapter.UpdateCategories(categoryService.GetCategories().ToList());
-                adapter.NotifyDataSetChanged();
-            }
+            chkSelectAll.Checked = isChecked;
         }
     }
 }

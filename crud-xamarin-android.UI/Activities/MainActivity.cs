@@ -11,6 +11,8 @@ namespace crud_xamarin_android.UI.Activities
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        Button btnArticles, btnCategories;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -18,16 +20,10 @@ namespace crud_xamarin_android.UI.Activities
 
             SetContentView(Resource.Layout.activity_main);
 
-            #region test article view
-
-            Button btnArticles = FindViewById<Button>(Resource.Id.btn_articles);
-
-            //btnArticles.Click += delegate { StartActivity(typeof(ArticleActivity)); };
+            btnArticles = FindViewById<Button>(Resource.Id.btn_articles);
             btnArticles.Click += BtnArticles_Click;
 
-            #endregion
-
-            var btnCategories = FindViewById<Button>(Resource.Id.btn_categories);
+            btnCategories = FindViewById<Button>(Resource.Id.btn_categories);
             btnCategories.Click += BtnCategories_Click;
         }
 

@@ -20,6 +20,9 @@ namespace crud_xamarin_android.UI.Activities
     [Activity(Label = "Articles")]
     public class ArticleActivity : AppCompatActivity
     {
+        Button btnAdd, btnEdit, btnDelete;
+        CheckBox chkSelectAll;
+
         RecyclerView recyclerView;
         ArticleAdapter adapter;
         ArticleService articleService;
@@ -27,8 +30,7 @@ namespace crud_xamarin_android.UI.Activities
         public ArticleActivity()
         {
             articleService = new ArticleService();
-            var items = articleService.GetArticles().ToList();
-            adapter = new ArticleAdapter(items);
+            adapter = new ArticleAdapter(articleService.GetArticles().ToList());
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -55,20 +57,21 @@ namespace crud_xamarin_android.UI.Activities
             //adapter = new ArticleAdapter(articles);
             recyclerView.SetAdapter(adapter);
 
-            var btnAdd = FindViewById<Button>(Resource.Id.btnAgregar);
+            btnAdd = FindViewById<Button>(Resource.Id.btnAgregar);
             btnAdd.Click += BtnAdd_Click;
 
-            var btnEdit = FindViewById<Button>(Resource.Id.btnEditar);
+            btnEdit = FindViewById<Button>(Resource.Id.btnEditar);
             btnEdit.Enabled = false;
             btnEdit.Click += BtnEdit_Click;
 
-            var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
+            btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
             btnDelete.Enabled = false;
             btnDelete.Click += BtnDelete_Click;
 
-            var chkSelectAllItems = FindViewById<CheckBox>(Resource.Id.chkSelectAllItems);
-            chkSelectAllItems.CheckedChange += ChkSelectAllItems_CheckedChange;
+            chkSelectAll = FindViewById<CheckBox>(Resource.Id.chkSelectAllItems);
+            chkSelectAll.CheckedChange += ChkSelectAllItems_CheckedChange;
         }
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -159,6 +162,7 @@ namespace crud_xamarin_android.UI.Activities
                 articleService.DeleteArticle(adapter.GetArticleAt(pos).Id);
                 adapter.RemoveAt(pos);
             }
+
             adapter.UpdateArticles(articleService.GetArticles().ToList());
             adapter.ClearSelectedPositions();
             ToggleDeleteButton(false);
@@ -174,20 +178,17 @@ namespace crud_xamarin_android.UI.Activities
 
         public void ToggleDeleteButton(bool isAnySelected)
         {
-            var btnDelete = FindViewById<Button>(Resource.Id.btnEliminar);
             btnDelete.Enabled = isAnySelected;
         }
 
         public void ToggleEditButton(bool isOneItemSelected)
         {
-            var btnEdit = FindViewById<Button>(Resource.Id.btnEditar);
             btnEdit.Enabled = isOneItemSelected;
         }
 
         public void ToogleCheckHeader(bool isChecked)
         {
-            var chkSelectAllItems = FindViewById<CheckBox>(Resource.Id.chkSelectAllItems);
-            chkSelectAllItems.Checked = false;
+            chkSelectAll.Checked = false;
         }
     }
 }

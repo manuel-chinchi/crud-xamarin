@@ -19,15 +19,20 @@ namespace crud_xamarin_android.UI.Activities
     [Activity(Label = "")]
     public class CreateArticleActivity : AppCompatActivity
     {
-        private ArticleService articleService = new ArticleService();
-        CategoryService categoryService = new CategoryService();
+        Button btnAccept, btnCancel;
+        Spinner spnCategories;
+
+        ArticleService articleService;
+        CategoryService categoryService;
         List<Category> categories;
         Category categorySelected;
 
         public CreateArticleActivity()
         {
-            this.categories = categoryService.GetCategories().ToList();
-            this.categories = this.categories.OrderBy(c => c.Name).ToList();
+            articleService = new ArticleService();
+            categoryService = new CategoryService();
+            categories = categoryService.GetCategories().ToList();
+            categories = categories.OrderBy(c => c.Name).ToList();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -39,15 +44,15 @@ namespace crud_xamarin_android.UI.Activities
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SupportActionBar.SetHomeButtonEnabled(true);
 
-            var btnCancel = FindViewById<Button>(Resource.Id.btnCancelar);
-            var btnAccept = FindViewById<Button>(Resource.Id.btnAceptar);
-
+            btnAccept = FindViewById<Button>(Resource.Id.btnAceptar);
             btnAccept.Click += BtnAccept_Click;
+
+            btnCancel = FindViewById<Button>(Resource.Id.btnCancelar);
             btnCancel.Click += BtnCancel_Click;
 
             //var spnCategories = FindViewById<Spinner>(Resource.Id.spnCate);
             //var aa = Resource.Id.spnCategories;
-            var spnCategories = FindViewById<Spinner>(Resource.Id.spnCategories);
+            spnCategories = FindViewById<Spinner>(Resource.Id.spnCategories);
             var categories = categoryService.GetCategories().OrderBy(c=>c.Name);
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, categories.Select(c => c.Name).ToList());
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
@@ -55,6 +60,7 @@ namespace crud_xamarin_android.UI.Activities
 
             spnCategories.ItemSelected += SpnCategories_ItemSelected;
         }
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -66,6 +72,7 @@ namespace crud_xamarin_android.UI.Activities
                     return base.OnOptionsItemSelected(item);
             }
         }
+
         private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             categorySelected = categories[e.Position];
