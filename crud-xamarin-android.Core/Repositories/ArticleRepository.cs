@@ -14,7 +14,7 @@ namespace crud_xamarin_android.Core.Repositories
 {
     internal class ArticleRepository : BaseRepository, IBaseRepository<Article>
     {
-        public ArticleRepository() : base()
+        public ArticleRepository()
         {
         }
 
@@ -27,15 +27,16 @@ namespace crud_xamarin_android.Core.Repositories
         public void Delete(int id)
         {
             checkTablesExist();
+            var article = Connection.Find<Article>(id);
+            var category = Connection.Find<Category>(article.CategoryId);
+            category.Articles--;
+            Connection.Update(category, typeof(Category));
             Connection.Delete<Article>(id);
         }
 
         public IEnumerable<Article> GetAll()
         {
             checkTablesExist();
-            //var items = Connection.Table<Article>().ToList();
-            //return items ?? null;
-
             var articles = Connection.Table<Article>();
             var categories = Connection.Table<Category>();
             var query =
@@ -56,24 +57,33 @@ namespace crud_xamarin_android.Core.Repositories
         public Article GetById(int id)
         {
             checkTablesExist();
-            var item = Connection.Find<Article>(id);
-            return item ?? null;
+            var article = Connection.Find<Article>(id);
+            return article ?? null;
         }
 
-        public void Insert(Article item)
+        public void Insert(Article article)
         {
             checkTablesExist();
-            //if (item.Category != null)
-            //{
-            //    Connection.Insert(item.Category);
-            //}
-            Connection.Insert(item);
+            var category=Connection.Find<Category>(article.CategoryId);
+            category.Articles++;
+            Connection.Update(category, typeof(Category));
+            Connection.Insert(article);
         }
 
-        public int Update(Article item)
+        public int Update(Article article)
         {
             checkTablesExist();
-            return Connection.Update(item, typeof(Article));
+            var oldArticle = Connection.Find<Article>(article.Id);
+            if (oldArticle.CategoryId != article.CategoryId)
+            {
+                var oldCategory = Connection.Find<Category>(oldArticle.CategoryId);
+                oldCategory.Articles--;
+                Connection.Update(oldCategory, typeof(Category));
+                var category = Connection.Find<Category>(article.CategoryId);
+                category.Articles++;
+                Connection.Update(category, typeof(Category));
+            }
+            return Connection.Update(article, typeof(Article));
         }
     }
 }

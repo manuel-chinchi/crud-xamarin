@@ -32,28 +32,27 @@ namespace crud_xamarin_android.Core.Repositories
         public IEnumerable<Category> GetAll()
         {
             checkTablesExist();
-            var items = Connection.Table<Category>().ToList();
-            return items;
+            var categories = Connection.Table<Category>().ToList();
+            return categories;
         }
 
         public Category GetById(int id)
         {
             checkTablesExist();
-            var item = Connection.Get<Category>(id);
-            return item;
+            var category = Connection.Get<Category>(id);
+            return category;
         }
 
-        public void Insert(Category item)
+        public void Insert(Category category)
         {
             checkTablesExist();
-            Connection.Insert(item);
+            Connection.Insert(category);
         }
 
-        public int Update(Category item)
+        public int Update(Category category)
         {
-            //checkTablesExist();
-            //return Connection.Update(item, typeof(Category));
-            return 0;
+            checkTablesExist();
+            return Connection.Update(category, typeof(Category));
         }
     }
 }

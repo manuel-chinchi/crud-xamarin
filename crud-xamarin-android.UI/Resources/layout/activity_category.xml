@@ -48,6 +48,17 @@
             android:padding="4dp"
             android:foreground="@drawable/border_item_header"
             android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="0.3"
+            android:text="Articles"
+            android:textStyle="bold"
+            android:padding="4dp"
+            android:foreground="@drawable/border_item_header"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <!--Rendering item_category.xml layout-->

@@ -15,7 +15,7 @@ namespace crud_xamarin_android.Core.Services
 {
     public class ArticleService
     {
-        ArticleRepository repository;
+        private readonly ArticleRepository repository;
 
         public ArticleService()
         {
