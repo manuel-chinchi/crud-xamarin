@@ -101,7 +101,6 @@ namespace crud_xamarin_android.UI.Activities
             var inpNameArt = FindViewById<EditText>(Resource.Id.inpNameArticle);
             var inpDetailsArt = FindViewById<EditText>(Resource.Id.inpDetailsArticle);
 
-            //articleService.AddArticle(new Article() { Name = inpNameArt.Text, Details = inpDetailsArt.Text, Category = new Category { Name = categorySelected.Name } });
             var article = new Article
             {
                 Name = inpNameArt.Text,

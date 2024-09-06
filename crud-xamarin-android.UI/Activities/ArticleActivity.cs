@@ -137,7 +137,6 @@ namespace crud_xamarin_android.UI.Activities
             {
                 DeleteArticle();
             });
-
             builder.SetNegativeButton("No", (senderAlert, args) =>
             {
                 Toast.MakeText(this, Resource.String.message_cancel_generic, ToastLength.Short).Show();

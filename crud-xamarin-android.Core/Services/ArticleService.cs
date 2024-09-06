@@ -31,6 +31,7 @@ namespace crud_xamarin_android.Core.Services
         public IEnumerable<Article> GetArticles()
         {
             var articles = articleRepository.GetAll().ToList();
+
             for (int i = 0; i < articles.Count; i++)
             {
                 if (articles[i].Category==null && articles[i].CategoryId!=0)
@@ -42,6 +43,7 @@ namespace crud_xamarin_android.Core.Services
                     articles[i].Category = _emptyCategory;
                 }
             }
+
             return articles;
         }
 
@@ -49,10 +51,12 @@ namespace crud_xamarin_android.Core.Services
         {
             var article = articleRepository.GetById(id);
             var category = categoryRepository.GetById(article.CategoryId);
+
             if (category != null)
             {
                 article.Category = category;
             }
+
             return article;
         }
 
@@ -86,6 +90,7 @@ namespace crud_xamarin_android.Core.Services
         public void UpdateArticle(Article article)
         {
             var oldArticle = articleRepository.GetById(article.Id);
+
             if (oldArticle.CategoryId != article.CategoryId)
             {
                 //TODO refactor if's
@@ -102,6 +107,7 @@ namespace crud_xamarin_android.Core.Services
                 category.ArticleCount++;
                 categoryRepository.Update(category);
             }
+
             articleRepository.Update(article);
         }
     }

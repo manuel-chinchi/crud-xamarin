@@ -107,7 +107,6 @@ namespace crud_xamarin_android.UI.Activities
                 ConfirmOrCancelDeleteCategory();
                 //DeleteCategory();
             });
-
             builder.SetNegativeButton("No", (senderAlert, args) =>
             {
                 Toast.MakeText(this, "Cancel action" , ToastLength.Short).Show();
@@ -121,6 +120,7 @@ namespace crud_xamarin_android.UI.Activities
         {
             bool hasRelatedArticles = false;
             var positions = adapter.GetSelectedPositions();
+
             foreach (var pos in positions)
             {
                 var category = (Category)adapter.GetItemAt(pos);
@@ -157,11 +157,13 @@ namespace crud_xamarin_android.UI.Activities
         private void DeleteCategory()
         {
             var positions = adapter.GetSelectedPositions();
+
             foreach (var pos in positions)
             {
                 categoryService.DeleteCategory(((Category)adapter.GetItemAt(pos)).Id);
                 adapter.RemoveAt(pos);
             }
+
             adapter.UpdateCategories(categoryService.GetCategories().ToList());
             adapter.ClearSelectedPositions();
             ToogleDeleteButton(false);

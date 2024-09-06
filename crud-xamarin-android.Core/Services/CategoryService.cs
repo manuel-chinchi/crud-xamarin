@@ -32,6 +32,7 @@ namespace crud_xamarin_android.Core.Services
         {
             var categories = categoryRepository.GetAll().ToList();
             var articles = articleRepository.GetAll();
+
             for (int i = 0; i < categories.Count; i++)
             {
                 if (categories[i].ArticleCount > 0)
@@ -39,6 +40,7 @@ namespace crud_xamarin_android.Core.Services
                     categories[i].Articles = articles.Where(a => a.CategoryId == categories[i].Id).ToList();
                 }
             }
+
             return categories;
         }
 
@@ -64,6 +66,7 @@ namespace crud_xamarin_android.Core.Services
         {
             var category = categoryRepository.GetById(id);
             var articles = articleRepository.GetAll().Where(a=>a.CategoryId == category.Id).ToList();
+
             if (articles != null && articles.Count > 0)
             {
                 foreach (var article in articles)
@@ -72,6 +75,7 @@ namespace crud_xamarin_android.Core.Services
                     articleRepository.Update(article);
                 }
             }
+
             categoryRepository.Delete(id);
         }
 

@@ -17,13 +17,14 @@ namespace crud_xamarin_android.UI.Activities
     [Activity(Label = "")]
     public class EditArticleActivity : AppCompatActivity
     {
-        ArticleService articleService;
-        Article article;
         EditText inpNameArticle;
         EditText inpDetailsArticle;
         Spinner spnCategory;
         Button btnAccept;
         Button btnCancel;
+
+        Article article;
+        ArticleService articleService;
         List<Category> categories;
         Category categorySelected;
 
@@ -115,6 +116,7 @@ namespace crud_xamarin_android.UI.Activities
             Category category;
             article.Name = inpNameArticle.Text;
             article.Details = inpDetailsArticle.Text;
+
             if (spnCategory.Adapter != null && spnCategory.Adapter.Count > 0)
             {
                 //category = categories[spnCategory.SelectedItemPosition];
@@ -127,6 +129,7 @@ namespace crud_xamarin_android.UI.Activities
                 article.Category = null;
                 article.CategoryId = 0;
             }
+
             articleService.UpdateArticle(article);
 
             Intent resultIntent = new Intent();

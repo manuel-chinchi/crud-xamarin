@@ -64,7 +64,6 @@ namespace crud_xamarin_android.UI.Activities
             categoryService.AddCategory(new Category { Name = inpNameCategory.Text });
 
             SetResult(Result.Ok);
-
             Finish();
         }
 
