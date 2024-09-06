@@ -131,7 +131,7 @@ namespace crud_xamarin_android.UI.Activities
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
-            builder.SetTitle("Delete");
+            builder.SetTitle(Resource.String.title_delete);
             builder.SetMessage(Resource.String.message_warning_article_delete);
             builder.SetPositiveButton("Yes", (senderAlert, args) =>
             {
@@ -139,7 +139,7 @@ namespace crud_xamarin_android.UI.Activities
             });
             builder.SetNegativeButton("No", (senderAlert, args) =>
             {
-                Toast.MakeText(this, Resource.String.message_cancel_generic, ToastLength.Short).Show();
+                Toast.MakeText(this, Resource.String.message_cancel, ToastLength.Short).Show();
             });
 
             var alertDialog = builder.Create();

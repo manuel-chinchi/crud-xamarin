@@ -100,16 +100,15 @@ namespace crud_xamarin_android.UI.Activities
         private void BtnDeleteCategory_Click(object sender, EventArgs e)
         {
             var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
-            builder.SetTitle("Delete");
-            builder.SetMessage("Are you sure you want to delete the selected categories?");
+            builder.SetTitle(Resource.String.title_delete);
+            builder.SetMessage(Resource.String.message_delete_category);
             builder.SetPositiveButton("Yes", (senderAlert, args) =>
             {
                 ConfirmOrCancelDeleteCategory();
-                //DeleteCategory();
             });
             builder.SetNegativeButton("No", (senderAlert, args) =>
             {
-                Toast.MakeText(this, "Cancel action" , ToastLength.Short).Show();
+                Toast.MakeText(this, Resource.String.message_cancel , ToastLength.Short).Show();
             });
 
             var alertDialog = builder.Create();
@@ -134,9 +133,8 @@ namespace crud_xamarin_android.UI.Activities
             if (hasRelatedArticles)
             {
                 var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
-                //TODO move to Contants class
-                builder.SetTitle("Warning");
-                builder.SetMessage("Some categories have linked articles, if you delete them, those articles will be left uncategorized. Do you want to continue?");
+                builder.SetTitle(Resource.String.title_warning);
+                builder.SetMessage(Resource.String.message_warning_delete_category);
                 builder.SetPositiveButton("Yes", (sender, args) =>
                 {
                     DeleteCategory();

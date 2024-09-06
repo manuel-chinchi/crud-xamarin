@@ -18,5 +18,11 @@
   <string name="action_cancel_create_article">Cancel</string>
   <string name="message_success_article_created">Item successfully added!</string>
   <string name="message_warning_article_delete">Are you sure you want to delete the selected items?</string>
-  <string name="message_cancel_generic">Canceled operation</string>
+  <!--activity_category.xml-->
+  <string name="message_delete_category">Are you sure you want to delete the selected categories?</string>
+  <string name="message_warning_delete_category">Some categories have linked articles, if you delete them, those articles will be left uncategorized. Do you want to continue?</string>
+
+  <string name="title_delete">Delete</string>
+  <string name="title_warning">Warning</string>
+  <string name="message_cancel">Canceled action</string>
 </resources>
