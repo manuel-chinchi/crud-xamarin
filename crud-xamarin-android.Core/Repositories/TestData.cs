@@ -36,7 +36,7 @@ namespace crud_xamarin_android.Core.Repositories
         {
             var categories = new List<Category>()
             {
-                new Category { Id = 1, Name = "Otro", Articles = GetArticles().Count() },
+                new Category { Id = 1, Name = "Otro", ArticleCount = GetArticles().Count() },
                 new Category { Id = 2, Name = "Pantalones" },
                 new Category { Id = 3, Name = "Remeras" },
                 new Category { Id = 4, Name = "Camisas" },

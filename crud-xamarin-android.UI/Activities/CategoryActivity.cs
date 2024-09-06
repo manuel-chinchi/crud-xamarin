@@ -104,7 +104,8 @@ namespace crud_xamarin_android.UI.Activities
             builder.SetMessage("Are you sure you want to delete the selected categories?");
             builder.SetPositiveButton("Yes", (senderAlert, args) =>
             {
-                DeleteCategory();
+                ConfirmOrCancelDeleteCategory();
+                //DeleteCategory();
             });
 
             builder.SetNegativeButton("No", (senderAlert, args) =>
@@ -114,6 +115,42 @@ namespace crud_xamarin_android.UI.Activities
 
             var alertDialog = builder.Create();
             alertDialog.Show();
+        }
+
+        private void ConfirmOrCancelDeleteCategory()
+        {
+            bool hasRelatedArticles = false;
+            var positions = adapter.GetSelectedPositions();
+            foreach (var pos in positions)
+            {
+                var category = (Category)adapter.GetItemAt(pos);
+                if (category.ArticleCount != 0)
+                {
+                    hasRelatedArticles = true;
+                    continue;
+                }
+            }
+
+            if (hasRelatedArticles)
+            {
+                var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
+                builder.SetTitle("Warning");
+                builder.SetMessage("Algunas categorías tienen artículos vinculados, si las borra se dejara sin categoría a los articulos en cuestión (NO_SET_CATEGORY) ¿Desea continuar?");
+                builder.SetPositiveButton("Yes", (sender, args) =>
+                {
+                    DeleteCategory();
+                });
+                builder.SetNegativeButton("No", (sender, args) =>
+                {
+                });
+
+                var alertDialog = builder.Create();
+                alertDialog.Show();
+            }
+            else
+            {
+                DeleteCategory();
+            }
         }
 
         private void DeleteCategory()

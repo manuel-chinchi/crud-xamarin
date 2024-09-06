@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace crud_xamarin_android.Core.Repositories
+namespace crud_xamarin_android.Core.Repositories.Contracts
 {
     internal interface IBaseRepository<T>
     {

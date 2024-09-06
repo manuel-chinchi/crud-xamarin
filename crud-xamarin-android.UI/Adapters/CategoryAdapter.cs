@@ -32,7 +32,7 @@ namespace crud_xamarin_android.UI.Adapters
             var viewHolder = holder as CategoryViewHolder;
             viewHolder.Id.Text = categories[position].Id.ToString();
             viewHolder.Name.Text = categories[position].Name;
-            viewHolder.Articles.Text = categories[position].Articles.ToString();
+            viewHolder.Articles.Text = categories[position].ArticleCount.ToString();
 
             viewHolder.Selected.CheckedChange -= null;
             viewHolder.Selected.Checked = selectedPositions.Contains(holder.Position);

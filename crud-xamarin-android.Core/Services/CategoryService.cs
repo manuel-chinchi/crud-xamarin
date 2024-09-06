@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using crud_xamarin_android.Core.Models;
 using crud_xamarin_android.Core.Repositories;
+using crud_xamarin_android.Core.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,36 +16,60 @@ namespace crud_xamarin_android.Core.Services
 {
     public class CategoryService
     {
-        private readonly CategoryRepository repository;
+        private readonly ICategoryRepository categoryRepository;
+        private readonly IArticleRepository articleRepository;
+        const int ID_NO_SET_CATEGORY = 0;
 
         public CategoryService()
         {
-            repository = new CategoryRepository();
+            categoryRepository = new CategoryRepository();
+            articleRepository = new ArticleRepository();
         }
 
         public IEnumerable<Category> GetCategories()
         {
-            return repository.GetAll();
+            var categories = categoryRepository.GetAll().ToList();
+            var articles = articleRepository.GetAll();
+            for (int i = 0; i < categories.Count; i++)
+            {
+                if (categories[i].ArticleCount > 0)
+                {
+                    categories[i].Articles = articles.Where(a => a.CategoryId == categories[i].Id).ToList();
+                }
+            }
+            return categories;
         }
 
         public Category GetCategoryById(int id)
         {
-            return repository.GetById(id);
+            var category = categoryRepository.GetById(id);
+            var articles = articleRepository.GetAll();
+            category.Articles = articles.Where(a => a.CategoryId == category.Id).ToList();
+            return category;
         }
 
         public void AddCategory(Category category)
         {
-            repository.Insert(category);
+            categoryRepository.Insert(category);
         }
 
         public void UpdateCategory(Category category)
         {
-            repository.Update(category);
+            categoryRepository.Update(category);
         }
 
         public void DeleteCategory(int id)
         {
-            repository.Delete(id);
+            var category = categoryRepository.GetById(id);
+            var articles = articleRepository.GetAll().Where(a=>a.CategoryId == category.Id).ToList();
+            if (articles != null && articles.Count > 0)
+            {
+                foreach (var article in articles)
+                {
+                    article.CategoryId = ID_NO_SET_CATEGORY;
+                    articleRepository.Update(article);
+                }
+            }
         }
     }
 }

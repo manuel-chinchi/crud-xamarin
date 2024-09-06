@@ -52,7 +52,9 @@
     <Compile Include="Repositories\ArticleRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
-    <Compile Include="Repositories\IBaseRepository.cs" />
+    <Compile Include="Repositories\Contracts\IArticleRepository.cs" />
+    <Compile Include="Repositories\Contracts\IBaseRepository.cs" />
+    <Compile Include="Repositories\Contracts\ICategoryRepository.cs" />
     <Compile Include="Repositories\TestData.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

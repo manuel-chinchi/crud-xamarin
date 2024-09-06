@@ -17,6 +17,8 @@ namespace crud_xamarin_android.Core.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Articles { get; set; }
+        public int ArticleCount { get; set; }
+        [Ignore]
+        public IEnumerable<Article> Articles { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using crud_xamarin_android.Core.Models;
+using crud_xamarin_android.Core.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Text;
 
 namespace crud_xamarin_android.Core.Repositories
 {
-    internal class CategoryRepository : BaseRepository, IBaseRepository<Category>
+    internal class CategoryRepository : BaseRepository, ICategoryRepository
     {
         public CategoryRepository()
         {

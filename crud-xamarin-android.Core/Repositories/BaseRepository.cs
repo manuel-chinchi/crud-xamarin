@@ -18,7 +18,7 @@ namespace crud_xamarin_android.Core.Repositories
     {
         public SQLiteConnection Connection { get; }
         private readonly TestData _data;
-        private static bool loadTestData = true;
+        private static bool loadTestData = false;
 
         public BaseRepository()
         {
