@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using crud_xamarin_android.Core.Helpers;
 using crud_xamarin_android.Core.Models;
 using crud_xamarin_android.Core.Repositories;
 using crud_xamarin_android.Core.Repositories.Contracts;
@@ -16,22 +17,25 @@ namespace crud_xamarin_android.Core.Services
 {
     public class CategoryService
     {
-        private readonly ICategoryRepository categoryRepository;
-        private readonly IArticleRepository articleRepository;
-        private readonly Category _emptyCategory;
-        public Category EmptyCategory { get { return _emptyCategory; } }
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IArticleRepository _articleRepository;
+        private Category untrackedCategory;
 
         public CategoryService()
         {
-            categoryRepository = new CategoryRepository();
-            articleRepository = new ArticleRepository();
-            _emptyCategory = new Category { Id = 0, Name = "UNCATEGORIZED" };
+            _categoryRepository = new CategoryRepository();
+            _articleRepository = new ArticleRepository();
+            untrackedCategory = new Category
+            {
+                Id = CategoryHelper.ID_EMPTY_CATEGORY,
+                Name = CategoryHelper.NAME_EMPTY_CATEGORY
+            };
         }
 
         public IEnumerable<Category> GetCategories()
         {
-            var categories = categoryRepository.GetAll().ToList();
-            var articles = articleRepository.GetAll();
+            var categories = _categoryRepository.GetAll().ToList();
+            var articles = _articleRepository.GetAll();
 
             for (int i = 0; i < categories.Count; i++)
             {
@@ -46,42 +50,37 @@ namespace crud_xamarin_android.Core.Services
 
         public Category GetCategoryById(int id)
         {
-            var category = categoryRepository.GetById(id);
-            var articles = articleRepository.GetAll();
+            var category = _categoryRepository.GetById(id);
+            var articles = _articleRepository.GetAll();
             category.Articles = articles.Where(a => a.CategoryId == category.Id).ToList();
             return category;
         }
 
         public void AddCategory(Category category)
         {
-            categoryRepository.Insert(category);
+            _categoryRepository.Insert(category);
         }
 
         public void UpdateCategory(Category category)
         {
-            categoryRepository.Update(category);
+            _categoryRepository.Update(category);
         }
 
         public void DeleteCategory(int id)
         {
-            var category = categoryRepository.GetById(id);
-            var articles = articleRepository.GetAll().Where(a=>a.CategoryId == category.Id).ToList();
+            var category = _categoryRepository.GetById(id);
+            var articles = _articleRepository.GetAll().Where(a => a.CategoryId == category.Id).ToList();
 
             if (articles != null && articles.Count > 0)
             {
                 foreach (var article in articles)
                 {
-                    article.CategoryId = EmptyCategory.Id;
-                    articleRepository.Update(article);
+                    article.CategoryId = untrackedCategory.Id;
+                    _articleRepository.Update(article);
                 }
             }
 
-            categoryRepository.Delete(id);
-        }
-
-        public static bool IsEmptyCategory(int id)
-        {
-            return id == 0 ? true : false;
+            _categoryRepository.Delete(id);
         }
     }
 }

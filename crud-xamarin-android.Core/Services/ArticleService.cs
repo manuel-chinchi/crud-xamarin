@@ -17,14 +17,14 @@ namespace crud_xamarin_android.Core.Services
 {
     public class ArticleService
     {
-        private readonly IArticleRepository articleRepository;
-        private readonly ICategoryRepository categoryRepository;
+        private readonly IArticleRepository _articleRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private Category untrackedCategory;
 
         public ArticleService()
         {
-            articleRepository = new ArticleRepository();
-            categoryRepository = new CategoryRepository();
+            _articleRepository = new ArticleRepository();
+            _categoryRepository = new CategoryRepository();
             untrackedCategory = new Category
             {
                 Id = CategoryHelper.ID_EMPTY_CATEGORY,
@@ -34,13 +34,13 @@ namespace crud_xamarin_android.Core.Services
 
         public IEnumerable<Article> GetArticles()
         {
-            var articles = articleRepository.GetAll().ToList();
+            var articles = _articleRepository.GetAll().ToList();
 
             for (int i = 0; i < articles.Count; i++)
             {
                 if (articles[i].Category == null && articles[i].CategoryId != untrackedCategory.Id)
                 {
-                    articles[i].Category = categoryRepository.GetById(articles[i].CategoryId);
+                    articles[i].Category = _categoryRepository.GetById(articles[i].CategoryId);
                 }
                 else if (articles[i].CategoryId == untrackedCategory.Id)
                 {
@@ -53,8 +53,8 @@ namespace crud_xamarin_android.Core.Services
 
         public Article GetArticleById(int id)
         {
-            var article = articleRepository.GetById(id);
-            var category = categoryRepository.GetById(article.CategoryId);
+            var article = _articleRepository.GetById(id);
+            var category = _categoryRepository.GetById(article.CategoryId);
 
             if (category != null)
             {
@@ -66,53 +66,53 @@ namespace crud_xamarin_android.Core.Services
 
         public void AddArticle(Article article)
         {
-            var category = categoryRepository.GetById(article.CategoryId);
+            var category = _categoryRepository.GetById(article.CategoryId);
 
             if (category != null)
             {
                 category.ArticleCount++;
-                categoryRepository.Update(category);
+                _categoryRepository.Update(category);
             }
 
-            articleRepository.Insert(article);
+            _articleRepository.Insert(article);
         }
 
         public void DeleteArticle(int id)
         {
-            var article = articleRepository.GetById(id);
-            var category = categoryRepository.GetById(article.CategoryId);
+            var article = _articleRepository.GetById(id);
+            var category = _categoryRepository.GetById(article.CategoryId);
 
             if (category != null)
             {
                 category.ArticleCount--;
-                categoryRepository.Update(category);
+                _categoryRepository.Update(category);
             }
 
-            articleRepository.Delete(id);
+            _articleRepository.Delete(id);
         }
 
         public void UpdateArticle(Article article)
         {
-            var oldArticle = articleRepository.GetById(article.Id);
+            var oldArticle = _articleRepository.GetById(article.Id);
 
             if (oldArticle.CategoryId != article.CategoryId)
             {
                 if (article.CategoryId != untrackedCategory.Id)
                 {
-                    var oldCategory = categoryRepository.GetById(oldArticle.CategoryId);
+                    var oldCategory = _categoryRepository.GetById(oldArticle.CategoryId);
                     if (oldCategory != null)
                     {
                         oldCategory.ArticleCount--;
-                        categoryRepository.Update(oldCategory);
+                        _categoryRepository.Update(oldCategory);
                     }
                 }
 
-                var category = categoryRepository.GetById(article.CategoryId);
+                var category = _categoryRepository.GetById(article.CategoryId);
                 category.ArticleCount++;
-                categoryRepository.Update(category);
+                _categoryRepository.Update(category);
             }
 
-            articleRepository.Update(article);
+            _articleRepository.Update(article);
         }
     }
 }
