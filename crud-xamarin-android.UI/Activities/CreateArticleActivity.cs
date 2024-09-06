@@ -104,9 +104,9 @@ namespace crud_xamarin_android.UI.Activities
             //articleService.AddArticle(new Article() { Name = inpNameArt.Text, Details = inpDetailsArt.Text, Category = new Category { Name = categorySelected.Name } });
             var article = new Article
             {
-                Name=inpNameArt.Text,
-                Details=inpDetailsArt.Text,
-                CategoryId=categorySelected.Id
+                Name = inpNameArt.Text,
+                Details = inpDetailsArt.Text,
+                CategoryId = (categorySelected != null ? categorySelected.Id : 0)
             };
             articleService.AddArticle(article);
 

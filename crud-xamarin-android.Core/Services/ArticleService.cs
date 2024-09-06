@@ -59,8 +59,13 @@ namespace crud_xamarin_android.Core.Services
         public void AddArticle(Article article)
         {
             var category = categoryRepository.GetById(article.CategoryId);
-            category.ArticleCount++;
-            categoryRepository.Update(category);
+
+            if (category != null)
+            {
+                category.ArticleCount++;
+                categoryRepository.Update(category);
+            }
+
             articleRepository.Insert(article);
         }
 
