@@ -28,8 +28,8 @@ namespace crud_xamarin_android.Core.Repositories
 
             #region static data
 
-            if (loadTestData == true)
-                LoadTestData();
+            //if (loadTestData == true)
+            //    LoadTestData();
 
             #endregion
         }

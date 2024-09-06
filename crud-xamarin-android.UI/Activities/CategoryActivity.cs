@@ -134,8 +134,9 @@ namespace crud_xamarin_android.UI.Activities
             if (hasRelatedArticles)
             {
                 var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
+                //TODO move to Contants class
                 builder.SetTitle("Warning");
-                builder.SetMessage("Algunas categorías tienen artículos vinculados, si las borra se dejara sin categoría a los articulos en cuestión (NO_SET_CATEGORY) ¿Desea continuar?");
+                builder.SetMessage("Some categories have linked articles, if you delete them, those articles will be left uncategorized. Do you want to continue?");
                 builder.SetPositiveButton("Yes", (sender, args) =>
                 {
                     DeleteCategory();

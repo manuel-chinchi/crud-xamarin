@@ -18,10 +18,14 @@ namespace crud_xamarin_android.Core.Services
     {
         private readonly IArticleRepository articleRepository;
         private readonly ICategoryRepository categoryRepository;
+        private readonly Category _emptyCategory;
+        public Category EmptyCategory { get { return _emptyCategory; } }
+
         public ArticleService()
         {
             articleRepository = new ArticleRepository();
             categoryRepository = new CategoryRepository();
+            _emptyCategory = new Category { Id = 0, Name = "UNCATEGORIZED" };
         }
 
         public IEnumerable<Article> GetArticles()
@@ -33,9 +37,9 @@ namespace crud_xamarin_android.Core.Services
                 {
                     articles[i].Category = categoryRepository.GetById(articles[i].CategoryId);
                 }
-                else if (articles[i].CategoryId == 0)
+                else if (articles[i].CategoryId == _emptyCategory.Id)
                 {
-                    articles[i].Category = new Category { Id = articles[i].CategoryId, Name = "UNCATEGORIZED" };
+                    articles[i].Category = _emptyCategory;
                 }
             }
             return articles;
@@ -43,7 +47,13 @@ namespace crud_xamarin_android.Core.Services
 
         public Article GetArticleById(int id)
         {
-            return articleRepository.GetById(id);
+            var article = articleRepository.GetById(id);
+            var category = categoryRepository.GetById(article.CategoryId);
+            if (category != null)
+            {
+                article.Category = category;
+            }
+            return article;
         }
 
         public void AddArticle(Article article)
@@ -58,8 +68,13 @@ namespace crud_xamarin_android.Core.Services
         {
             var article = articleRepository.GetById(id);
             var category = categoryRepository.GetById(article.CategoryId);
-            category.ArticleCount++;
-            categoryRepository.Update(category);
+
+            if (category != null)
+            {
+                category.ArticleCount++;
+                categoryRepository.Update(category);
+            }
+
             articleRepository.Delete(id);
         }
 
@@ -68,9 +83,16 @@ namespace crud_xamarin_android.Core.Services
             var oldArticle = articleRepository.GetById(article.Id);
             if (oldArticle.CategoryId != article.CategoryId)
             {
-                var oldCategory = categoryRepository.GetById(oldArticle.CategoryId);
-                oldCategory.ArticleCount--;
-                categoryRepository.Update(oldCategory);
+                //TODO refactor if's
+                if (article.CategoryId != 0)
+                {
+                    var oldCategory = categoryRepository.GetById(oldArticle.CategoryId);
+                    if (oldCategory!=null)
+                    {
+                        oldCategory.ArticleCount--;
+                        categoryRepository.Update(oldCategory);
+                    }
+                }
                 var category = categoryRepository.GetById(article.CategoryId);
                 category.ArticleCount++;
                 categoryRepository.Update(category);

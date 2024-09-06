@@ -51,10 +51,23 @@ namespace crud_xamarin_android.UI.Activities
             btnCancel.Click += BtnCancel_Click;
 
             spnCategories = FindViewById<Spinner>(Resource.Id.spnCategories);
-            var categories = categoryService.GetCategories().OrderBy(c=>c.Name);
-            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, categories.Select(c => c.Name).ToList());
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spnCategories.Adapter = adapter;
+            var categories = categoryService.GetCategories().OrderBy(c=>c.Name).ToList();
+            List<string> spnDataSource;
+            ArrayAdapter spnAdapter;
+
+            if (categories.Count > 0)
+            {
+                spnDataSource = categories.Select(c => c.Name).ToList();
+            }
+            else
+            {
+                spnDataSource = new List<string> { "(NO CATEGORIES)" };
+                spnCategories.Enabled = false;
+            }
+
+            spnAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, spnDataSource);
+            spnAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spnCategories.Adapter = spnAdapter;
 
             spnCategories.ItemSelected += SpnCategories_ItemSelected;
         }
@@ -73,7 +86,10 @@ namespace crud_xamarin_android.UI.Activities
 
         private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
-            categorySelected = categories[e.Position];
+            if (categories.Count > 0)
+            {
+                categorySelected = categories[e.Position];
+            }
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)

@@ -40,7 +40,7 @@ namespace crud_xamarin_android.Core.Repositories
         public Category GetById(int id)
         {
             checkTablesExist();
-            var category = Connection.Get<Category>(id);
+            var category = Connection.Find<Category>(id);
             return category;
         }
 

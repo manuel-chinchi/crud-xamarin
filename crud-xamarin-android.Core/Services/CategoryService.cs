@@ -18,12 +18,14 @@ namespace crud_xamarin_android.Core.Services
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IArticleRepository articleRepository;
-        const int ID_NO_SET_CATEGORY = 0;
+        private readonly Category _emptyCategory;
+        public Category EmptyCategory { get { return _emptyCategory; } }
 
         public CategoryService()
         {
             categoryRepository = new CategoryRepository();
             articleRepository = new ArticleRepository();
+            _emptyCategory = new Category { Id = 0, Name = "UNCATEGORIZED" };
         }
 
         public IEnumerable<Category> GetCategories()
@@ -66,10 +68,16 @@ namespace crud_xamarin_android.Core.Services
             {
                 foreach (var article in articles)
                 {
-                    article.CategoryId = ID_NO_SET_CATEGORY;
+                    article.CategoryId = EmptyCategory.Id;
                     articleRepository.Update(article);
                 }
             }
+            categoryRepository.Delete(id);
+        }
+
+        public static bool IsEmptyCategory(int id)
+        {
+            return id == 0 ? true : false;
         }
     }
 }

@@ -25,11 +25,13 @@ namespace crud_xamarin_android.UI.Activities
         Button btnAccept;
         Button btnCancel;
         List<Category> categories;
+        Category categorySelected;
 
         public EditArticleActivity()
         {
             articleService = new ArticleService();
             categories = new CategoryService().GetCategories().ToList();
+            categories = categories.OrderBy(c => c.Name).ToList();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -49,23 +51,54 @@ namespace crud_xamarin_android.UI.Activities
 
             int articleId = Intent.GetIntExtra("ArticleId", -1);
             int categoryId = Intent.GetIntExtra("CategoryId", -1);
-            article = articleService.GetArticleById(articleId);
 
+            article = articleService.GetArticleById(articleId);
             categories = categories.OrderBy(c => c.Name).ToList();
-            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, categories.Select(c => c.Name).ToList());
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spnCategory.Adapter = adapter;
-            if (article !=null)
+            ArrayAdapter spnAdapter;
+            List<string> spnDataSource;
+
+            if (article != null)
             {
                 inpNameArticle.Text = article.Name;
                 inpDetailsArticle.Text = article.Details;
+            }
 
+            if (categoryId == 0 && categories.Count > 0)
+            {
+                categories.Insert(0, new Category { Id = 0, Name = "UNCATEGORIZED" });
+                spnDataSource = categories.Select(c => c.Name).ToList();
                 int position = categories.FindIndex(c => c.Id == categoryId);
                 spnCategory.SetSelection(position);
             }
+            else if (categories.Count > 0)
+            {
+                spnDataSource = categories.Select(c => c.Name).ToList();
+                int position = categories.FindIndex(c => c.Id == categoryId);
+                spnCategory.SetSelection(position);
+            }
+            else
+            {
+                spnDataSource = new List<string> { "UNCATEGORIZED" };
+                spnCategory.Enabled = false;
+            }
+
+            spnAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, spnDataSource);
+            spnAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            spnCategory.Adapter = spnAdapter;
+
             btnAccept.Click += BtnAccept_Click;
             btnCancel.Click += BtnCancel_Click;
+            spnCategory.ItemSelected += SpnCategory_ItemSelected;
         }
+
+        private void SpnCategory_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if (categories.Count > 0)
+            {
+                categorySelected = categories[e.Position];
+            }
+        }
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -79,11 +112,21 @@ namespace crud_xamarin_android.UI.Activities
         }
         private void BtnAccept_Click(object sender, EventArgs e)
         {
+            Category category;
             article.Name = inpNameArticle.Text;
             article.Details = inpDetailsArticle.Text;
-            var category = categories[spnCategory.SelectedItemPosition];
-            article.Category = categories.FirstOrDefault(c => c.Name == category.Name);
-            article.CategoryId = category.Id;
+            if (spnCategory.Adapter != null && spnCategory.Adapter.Count > 0)
+            {
+                //category = categories[spnCategory.SelectedItemPosition];
+                category = categorySelected;
+                article.Category = categories.FirstOrDefault(c => c.Name == category.Name);
+                article.CategoryId = category.Id;
+            }
+            else
+            {
+                article.Category = null;
+                article.CategoryId = 0;
+            }
             articleService.UpdateArticle(article);
 
             Intent resultIntent = new Intent();
