@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using crud_xamarin_android.Core.Helpers;
 using crud_xamarin_android.Core.Models;
 using crud_xamarin_android.Core.Services;
 using System;
@@ -64,9 +65,13 @@ namespace crud_xamarin_android.UI.Activities
                 inpDetailsArticle.Text = article.Details;
             }
 
-            if (categoryId == 0 && categories.Count > 0)
+            if (categoryId == CategoryHelper.ID_EMPTY_CATEGORY && categories.Count > 0)
             {
-                categories.Insert(0, new Category { Id = 0, Name = "UNCATEGORIZED" });
+                categories.Insert(0, new Category
+                {
+                    Id = CategoryHelper.ID_EMPTY_CATEGORY,
+                    Name = CategoryHelper.NAME_EMPTY_CATEGORY
+                });
                 spnDataSource = categories.Select(c => c.Name).ToList();
                 int position = categories.FindIndex(c => c.Id == categoryId);
                 spnCategory.SetSelection(position);
@@ -79,7 +84,7 @@ namespace crud_xamarin_android.UI.Activities
             }
             else
             {
-                spnDataSource = new List<string> { "UNCATEGORIZED" };
+                spnDataSource = new List<string> { CategoryHelper.NAME_EMPTY_CATEGORY };
                 spnCategory.Enabled = false;
             }
 
@@ -113,21 +118,18 @@ namespace crud_xamarin_android.UI.Activities
         }
         private void BtnAccept_Click(object sender, EventArgs e)
         {
-            Category category;
             article.Name = inpNameArticle.Text;
             article.Details = inpDetailsArticle.Text;
 
-            if (spnCategory.Adapter != null && spnCategory.Adapter.Count > 0)
+            if (categories.Count > 0)
             {
-                //category = categories[spnCategory.SelectedItemPosition];
-                category = categorySelected;
-                article.Category = categories.FirstOrDefault(c => c.Name == category.Name);
-                article.CategoryId = category.Id;
+                article.Category = categories.FirstOrDefault(c => c.Name == categorySelected.Name);
+                article.CategoryId = categorySelected.Id;
             }
             else
             {
                 article.Category = null;
-                article.CategoryId = 0;
+                article.CategoryId = CategoryHelper.ID_EMPTY_CATEGORY;
             }
 
             articleService.UpdateArticle(article);

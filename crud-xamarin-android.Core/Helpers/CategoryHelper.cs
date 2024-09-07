@@ -14,6 +14,6 @@ namespace crud_xamarin_android.Core.Helpers
     public static class CategoryHelper
     {
         public const int ID_EMPTY_CATEGORY = 0;
-        public const string NAME_EMPTY_CATEGORY = "Uncategorized";
+        public const string NAME_EMPTY_CATEGORY = "UNCATEGORIZED";
     }
 }

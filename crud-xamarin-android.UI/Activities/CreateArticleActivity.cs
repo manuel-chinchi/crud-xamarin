@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.RecyclerView.Widget;
+using crud_xamarin_android.Core.Helpers;
 using crud_xamarin_android.Core.Models;
 using crud_xamarin_android.Core.Services;
 using crud_xamarin_android.UI.Adapters;
@@ -61,7 +62,7 @@ namespace crud_xamarin_android.UI.Activities
             }
             else
             {
-                spnDataSource = new List<string> { "(NO CATEGORIES)" };
+                spnDataSource = new List<string> { "(NO CATEGORIES AVAILABLE)" };
                 spnCategories.Enabled = false;
             }
 
@@ -105,12 +106,11 @@ namespace crud_xamarin_android.UI.Activities
             {
                 Name = inpNameArt.Text,
                 Details = inpDetailsArt.Text,
-                CategoryId = (categorySelected != null ? categorySelected.Id : 0)
+                CategoryId = (categorySelected != null ? categorySelected.Id : CategoryHelper.ID_EMPTY_CATEGORY)
             };
             articleService.AddArticle(article);
 
             SetResult(Result.Ok);
-
             Finish();
         }
 
