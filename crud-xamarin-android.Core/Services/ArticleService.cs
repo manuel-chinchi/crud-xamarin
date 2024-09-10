@@ -38,13 +38,15 @@ namespace crud_xamarin_android.Core.Services
 
             for (int i = 0; i < articles.Count; i++)
             {
-                if (articles[i].Category == null && articles[i].CategoryId != untrackedCategory.Id)
+                articles[i].Category = _categoryRepository.GetById(articles[i].CategoryId);
+
+                if (articles[i].Category == null)
                 {
-                    articles[i].Category = _categoryRepository.GetById(articles[i].CategoryId);
-                }
-                else if (articles[i].CategoryId == untrackedCategory.Id)
-                {
-                    articles[i].Category = untrackedCategory;
+                    articles[i].Category = new Category
+                    {
+                        Id = CategoryHelper.ID_EMPTY_CATEGORY,
+                        Name = CategoryHelper.NAME_EMPTY_CATEGORY
+                    };
                 }
             }
 
