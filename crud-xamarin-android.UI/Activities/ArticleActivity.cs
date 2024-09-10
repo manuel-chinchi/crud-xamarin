@@ -42,14 +42,6 @@ namespace crud_xamarin_android.UI.Activities
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SupportActionBar.SetHomeButtonEnabled(true);
 
-            #region old: drawing line separator for data grid
-
-            //int color = Android.Graphics.Color.Gray;
-            //int dividerHeight = 2;
-            //recyclerView.AddItemDecoration(new GridItemDecoration(color, dividerHeight));
-
-            #endregion
-
             recyclerView = FindViewById<RecyclerView>(Resource.Id.lstArticles);
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
             recyclerView.SetAdapter(adapter);
