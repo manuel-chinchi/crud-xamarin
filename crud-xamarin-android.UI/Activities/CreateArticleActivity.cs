@@ -152,6 +152,42 @@ namespace crud_xamarin_android.UI.Activities
             builder.Show();
         }
 
+        private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if (categories.Count > 0)
+            {
+                categorySelected = categories[e.Position];
+            }
+        }
+
+        private void BtnAccept_Click(object sender, EventArgs e)
+        {
+            var toast = Toast.MakeText(this, Resource.String.message_success_article_created, ToastLength.Short);
+            toast.SetGravity(GravityFlags.Top | GravityFlags.CenterHorizontal, 0, 0);
+            toast.Show();
+
+            var inpNameArt = FindViewById<EditText>(Resource.Id.inpNameArticle);
+            var inpDetailsArt = FindViewById<EditText>(Resource.Id.inpDetailsArticle);
+
+            var article = new Article
+            {
+                Name = inpNameArt.Text,
+                Details = inpDetailsArt.Text,
+                CategoryId = (categorySelected != null ? categorySelected.Id : CategoryHelper.ID_EMPTY_CATEGORY),
+                ImagePath = photoFile != null ? photoFile.AbsolutePath : null,
+                ImageData = photoFile != null ? ImageHelper.GetImageAsByteArray(photoFile.AbsolutePath) : null,
+            };
+            articleService.AddArticle(article);
+
+            SetResult(Result.Ok);
+            Finish();
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            Finish();
+        }
+
         private void GoToCamera()
         {
             if (!CameraHelper.HasCameraPermission(this))
@@ -196,42 +232,6 @@ namespace crud_xamarin_android.UI.Activities
             Intent chooseItemFromGalleryIntent = new Intent(Intent.ActionPick);
             chooseItemFromGalleryIntent.SetType("image/*");
             StartActivityForResult(chooseItemFromGalleryIntent, GaleryHelper.PICK_IMAGE_REQUEST);
-        }
-
-        private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            if (categories.Count > 0)
-            {
-                categorySelected = categories[e.Position];
-            }
-        }
-
-        private void BtnAccept_Click(object sender, EventArgs e)
-        {
-            var toast = Toast.MakeText(this, Resource.String.message_success_article_created, ToastLength.Short);
-            toast.SetGravity(GravityFlags.Top | GravityFlags.CenterHorizontal, 0, 0);
-            toast.Show();
-
-            var inpNameArt = FindViewById<EditText>(Resource.Id.inpNameArticle);
-            var inpDetailsArt = FindViewById<EditText>(Resource.Id.inpDetailsArticle);
-
-            var article = new Article
-            {
-                Name = inpNameArt.Text,
-                Details = inpDetailsArt.Text,
-                CategoryId = (categorySelected != null ? categorySelected.Id : CategoryHelper.ID_EMPTY_CATEGORY),
-                ImagePath = photoFile != null ? photoFile.AbsolutePath : null,
-                ImageData = photoFile != null ? ImageHelper.GetImageAsByteArray(photoFile.AbsolutePath) : null,
-            };
-            articleService.AddArticle(article);
-
-            SetResult(Result.Ok);
-            Finish();
-        }
-
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            Finish();
         }
     }
 }

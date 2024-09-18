@@ -200,6 +200,45 @@ namespace crud_xamarin_android.UI.Activities
             builder.Show();
         }
 
+        private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if (categories.Count > 0)
+            {
+                categorySelected = categories[e.Position];
+            }
+        }
+
+        private void BtnAccept_Click(object sender, EventArgs e)
+        {
+            article.Name = inpNameArticle.Text;
+            article.Details = inpDetailsArticle.Text;
+            article.ImagePath = photoFile != null ? photoFile.AbsolutePath : null;
+            article.ImageData = photoFile != null ? ImageHelper.GetImageAsByteArray(photoFile.AbsolutePath) : null;
+
+            if (categories.Count > 0)
+            {
+                article.Category = categories.FirstOrDefault(c => c.Name == categorySelected.Name);
+                article.CategoryId = categorySelected.Id;
+            }
+            else
+            {
+                article.Category = null;
+                article.CategoryId = CategoryHelper.ID_EMPTY_CATEGORY;
+            }
+
+            articleService.UpdateArticle(article);
+
+            Intent resultIntent = new Intent();
+            SetResult(Result.Ok, resultIntent);
+            Finish();
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            SetResult(Result.Canceled);
+            Finish();
+        }
+
         private void GoToCamera()
         {
             if (!CameraHelper.HasCameraPermission(this))
@@ -247,43 +286,5 @@ namespace crud_xamarin_android.UI.Activities
             StartActivityForResult(chooseItemFromGalleryIntent, GaleryHelper.PICK_IMAGE_REQUEST);
         }
 
-        private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            if (categories.Count > 0)
-            {
-                categorySelected = categories[e.Position];
-            }
-        }
-
-        private void BtnAccept_Click(object sender, EventArgs e)
-        {
-            article.Name = inpNameArticle.Text;
-            article.Details = inpDetailsArticle.Text;
-            article.ImagePath = photoFile != null ? photoFile.AbsolutePath : null;
-            article.ImageData = photoFile != null ? ImageHelper.GetImageAsByteArray(photoFile.AbsolutePath) : null;
-
-            if (categories.Count > 0)
-            {
-                article.Category = categories.FirstOrDefault(c => c.Name == categorySelected.Name);
-                article.CategoryId = categorySelected.Id;
-            }
-            else
-            {
-                article.Category = null;
-                article.CategoryId = CategoryHelper.ID_EMPTY_CATEGORY;
-            }
-
-            articleService.UpdateArticle(article);
-
-            Intent resultIntent = new Intent();
-            SetResult(Result.Ok, resultIntent);
-            Finish();
-        }
-
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            SetResult(Result.Canceled);
-            Finish();
-        }
     }
 }
