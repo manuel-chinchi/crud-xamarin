@@ -36,11 +36,6 @@ namespace crud_xamarin_android.UI.Activities
         Category categorySelected;
         Java.IO.File photoFile;
 
-        const int REQUEST_CAMERA_PERMISSION = 100;
-        const string FILE_PROVIDER = "com.companyname.crud_xamarin.fileprovider";
-        private static readonly int REQUEST_IMAGE_CAPTURE = 1;
-        private string _currentPhotoPath;
-
         public CreateArticleActivity()
         {
             articleService = new ArticleService();
@@ -105,10 +100,9 @@ namespace crud_xamarin_android.UI.Activities
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
-            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Result.Ok)
+            if (CameraHelper.CheckResultCamera(requestCode,resultCode))
             {
-                var imageView = FindViewById<ImageView>(Resource.Id.imgArticle);
-                imageView.SetImageURI(Android.Net.Uri.Parse(_currentPhotoPath));
+                imgArticle.SetImageURI(Android.Net.Uri.Parse(photoFile.AbsolutePath));
             }
 
             if (GaleryHelper.CheckResultGalery(requestCode, resultCode))
@@ -127,12 +121,9 @@ namespace crud_xamarin_android.UI.Activities
         {
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            if (requestCode == REQUEST_CAMERA_PERMISSION)
+            if (CameraHelper.CheckCameraPermission(requestCode,grantResults))
             {
-                if (grantResults.Length > 0 && grantResults[0] == Android.Content.PM.Permission.Granted)
-                {
-                    OpenCamera();
-                }
+                OpenCamera();
             }
 
             if (GaleryHelper.CheckGaleryPermission(requestCode, grantResults))
@@ -163,28 +154,13 @@ namespace crud_xamarin_android.UI.Activities
 
         private void GoToCamera()
         {
-            if (CheckSelfPermission(Android.Manifest.Permission.Camera) != (int)Android.Content.PM.Permission.Granted)
+            if (!CameraHelper.HasCameraPermission(this))
             {
-                RequestPermissions(new string[] { Android.Manifest.Permission.Camera }, REQUEST_CAMERA_PERMISSION);
+                CameraHelper.RequestCameraPermission(this);
             }
             else
             {
                 OpenCamera();
-            }
-        }
-
-        private void OpenCamera()
-        {
-            Intent takePictureIntent = new Intent(Android.Provider.MediaStore.ActionImageCapture);
-            if (takePictureIntent.ResolveActivity(PackageManager) != null)
-            {
-                photoFile = ImageHelper.CreateImageFile(this);
-                if (photoFile != null)
-                {
-                    var photoURI = FileProvider.GetUriForFile(this, FILE_PROVIDER, photoFile);
-                    takePictureIntent.PutExtra(Android.Provider.MediaStore.ExtraOutput, photoURI);
-                    StartActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
             }
         }
 
@@ -200,11 +176,26 @@ namespace crud_xamarin_android.UI.Activities
             }
         }
 
+        private void OpenCamera()
+        {
+            Intent takePictureIntent = new Intent(Android.Provider.MediaStore.ActionImageCapture);
+            if (takePictureIntent.ResolveActivity(PackageManager) != null)
+            {
+                photoFile = ImageHelper.CreateImageFile(this);
+                if (photoFile != null)
+                {
+                    var photoURI = FileProvider.GetUriForFile(this, CommonHelper.GetFileProviderAuthorities(this), photoFile);
+                    takePictureIntent.PutExtra(Android.Provider.MediaStore.ExtraOutput, photoURI);
+                    StartActivityForResult(takePictureIntent, CameraHelper.REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        }
+
         private void OpenGallery()
         {
-            Intent chosseItemFromGalleryIntent = new Intent(Intent.ActionPick);
-            chosseItemFromGalleryIntent.SetType("image/*");
-            StartActivityForResult(chosseItemFromGalleryIntent, GaleryHelper.PICK_IMAGE_REQUEST);
+            Intent chooseItemFromGalleryIntent = new Intent(Intent.ActionPick);
+            chooseItemFromGalleryIntent.SetType("image/*");
+            StartActivityForResult(chooseItemFromGalleryIntent, GaleryHelper.PICK_IMAGE_REQUEST);
         }
 
         private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -213,28 +204,6 @@ namespace crud_xamarin_android.UI.Activities
             {
                 categorySelected = categories[e.Position];
             }
-        }
-
-        private byte[] GetImageAsByteArray(string path)
-        {
-            byte[] imageBytes = null;
-            try
-            {
-                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        stream.CopyTo(memoryStream);
-                        imageBytes = memoryStream.ToArray();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error converting image to byte[]: {ex.Message}");
-            }
-
-            return imageBytes;
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
@@ -252,7 +221,7 @@ namespace crud_xamarin_android.UI.Activities
                 Details = inpDetailsArt.Text,
                 CategoryId = (categorySelected != null ? categorySelected.Id : CategoryHelper.ID_EMPTY_CATEGORY),
                 ImagePath = photoFile != null ? photoFile.AbsolutePath : null,
-                ImageData = photoFile != null ? GetImageAsByteArray(photoFile.AbsolutePath) : null,
+                ImageData = photoFile != null ? ImageHelper.GetImageAsByteArray(photoFile.AbsolutePath) : null,
             };
             articleService.AddArticle(article);
 

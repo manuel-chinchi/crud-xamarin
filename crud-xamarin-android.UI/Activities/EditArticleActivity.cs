@@ -22,7 +22,7 @@ namespace crud_xamarin_android.UI.Activities
     {
         EditText inpNameArticle;
         EditText inpDetailsArticle;
-        Spinner spnCategory;
+        Spinner spnCategories;
         Button btnAccept;
         Button btnCancel;
         ImageView imgArticle;
@@ -52,7 +52,7 @@ namespace crud_xamarin_android.UI.Activities
 
             inpNameArticle = FindViewById<EditText>(Resource.Id.inpNameArticle);
             inpDetailsArticle = FindViewById<EditText>(Resource.Id.inpDetailsArticle);
-            spnCategory = FindViewById<Spinner>(Resource.Id.spnCategories);
+            spnCategories = FindViewById<Spinner>(Resource.Id.spnCategories);
             imgArticle = FindViewById<ImageView>(Resource.Id.imgArticle);
             txtNotImage = FindViewById<TextView>(Resource.Id.txtNoImage);
             btnAccept = FindViewById<Button>(Resource.Id.btnAceptar);
@@ -94,36 +94,28 @@ namespace crud_xamarin_android.UI.Activities
                 });
                 spnDataSource = categories.Select(c => c.Name).ToList();
                 int position = categories.FindIndex(c => c.Id == categoryId);
-                spnCategory.SetSelection(position);
+                spnCategories.SetSelection(position);
             }
             else if (categories.Count > 0)
             {
                 spnDataSource = categories.Select(c => c.Name).ToList();
                 int position = categories.FindIndex(c => c.Id == categoryId);
-                spnCategory.SetSelection(position);
+                spnCategories.SetSelection(position);
             }
             else
             {
                 spnDataSource = new List<string> { CategoryHelper.NAME_EMPTY_CATEGORY };
-                spnCategory.Enabled = false;
+                spnCategories.Enabled = false;
             }
 
             spnAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, spnDataSource);
             spnAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spnCategory.Adapter = spnAdapter;
+            spnCategories.Adapter = spnAdapter;
 
             btnAccept.Click += BtnAccept_Click;
             btnCancel.Click += BtnCancel_Click;
-            spnCategory.ItemSelected += SpnCategory_ItemSelected;
+            spnCategories.ItemSelected += SpnCategories_ItemSelected;
             imgArticle.Click += ImgArticle_Click;
-        }
-
-        private void SpnCategory_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
-        {
-            if (categories.Count > 0)
-            {
-                categorySelected = categories[e.Position];
-            }
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -250,9 +242,17 @@ namespace crud_xamarin_android.UI.Activities
 
         private void OpenGallery()
         {
-            Intent takeChooseItemFromGalery = new Intent(Intent.ActionPick);
-            takeChooseItemFromGalery.SetType("image/*");
-            StartActivityForResult(takeChooseItemFromGalery, GaleryHelper.PICK_IMAGE_REQUEST);
+            Intent chooseItemFromGalleryIntent = new Intent(Intent.ActionPick);
+            chooseItemFromGalleryIntent.SetType("image/*");
+            StartActivityForResult(chooseItemFromGalleryIntent, GaleryHelper.PICK_IMAGE_REQUEST);
+        }
+
+        private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if (categories.Count > 0)
+            {
+                categorySelected = categories[e.Position];
+            }
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
