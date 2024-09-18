@@ -229,7 +229,7 @@ namespace crud_xamarin_android.UI.Activities
         private void OpenCamera()
         {
             Intent takePictureIntent = new Intent(Android.Provider.MediaStore.ActionImageCapture);
-            if (takePictureIntent.ResolveActivity(PackageManager) != null)
+            //if (takePictureIntent.ResolveActivity(PackageManager) != null)
             {
                 photoFile = ImageHelper.CreateImageFile(this);
                 if (photoFile != null)
