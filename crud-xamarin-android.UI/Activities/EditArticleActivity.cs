@@ -118,13 +118,6 @@ namespace crud_xamarin_android.UI.Activities
             txtDeleteImage.Click += TxtDeleteImage_Click;
         }
 
-        private void TxtDeleteImage_Click(object sender, EventArgs e)
-        {
-            imgArticle.SetImageResource(Resource.Drawable.ic_launcher_foreground);
-            photoFile = null;
-            txtDeleteImage.Visibility = ViewStates.Gone;
-        }
-
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -194,6 +187,13 @@ namespace crud_xamarin_android.UI.Activities
                 }
             });
             builder.Show();
+        }
+
+        private void TxtDeleteImage_Click(object sender, EventArgs e)
+        {
+            imgArticle.SetImageResource(Resource.Drawable.ic_launcher_foreground);
+            photoFile = null;
+            txtDeleteImage.Visibility = ViewStates.Gone;
         }
 
         private void SpnCategories_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
