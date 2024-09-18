@@ -151,22 +151,11 @@ namespace crud_xamarin_android.UI.Activities
             {
                 if (data != null)
                 {
+                    //imgArticle.SetImageURI(data.Data); // TODO si la imagen es muy grande da error
                     var imageUri = data.Data;
-
-                    #region v1
-                    
-                    //imgArticle.SetImageURI(imageUri); // TODO si la imagen es muy grande da error
-                    
-                    #endregion
-
-                    #region v2
-
                     var bitmap = ImageHelper.GetResizedBitmap(imageUri, this);
                     imgArticle.SetImageBitmap(bitmap);
                     photoFile = ImageHelper.CreateImageFileFromUri2(this, imageUri);
-
-                    #endregion
-
                     txtDeleteImage.Visibility = ViewStates.Gone;
                 }
             }
@@ -273,8 +262,8 @@ namespace crud_xamarin_android.UI.Activities
         private void OpenCamera()
         {
             Intent takePictureIntent = new Intent(Android.Provider.MediaStore.ActionImageCapture);
-            bool hasCameraAvailable = takePictureIntent.ResolveActivity(PackageManager) != null;
-            if (hasCameraAvailable)
+            //bool hasCameraAvailable = takePictureIntent.ResolveActivity(PackageManager) != null;
+            //if (hasCameraAvailable)
             {
                 photoFile = ImageHelper.CreateImageFile(this);
                 if (photoFile != null)
