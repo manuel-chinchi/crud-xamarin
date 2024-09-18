@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -8,6 +9,7 @@ using AndroidX.AppCompat.App;
 using crud_xamarin_android.Core.Helpers;
 using crud_xamarin_android.Core.Models;
 using crud_xamarin_android.Core.Services;
+using crud_xamarin_android.UI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +25,14 @@ namespace crud_xamarin_android.UI.Activities
         Spinner spnCategory;
         Button btnAccept;
         Button btnCancel;
+        ImageView imgArticle;
+        TextView txtNotImage;
 
         Article article;
         ArticleService articleService;
         List<Category> categories;
         Category categorySelected;
+        Java.IO.File photoFile;
 
         public EditArticleActivity()
         {
@@ -48,6 +53,8 @@ namespace crud_xamarin_android.UI.Activities
             inpNameArticle = FindViewById<EditText>(Resource.Id.inpNameArticle);
             inpDetailsArticle = FindViewById<EditText>(Resource.Id.inpDetailsArticle);
             spnCategory = FindViewById<Spinner>(Resource.Id.spnCategories);
+            imgArticle = FindViewById<ImageView>(Resource.Id.imgArticle);
+            txtNotImage = FindViewById<TextView>(Resource.Id.txtNoImage);
             btnAccept = FindViewById<Button>(Resource.Id.btnAceptar);
             btnCancel = FindViewById<Button>(Resource.Id.btnCancelar);
 
@@ -63,6 +70,19 @@ namespace crud_xamarin_android.UI.Activities
             {
                 inpNameArticle.Text = article.Name;
                 inpDetailsArticle.Text = article.Details;
+
+                if (article.ImageData != null)
+                {
+                    //var bitmap = BitmapFactory.DecodeFile(article.ImagePath); // TODO con imagenes muy grandes da error
+                    var bitmap = ImageHelper.GetResizedBitmapFromBytes(article.ImageData, 1024, 1024);
+                    imgArticle.SetImageBitmap(bitmap);
+                    txtNotImage.Visibility = ViewStates.Gone;
+                }
+                else
+                {
+                    txtNotImage.Text = "(NOT IMAGE)";
+                    txtNotImage.Visibility = ViewStates.Visible;
+                }
             }
 
             if (categoryId == CategoryHelper.ID_EMPTY_CATEGORY && categories.Count > 0)
@@ -95,6 +115,7 @@ namespace crud_xamarin_android.UI.Activities
             btnAccept.Click += BtnAccept_Click;
             btnCancel.Click += BtnCancel_Click;
             spnCategory.ItemSelected += SpnCategory_ItemSelected;
+            imgArticle.Click += ImgArticle_Click;
         }
 
         private void SpnCategory_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -116,10 +137,130 @@ namespace crud_xamarin_android.UI.Activities
                     return base.OnOptionsItemSelected(item);
             }
         }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (CameraHelper.CheckResultCamera(requestCode, resultCode))
+            {
+                imgArticle.SetImageURI(Android.Net.Uri.Parse(photoFile.AbsolutePath));
+                txtNotImage.Visibility = ViewStates.Gone;
+            }
+
+            if (GaleryHelper.CheckResultGalery(requestCode, resultCode))
+            {
+                if (data != null)
+                {
+                    var imageUri = data.Data;
+
+                    #region v1
+                    
+                    //imgArticle.SetImageURI(imageUri); // TODO si la imagen es muy grande da error
+                    
+                    #endregion
+
+                    #region v2
+
+                    var bitmap = ImageHelper.GetResizedBitmap(imageUri, this);
+                    imgArticle.SetImageBitmap(bitmap);
+                    photoFile = ImageHelper.CreateImageFileFromUri2(this, imageUri);
+                    
+                    #endregion
+
+                    txtNotImage.Visibility = ViewStates.Gone;
+                }
+            }
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            if (CameraHelper.CheckCameraPermission(requestCode, grantResults))
+            {
+                OpenCamera();
+            }
+
+            if (GaleryHelper.CheckGaleryPermission(requestCode, grantResults))
+            {
+                OpenGallery();
+            }
+        }
+
+        private void ImgArticle_Click(object sender, EventArgs e)
+        {
+            string[] options = { "Take a photo", "Choose from Galery" };
+            var builder = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
+            builder.SetTitle("Select option");
+            builder.SetItems(options, (dialog, which) =>
+            {
+                switch (which.Which)
+                {
+                    case 0:
+                        GoToCamera();
+                        break;
+                    case 1:
+                        GoToGallery();
+                        break;
+                }
+            });
+            builder.Show();
+        }
+
+        private void GoToCamera()
+        {
+            if (!CameraHelper.HasCameraPermission(this))
+            {
+                CameraHelper.RequestCameraPermission(this); // TODO pone en cola el permiso para solicitar la camara
+            }
+            else
+            {
+                OpenCamera();
+            }
+        }
+
+        private void GoToGallery()
+        {
+            if (!GaleryHelper.HasGaleryPermission(this))
+            {
+                GaleryHelper.RequestGaleryPermission(this); // TODO pone en cola el permiso para solicitar la camara
+            }
+            else
+            {
+                OpenGallery();
+            }
+        }
+
+        private void OpenCamera()
+        {
+            Intent takePictureIntent = new Intent(Android.Provider.MediaStore.ActionImageCapture);
+            bool hasCameraAvailable = takePictureIntent.ResolveActivity(PackageManager) != null;
+            if (hasCameraAvailable)
+            {
+                photoFile = ImageHelper.CreateImageFile(this);
+                if (photoFile != null)
+                {
+                    var photoURI = AndroidX.Core.Content.FileProvider.GetUriForFile(this, CommonHelper.GetFileProviderAuthorities(this), photoFile);
+                    takePictureIntent.PutExtra(Android.Provider.MediaStore.ExtraOutput, photoURI);
+                    StartActivityForResult(takePictureIntent, CameraHelper.REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        }
+
+        private void OpenGallery()
+        {
+            Intent takeChooseItemFromGalery = new Intent(Intent.ActionPick);
+            takeChooseItemFromGalery.SetType("image/*");
+            StartActivityForResult(takeChooseItemFromGalery, GaleryHelper.PICK_IMAGE_REQUEST);
+        }
+
         private void BtnAccept_Click(object sender, EventArgs e)
         {
             article.Name = inpNameArticle.Text;
             article.Details = inpDetailsArticle.Text;
+            article.ImagePath = photoFile != null ? photoFile.AbsolutePath : null;
+            article.ImageData = photoFile != null ? ImageHelper.GetImageAsByteArray(photoFile.AbsolutePath) : null;
 
             if (categories.Count > 0)
             {

@@ -21,5 +21,7 @@ namespace crud_xamarin_android.Core.Models
         [Ignore]
         public Category Category { get; set; }
         public int CategoryId { get; set; } // foreign key
+        public string ImagePath { get; set; }
+        public byte[] ImageData { get; set; }
     }
 }
