@@ -29,6 +29,7 @@ namespace crud_xamarin_android.UI.Activities
         Button btnAccept, btnCancel;
         Spinner spnCategories;
         ImageView imgArticle;
+        TextView txtDeleteImage;
 
         ArticleService articleService;
         CategoryService categoryService;
@@ -62,6 +63,10 @@ namespace crud_xamarin_android.UI.Activities
             imgArticle = FindViewById<ImageView>(Resource.Id.imgArticle);
             imgArticle.Click += ImgArticle_Click;
 
+            txtDeleteImage = FindViewById<TextView>(Resource.Id.txtDeleteImage);
+            txtDeleteImage.Visibility = ViewStates.Gone;
+            txtDeleteImage.Click += TxtDeleteImage_Click;
+
             spnCategories = FindViewById<Spinner>(Resource.Id.spnCategories);
             var categories = categoryService.GetCategories().OrderBy(c=>c.Name).ToList();
             List<string> spnDataSource;
@@ -84,6 +89,13 @@ namespace crud_xamarin_android.UI.Activities
             spnCategories.ItemSelected += SpnCategories_ItemSelected;
         }
 
+        private void TxtDeleteImage_Click(object sender, EventArgs e)
+        {
+            imgArticle.SetImageResource(Resource.Drawable.ic_launcher_foreground);
+            photoFile = null;
+            txtDeleteImage.Visibility = ViewStates.Gone;
+        }
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -103,6 +115,7 @@ namespace crud_xamarin_android.UI.Activities
             if (CameraHelper.CheckResultCamera(requestCode,resultCode))
             {
                 imgArticle.SetImageURI(Android.Net.Uri.Parse(photoFile.AbsolutePath));
+                txtDeleteImage.Visibility = ViewStates.Visible;
             }
 
             if (GaleryHelper.CheckResultGalery(requestCode, resultCode))
@@ -113,6 +126,7 @@ namespace crud_xamarin_android.UI.Activities
                     var bitmap = ImageHelper.GetResizedBitmap(imageUri, this);
                     imgArticle.SetImageBitmap(bitmap);
                     photoFile = ImageHelper.CreateImageFileFromUri2(this, imageUri);
+                    txtDeleteImage.Visibility = ViewStates.Visible;
                 }
             }
         }

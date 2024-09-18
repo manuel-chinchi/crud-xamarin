@@ -5869,7 +5869,7 @@ namespace crud_xamarin_android.UI
 			public const int transition_transform = 2131230978;
 			
 			// aapt resource value: 0x7F080103
-			public const int txtNoImage = 2131230979;
+			public const int txtDeleteImage = 2131230979;
 			
 			// aapt resource value: 0x7F080104
 			public const int @unchecked = 2131230980;

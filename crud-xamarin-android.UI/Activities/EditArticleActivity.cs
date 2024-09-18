@@ -26,7 +26,7 @@ namespace crud_xamarin_android.UI.Activities
         Button btnAccept;
         Button btnCancel;
         ImageView imgArticle;
-        TextView txtNotImage;
+        TextView txtDeleteImage;
 
         Article article;
         ArticleService articleService;
@@ -54,7 +54,7 @@ namespace crud_xamarin_android.UI.Activities
             inpDetailsArticle = FindViewById<EditText>(Resource.Id.inpDetailsArticle);
             spnCategories = FindViewById<Spinner>(Resource.Id.spnCategories);
             imgArticle = FindViewById<ImageView>(Resource.Id.imgArticle);
-            txtNotImage = FindViewById<TextView>(Resource.Id.txtNoImage);
+            txtDeleteImage = FindViewById<TextView>(Resource.Id.txtDeleteImage);
             btnAccept = FindViewById<Button>(Resource.Id.btnAceptar);
             btnCancel = FindViewById<Button>(Resource.Id.btnCancelar);
 
@@ -76,12 +76,11 @@ namespace crud_xamarin_android.UI.Activities
                     //var bitmap = BitmapFactory.DecodeFile(article.ImagePath); // TODO con imagenes muy grandes da error
                     var bitmap = ImageHelper.GetResizedBitmapFromBytes(article.ImageData, 1024, 1024);
                     imgArticle.SetImageBitmap(bitmap);
-                    txtNotImage.Visibility = ViewStates.Gone;
+                    txtDeleteImage.Visibility = ViewStates.Visible;
                 }
                 else
                 {
-                    txtNotImage.Text = "(NOT IMAGE)";
-                    txtNotImage.Visibility = ViewStates.Visible;
+                    txtDeleteImage.Visibility = ViewStates.Gone;
                 }
             }
 
@@ -116,6 +115,14 @@ namespace crud_xamarin_android.UI.Activities
             btnCancel.Click += BtnCancel_Click;
             spnCategories.ItemSelected += SpnCategories_ItemSelected;
             imgArticle.Click += ImgArticle_Click;
+            txtDeleteImage.Click += TxtDeleteImage_Click;
+        }
+
+        private void TxtDeleteImage_Click(object sender, EventArgs e)
+        {
+            imgArticle.SetImageResource(Resource.Drawable.ic_launcher_foreground);
+            photoFile = null;
+            txtDeleteImage.Visibility = ViewStates.Gone;
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -137,7 +144,7 @@ namespace crud_xamarin_android.UI.Activities
             if (CameraHelper.CheckResultCamera(requestCode, resultCode))
             {
                 imgArticle.SetImageURI(Android.Net.Uri.Parse(photoFile.AbsolutePath));
-                txtNotImage.Visibility = ViewStates.Gone;
+                txtDeleteImage.Visibility = ViewStates.Gone;
             }
 
             if (GaleryHelper.CheckResultGalery(requestCode, resultCode))
@@ -157,10 +164,10 @@ namespace crud_xamarin_android.UI.Activities
                     var bitmap = ImageHelper.GetResizedBitmap(imageUri, this);
                     imgArticle.SetImageBitmap(bitmap);
                     photoFile = ImageHelper.CreateImageFileFromUri2(this, imageUri);
-                    
+
                     #endregion
 
-                    txtNotImage.Visibility = ViewStates.Gone;
+                    txtDeleteImage.Visibility = ViewStates.Gone;
                 }
             }
         }
@@ -212,8 +219,8 @@ namespace crud_xamarin_android.UI.Activities
         {
             article.Name = inpNameArticle.Text;
             article.Details = inpDetailsArticle.Text;
-            article.ImagePath = photoFile != null ? photoFile.AbsolutePath : null;
-            article.ImageData = photoFile != null ? ImageHelper.GetImageAsByteArray(photoFile.AbsolutePath) : null;
+            article.ImagePath = article.ImagePath!=null? article.ImagePath: (photoFile != null ? photoFile.AbsolutePath : null);
+            article.ImageData = article.ImageData !=null? article.ImageData:(photoFile != null ? ImageHelper.GetImageAsByteArray(photoFile.AbsolutePath) : null);
 
             if (categories.Count > 0)
             {
