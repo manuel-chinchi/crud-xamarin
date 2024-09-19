@@ -71,15 +71,6 @@ namespace crud_xamarin_android.UI.Activities
                 inpNameArticle.Text = article.Name;
                 inpDetailsArticle.Text = article.Details;
 
-                //var position = categories.FindIndex(c => c.Id == article.CategoryId);
-                //spnCategories.SetSelection(position);
-
-                //int position = categories.FindIndex(c => c.Id == article.CategoryId);
-                //if (position>=0)
-                //{
-                //    spnCategories.SetSelection(position);
-                //}
-
                 if (article.ImageData != null)
                 {
                     //var bitmap = BitmapFactory.DecodeFile(article.ImagePath); // TODO con imagenes muy grandes da error
