@@ -71,6 +71,15 @@ namespace crud_xamarin_android.UI.Activities
                 inpNameArticle.Text = article.Name;
                 inpDetailsArticle.Text = article.Details;
 
+                //var position = categories.FindIndex(c => c.Id == article.CategoryId);
+                //spnCategories.SetSelection(position);
+
+                //int position = categories.FindIndex(c => c.Id == article.CategoryId);
+                //if (position>=0)
+                //{
+                //    spnCategories.SetSelection(position);
+                //}
+
                 if (article.ImageData != null)
                 {
                     //var bitmap = BitmapFactory.DecodeFile(article.ImagePath); // TODO con imagenes muy grandes da error
@@ -92,24 +101,29 @@ namespace crud_xamarin_android.UI.Activities
                     Name = CategoryHelper.NAME_EMPTY_CATEGORY
                 });
                 spnDataSource = categories.Select(c => c.Name).ToList();
+                spnAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, spnDataSource);
+                spnAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+                spnCategories.Adapter = spnAdapter;
                 int position = categories.FindIndex(c => c.Id == categoryId);
                 spnCategories.SetSelection(position);
             }
             else if (categories.Count > 0)
             {
                 spnDataSource = categories.Select(c => c.Name).ToList();
+                spnAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, spnDataSource);
+                spnAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+                spnCategories.Adapter = spnAdapter;
                 int position = categories.FindIndex(c => c.Id == categoryId);
                 spnCategories.SetSelection(position);
             }
             else
             {
                 spnDataSource = new List<string> { CategoryHelper.NAME_EMPTY_CATEGORY };
+                spnAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, spnDataSource);
+                spnAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+                spnCategories.Adapter = spnAdapter;
                 spnCategories.Enabled = false;
             }
-
-            spnAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, spnDataSource);
-            spnAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spnCategories.Adapter = spnAdapter;
 
             btnAccept.Click += BtnAccept_Click;
             btnCancel.Click += BtnCancel_Click;
