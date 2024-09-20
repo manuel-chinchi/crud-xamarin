@@ -18,7 +18,7 @@ namespace crud_xamarin_android.UI.Helpers
         public const int REQUEST_CAMERA_PERMISSION = 100;
         public const int REQUEST_IMAGE_CAPTURE = 1;
 
-        public static bool CheckCameraPermission(int requestCode, [GeneratedEnum] Permission[] grantResults) // AskCameraPermission
+        public static bool CheckCameraPermission(int requestCode, [GeneratedEnum] Permission[] grantResults)
         {
             bool permission = false;
             if (requestCode == REQUEST_CAMERA_PERMISSION)
@@ -31,7 +31,6 @@ namespace crud_xamarin_android.UI.Helpers
 
         public static bool HasCameraPermission(Activity context)
         {
-            //bool permission = context.CheckSelfPermission(Android.Manifest.Permission.Camera) != (int)Android.Content.PM.Permission.Granted;
             bool permission = context.CheckSelfPermission(Android.Manifest.Permission.Camera) == (int)Android.Content.PM.Permission.Granted;
             return permission;
         }
@@ -45,20 +44,5 @@ namespace crud_xamarin_android.UI.Helpers
         {
             return requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Result.Ok;
         }
-
-        //public static bool CheckCameraPermission(Activity context)
-        //{
-        //    bool hasPermission = false;
-        //    if (context.CheckSelfPermission(Android.Manifest.Permission.Camera) != (int)Android.Content.PM.Permission.Granted)
-        //    {
-        //        context.RequestPermissions(new string[] { Android.Manifest.Permission.Camera }, REQUEST_CAMERA_PERMISSION);
-        //        hasPermission = true;
-        //    }
-        //    else
-        //    {
-        //        hasPermission = true;
-        //    }
-        //    return hasPermission;
-        //}
     }
 }

@@ -22,9 +22,6 @@ namespace crud_xamarin_android.UI.Helpers
             bool permission=false;
             if (requestCode == REQUEST_GALLERY_PERMISSION)
             {
-                //Android.Net.Uri imageUri = data.Data;
-                // Aquí puedes usar la URI de la imagen seleccionada y mostrarla en tu ImageView, por ejemplo
-                //ImgArticle.SetImageURI(imageUri);
                 if (grantResults.Length > 0 && grantResults[0] == Android.Content.PM.Permission.Granted)
                     permission = true;
             }

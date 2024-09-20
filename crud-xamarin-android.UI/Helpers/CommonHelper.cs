@@ -33,10 +33,10 @@ namespace crud_xamarin_android.UI.Helpers
             }
             catch (PackageManager.NameNotFoundException ex)
             {
-                //Log.Error("GetFileProviderAuthorities", $"Error: {ex.Message}");
+                throw ex;
             }
 
-            return null; // Si no se encuentra el authorities
+            return null;
         }
     }
 }
