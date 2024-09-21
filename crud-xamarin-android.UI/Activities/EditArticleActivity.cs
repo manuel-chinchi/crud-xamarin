@@ -267,6 +267,7 @@ namespace crud_xamarin_android.UI.Activities
         private void OpenCamera()
         {
             Intent takePictureIntent = new Intent(Android.Provider.MediaStore.ActionImageCapture);
+            //TODO For devices without a camera this could cause a runtime error.
             //if (takePictureIntent.ResolveActivity(PackageManager) != null)
             {
                 photoFile = ImageHelper.CreateImageFile(this);
