@@ -34,6 +34,57 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             />
+
+        <!-- ImageView for displaying the selected image -->
+        <!--<ImageView
+            android:id="@+id/imgArticle"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="#E0E0E0"
+            android:scaleType="centerCrop" />-->
+
+<!--        <ImageView
+            android:id="@+id/imgArticle"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:scaleType="centerCrop"
+            android:background="#E0E0E0"
+            android:layout_gravity="center" />-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_margin="16dp">
+
+            <ImageView
+                android:id="@+id/imgArticle"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_launcher_foreground"
+                android:scaleType="centerCrop"
+                android:background="#E0E0E0"
+                android:contentDescription="Article Image" />
+
+            <TextView
+                android:id="@+id/txtDeleteImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete image"
+                android:textColor="@android:color/holo_blue_light"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_gravity="center_horizontal|bottom"
+                android:padding="8dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <!-- White spacing -->
