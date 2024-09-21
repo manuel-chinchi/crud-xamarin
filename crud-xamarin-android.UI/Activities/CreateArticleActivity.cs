@@ -1,25 +1,20 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Icu.Text;
 using Android.OS;
+using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
-using AndroidX.RecyclerView.Widget;
 using crud_xamarin_android.Core.Helpers;
 using crud_xamarin_android.Core.Models;
 using crud_xamarin_android.Core.Services;
-using crud_xamarin_android.UI.Adapters;
 using crud_xamarin_android.UI.Helpers;
-using Java.Util;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace crud_xamarin_android.UI.Activities
 {
@@ -228,15 +223,16 @@ namespace crud_xamarin_android.UI.Activities
 
         private void OpenCamera()
         {
-            Intent takePictureIntent = new Intent(Android.Provider.MediaStore.ActionImageCapture);
+            Intent takePictureIntent = new Intent(MediaStore.ActionImageCapture);
+            //TODO //TODO For devices without a camera this could cause a runtime error.
             //if (takePictureIntent.ResolveActivity(PackageManager) != null)
             {
                 photoFile = ImageHelper.CreateImageFile(this);
                 if (photoFile != null)
                 {
                     var photoURI = FileProvider.GetUriForFile(this, CommonHelper.GetFileProviderAuthorities(this), photoFile);
-                    takePictureIntent.PutExtra(Android.Provider.MediaStore.ExtraOutput, photoURI);
-                    StartActivityForResult(takePictureIntent, CameraHelper.REQUEST_IMAGE_CAPTURE);
+                    takePictureIntent.PutExtra(MediaStore.ExtraOutput, photoURI);
+                    StartActivityForResult(takePictureIntent, CameraHelper.REQUEST_OPEN_CAMERA);
                 }
             }
         }
@@ -245,7 +241,7 @@ namespace crud_xamarin_android.UI.Activities
         {
             Intent chooseItemFromGalleryIntent = new Intent(Intent.ActionPick);
             chooseItemFromGalleryIntent.SetType("image/*");
-            StartActivityForResult(chooseItemFromGalleryIntent, GaleryHelper.PICK_IMAGE_REQUEST);
+            StartActivityForResult(chooseItemFromGalleryIntent, GaleryHelper.REQUEST_OPEN_GALLERY);
         }
     }
 }

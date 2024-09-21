@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -13,7 +14,6 @@ using crud_xamarin_android.UI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace crud_xamarin_android.UI.Activities
 {
@@ -244,7 +244,7 @@ namespace crud_xamarin_android.UI.Activities
         {
             if (!CameraHelper.HasCameraPermission(this))
             {
-                CameraHelper.RequestCameraPermission(this); // TODO pone en cola el permiso para solicitar la camara
+                CameraHelper.RequestCameraPermission(this);
             }
             else
             {
@@ -256,7 +256,7 @@ namespace crud_xamarin_android.UI.Activities
         {
             if (!GaleryHelper.HasGaleryPermission(this))
             {
-                GaleryHelper.RequestGaleryPermission(this); // TODO pone en cola el permiso para solicitar la camara
+                GaleryHelper.RequestGaleryPermission(this);
             }
             else
             {
@@ -267,15 +267,14 @@ namespace crud_xamarin_android.UI.Activities
         private void OpenCamera()
         {
             Intent takePictureIntent = new Intent(Android.Provider.MediaStore.ActionImageCapture);
-            //bool hasCameraAvailable = takePictureIntent.ResolveActivity(PackageManager) != null;
-            //if (hasCameraAvailable)
+            //if (takePictureIntent.ResolveActivity(PackageManager) != null)
             {
                 photoFile = ImageHelper.CreateImageFile(this);
                 if (photoFile != null)
                 {
                     var photoURI = AndroidX.Core.Content.FileProvider.GetUriForFile(this, CommonHelper.GetFileProviderAuthorities(this), photoFile);
-                    takePictureIntent.PutExtra(Android.Provider.MediaStore.ExtraOutput, photoURI);
-                    StartActivityForResult(takePictureIntent, CameraHelper.REQUEST_IMAGE_CAPTURE);
+                    takePictureIntent.PutExtra(MediaStore.ExtraOutput, photoURI);
+                    StartActivityForResult(takePictureIntent, CameraHelper.REQUEST_OPEN_CAMERA);
                 }
             }
         }
@@ -284,7 +283,7 @@ namespace crud_xamarin_android.UI.Activities
         {
             Intent chooseItemFromGalleryIntent = new Intent(Intent.ActionPick);
             chooseItemFromGalleryIntent.SetType("image/*");
-            StartActivityForResult(chooseItemFromGalleryIntent, GaleryHelper.PICK_IMAGE_REQUEST);
+            StartActivityForResult(chooseItemFromGalleryIntent, GaleryHelper.REQUEST_OPEN_GALLERY);
         }
 
     }

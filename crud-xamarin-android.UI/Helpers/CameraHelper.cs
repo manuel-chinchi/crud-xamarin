@@ -16,7 +16,7 @@ namespace crud_xamarin_android.UI.Helpers
     public class CameraHelper
     {
         public const int REQUEST_CAMERA_PERMISSION = 100;
-        public const int REQUEST_IMAGE_CAPTURE = 1;
+        public const int REQUEST_OPEN_CAMERA = 1;
 
         public static bool CheckCameraPermission(int requestCode, [GeneratedEnum] Permission[] grantResults)
         {
@@ -42,7 +42,7 @@ namespace crud_xamarin_android.UI.Helpers
 
         public static bool CheckResultCamera(int requestCode, Result resultCode)
         {
-            return requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Result.Ok;
+            return requestCode == REQUEST_OPEN_CAMERA && resultCode == Result.Ok;
         }
     }
 }

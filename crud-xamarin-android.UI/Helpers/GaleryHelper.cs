@@ -15,7 +15,7 @@ namespace crud_xamarin_android.UI.Helpers
     public static class GaleryHelper
     {
         public const int REQUEST_GALLERY_PERMISSION = 101;
-        public const int PICK_IMAGE_REQUEST = 2;
+        public const int REQUEST_OPEN_GALLERY = 2;
         
         public static bool CheckGaleryPermission(int requestCode, [GeneratedEnum] Permission[] grantResults)
         {
@@ -41,7 +41,7 @@ namespace crud_xamarin_android.UI.Helpers
 
         public static bool CheckResultGalery(int requestCode, [GeneratedEnum] Result resultCode)
         {
-            return requestCode == PICK_IMAGE_REQUEST && resultCode == Result.Ok;
+            return requestCode == REQUEST_OPEN_GALLERY && resultCode == Result.Ok;
         }
     }
 }
