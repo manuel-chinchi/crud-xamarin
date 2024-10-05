@@ -18,7 +18,7 @@ using System.Linq;
 
 namespace crud_xamarin_android.UI.Activities
 {
-    [Activity(Label = "")]
+    [Activity(Label = "", ParentActivity = typeof(ArticleActivity))]
     public class CreateArticleActivity : AppCompatActivity
     {
         Button btnAccept, btnCancel;
@@ -46,8 +46,7 @@ namespace crud_xamarin_android.UI.Activities
 
             SetContentView(Resource.Layout.activity_create_article);
 
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-            SupportActionBar.SetHomeButtonEnabled(true);
+            SetupActionBar();
 
             btnAccept = FindViewById<Button>(Resource.Id.btnAceptar);
             btnAccept.Click += BtnAccept_Click;
@@ -82,6 +81,17 @@ namespace crud_xamarin_android.UI.Activities
             spnCategories.Adapter = spnAdapter;
 
             spnCategories.ItemSelected += SpnCategories_ItemSelected;
+        }
+
+        private void SetupActionBar()
+        {
+            // NOTE using AndroidX.AppCompat.App
+            //SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            //SupportActionBar.SetHomeButtonEnabled(true);
+
+            Toolbar toolbar = new Toolbar(this);
+            SetActionBar(toolbar);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

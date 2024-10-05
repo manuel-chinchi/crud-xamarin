@@ -16,7 +16,7 @@ using System.Text;
 
 namespace crud_xamarin_android.UI.Activities
 {
-    [Activity(Label = "Categories")]
+    [Activity(Label = "Categories", ParentActivity = typeof(MainActivity))]
     public class CategoryActivity : AppCompatActivity
     {
         Button btnAdd, btnDelete;
@@ -37,9 +37,8 @@ namespace crud_xamarin_android.UI.Activities
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_category);
-            
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-            SupportActionBar.SetHomeButtonEnabled(true);
+
+            SetupActionBar();
 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.lstCategories);
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
@@ -54,6 +53,17 @@ namespace crud_xamarin_android.UI.Activities
 
             chkSelectAll = FindViewById<CheckBox>(Resource.Id.chkSelectAllCategories);
             chkSelectAll.CheckedChange += ChkSelectAllCategories_CheckedChange;
+        }
+
+        private void SetupActionBar()
+        {
+            // NOTE using AndroidX.AppCompat.App
+            //SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            //SupportActionBar.SetHomeButtonEnabled(true);
+
+            Toolbar toolbar = new Toolbar(this);
+            SetActionBar(toolbar);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

@@ -17,7 +17,7 @@ using AndroidX.AppCompat.App;
 
 namespace crud_xamarin_android.UI.Activities
 {
-    [Activity(Label = "Articles")]
+    [Activity(Label = "Articles", ParentActivity = typeof(MainActivity))]
     public class ArticleActivity : AppCompatActivity
     {
         Button btnAdd, btnEdit, btnDelete;
@@ -39,8 +39,7 @@ namespace crud_xamarin_android.UI.Activities
 
             SetContentView(Resource.Layout.activity_article);
 
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-            SupportActionBar.SetHomeButtonEnabled(true);
+            SetupActionBar();
 
             recyclerView = FindViewById<RecyclerView>(Resource.Id.lstArticles);
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
@@ -59,6 +58,19 @@ namespace crud_xamarin_android.UI.Activities
 
             chkSelectAll = FindViewById<CheckBox>(Resource.Id.chkSelectAllItems);
             chkSelectAll.CheckedChange += ChkSelectAllItems_CheckedChange;
+        }
+
+        private void SetupActionBar()
+        {
+            // NOTE using AndroidX.AppCompat.App
+            //SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            //SupportActionBar.SetHomeButtonEnabled(true);
+
+            Toolbar toolbar = new Toolbar(this);
+            SetActionBar(toolbar);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
+
+            //this.MenuInflater.
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

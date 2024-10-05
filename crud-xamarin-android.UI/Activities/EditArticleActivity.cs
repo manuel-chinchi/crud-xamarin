@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace crud_xamarin_android.UI.Activities
 {
-    [Activity(Label = "")]
+    [Activity(Label = "", ParentActivity = typeof(ArticleActivity))]
     public class EditArticleActivity : AppCompatActivity
     {
         EditText inpNameArticle;
@@ -47,8 +47,7 @@ namespace crud_xamarin_android.UI.Activities
 
             SetContentView(Resource.Layout.activity_create_article);
 
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-            SupportActionBar.SetHomeButtonEnabled(true);
+            SetupActionBar();
 
             inpNameArticle = FindViewById<EditText>(Resource.Id.inpNameArticle);
             inpDetailsArticle = FindViewById<EditText>(Resource.Id.inpDetailsArticle);
@@ -121,6 +120,17 @@ namespace crud_xamarin_android.UI.Activities
             spnCategories.ItemSelected += SpnCategories_ItemSelected;
             imgArticle.Click += ImgArticle_Click;
             txtDeleteImage.Click += TxtDeleteImage_Click;
+        }
+
+        private void SetupActionBar()
+        {
+            // NOTE using AndroidX.AppCompat.App
+            //SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            //SupportActionBar.SetHomeButtonEnabled(true);
+
+            Toolbar toolbar = new Toolbar(this);
+            SetActionBar(toolbar);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
