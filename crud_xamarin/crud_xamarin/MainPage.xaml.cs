@@ -1,4 +1,5 @@
-﻿using System;
+﻿using crud_xamarin.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace crud_xamarin
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private async void btnGoToProducts_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync($"{nameof(ProductsView)}");
         }
     }
 }

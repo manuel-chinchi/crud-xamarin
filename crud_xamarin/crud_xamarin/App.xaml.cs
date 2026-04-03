@@ -1,4 +1,5 @@
-﻿using System;
+﻿using crud_xamarin.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,14 @@ namespace crud_xamarin
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            RegisterRoutes();
+
+            MainPage = new AppShell();
+        }
+
+        private void RegisterRoutes()
+        {
+            Routing.RegisterRoute(nameof(ProductsView), typeof(ProductsView));
         }
 
         protected override void OnStart()
