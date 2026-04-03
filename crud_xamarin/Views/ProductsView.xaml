@@ -2,38 +2,42 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:crud_xamarin.ViewModels"
+             xmlns:models="clr-namespace:crud_xamarin.Models"
              x:Class="crud_xamarin.Views.ProductsView">
 
     <ContentPage.BindingContext>
         <viewmodels:ProductsViewModel />
     </ContentPage.BindingContext>
-    
-  <ListView x:Name="MyListView"
-            ItemsSource="{Binding Products}"
-            ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
-      
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
+
+    <StackLayout>
+        <Label Text="Products" 
+               BackgroundColor="LightGoldenrodYellow"
+               Padding="10"
+               HorizontalTextAlignment="Center"/>
+        <CollectionView ItemsSource="{Binding Products}">
+        <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ProductModel">
+                    <Grid HeightRequest="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                               Text="{Binding Id}" 
+                               FontSize="12"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Column="1" 
+                               Text="{Binding Name}"
+                               FontSize="12"
+                               VerticalOptions="Center"/>
+                        <Label Grid.Column="2" 
+                               Text="{Binding Description}" 
+                               FontSize="12"
+                               VerticalOptions="Center"/>
+                    </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+    </StackLayout>
 </ContentPage>
