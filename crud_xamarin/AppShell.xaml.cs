@@ -1,4 +1,5 @@
-﻿using System;
+﻿using crud_xamarin.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,20 @@ namespace crud_xamarin
         public AppShell()
         {
             InitializeComponent();
+
+            RegisterServices();
+            RegisterRoutes();
+        }
+
+        private void RegisterRoutes()
+        {
+            Routing.RegisterRoute(nameof(ProductsView), typeof(ProductsView));
+        }
+
+        private void RegisterServices()
+        {
+            // add you service here
+            //DependencyService.Register<IMockService, MockService>();
         }
     }
 }

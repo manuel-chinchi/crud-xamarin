@@ -1,15 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:views="clr-namespace:crud_xamarin.Views" 
        xmlns:local="clr-namespace:crud_xamarin"
-       x:Class="crud_xamarin.AppShell"
-       FlyoutBehavior="Disabled">
+       x:Class="crud_xamarin.AppShell">
 
     <FlyoutItem Title="Inicio">
-        <ShellContent Title="Principal"
-                      ContentTemplate="{DataTemplate local:MainPage}"
-                      Route="MainPage" />
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     </FlyoutItem>
 
 </Shell>

@@ -11,14 +11,7 @@ namespace crud_xamarin
         {
             InitializeComponent();
 
-            RegisterRoutes();
-
             MainPage = new AppShell();
-        }
-
-        private void RegisterRoutes()
-        {
-            Routing.RegisterRoute(nameof(ProductsView), typeof(ProductsView));
         }
 
         protected override void OnStart()
