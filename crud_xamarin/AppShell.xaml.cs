@@ -1,4 +1,5 @@
-﻿using crud_xamarin.Views;
+﻿using crud_xamarin.Services;
+using crud_xamarin.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +29,7 @@ namespace crud_xamarin
 
         private void RegisterServices()
         {
-            // add you service here
-            //DependencyService.Register<IMockService, MockService>();
+            DependencyService.Register<MockProductService>();
         }
     }
 }

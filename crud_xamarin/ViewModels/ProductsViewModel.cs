@@ -1,8 +1,11 @@
 ﻿using crud_xamarin.Models;
+using crud_xamarin.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace crud_xamarin.ViewModels
 {
@@ -15,34 +18,18 @@ namespace crud_xamarin.ViewModels
             set => SetProperty(ref _products, value);
         }
 
+        private readonly IProductService<ProductModel> _productService;
+
         public ProductsViewModel()
         {
+            _productService = DependencyService.Get<IProductService<ProductModel>>();
+
             LoadProducts();
         }
 
-        private void LoadProducts()
+        public async Task LoadProducts()
         {
-            var items = new List<ProductModel>
-            {
-                new ProductModel
-                {
-                    Id = 100,
-                    Name ="zapatilla",
-                    Description = "H Talle 32"
-                },
-                new ProductModel
-                {
-                    Id=101,
-                    Name="remera lisa",
-                    Description = "H Talle M"
-                },
-                new ProductModel
-                {
-                    Id=102,
-                    Name="pantalon deportivo",
-                    Description = "Unisex"
-                },
-            };
+            var items = await _productService.GetProductsAsync();
 
             Products = new ObservableCollection<ProductModel>(items);
         }

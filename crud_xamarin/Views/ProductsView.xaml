@@ -10,8 +10,7 @@
     </ContentPage.BindingContext>
 
     <StackLayout>
-        <Label Text="Products" 
-               BackgroundColor="LightGoldenrodYellow"
+        <Label Text="Products"
                Padding="10"
                HorizontalTextAlignment="Center"/>
         <CollectionView ItemsSource="{Binding Products}">
