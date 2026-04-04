@@ -1,6 +1,7 @@
 ﻿using crud_xamarin.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,15 @@ namespace crud_xamarin.Services
         public Task<bool> DeleteProductAsync(string id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<ProductModel> GetProductById(string id)
+        {
+            var products = await Task.FromResult(s_products);
+            var id2 = Convert.ToInt32(id);
+            var product = products.Where(p => p.Id == id2).FirstOrDefault();
+
+            return product;
         }
 
         public async Task<IEnumerable<ProductModel>> GetProductsAsync()

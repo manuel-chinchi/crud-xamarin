@@ -11,5 +11,6 @@ namespace crud_xamarin.Services
         Task<bool> UpdateProductAsync(T item);
         Task<bool> DeleteProductAsync(string id);
         Task<IEnumerable<T>> GetProductsAsync();
+        Task<T> GetProductById(string id);
     }
 }

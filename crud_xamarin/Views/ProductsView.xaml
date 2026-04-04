@@ -6,7 +6,7 @@
              x:Class="crud_xamarin.Views.ProductsView">
 
     <ContentPage.BindingContext>
-        <viewmodels:ProductsViewModel />
+        <viewmodels:ProductsViewModel/>
     </ContentPage.BindingContext>
 
     <StackLayout Padding="10">
@@ -14,7 +14,7 @@
                Padding="10"
                HorizontalTextAlignment="Center"/>
         <CollectionView ItemsSource="{Binding Products}">
-        <CollectionView.ItemTemplate>
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ProductModel">
                     <Grid HeightRequest="50" ColumnDefinitions="Auto,160,Auto">
                         <Label Grid.Column="0"
@@ -26,9 +26,17 @@
                         <Label Grid.Column="2" 
                                Text="{Binding Description}" 
                                VerticalOptions="Center"/>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding
+                                    Source={
+                                        RelativeSource AncestorType={x:Type viewmodels:ProductsViewModel}
+                                    }, Path=ViewProductDetailsCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </Grid.GestureRecognizers>
                     </Grid>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
 </ContentPage>
