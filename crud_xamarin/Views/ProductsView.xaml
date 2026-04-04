@@ -16,23 +16,15 @@
         <CollectionView ItemsSource="{Binding Products}">
         <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ProductModel">
-                    <Grid HeightRequest="50">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="150"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                    <Grid HeightRequest="50" ColumnDefinitions="Auto,160,Auto">
                         <Label Grid.Column="0"
                                Text="{Binding Id}" 
-                               FontSize="12"
                                VerticalOptions="Center"/>
                         <Label Grid.Column="1" 
                                Text="{Binding Name}"
-                               FontSize="12"
                                VerticalOptions="Center"/>
                         <Label Grid.Column="2" 
                                Text="{Binding Description}" 
-                               FontSize="12"
                                VerticalOptions="Center"/>
                     </Grid>
             </DataTemplate>

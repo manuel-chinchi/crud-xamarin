@@ -23,8 +23,6 @@ namespace crud_xamarin.ViewModels
         public ProductsViewModel()
         {
             _productService = DependencyService.Get<IProductService<ProductModel>>();
-
-            LoadProducts();
         }
 
         public async Task LoadProducts()
