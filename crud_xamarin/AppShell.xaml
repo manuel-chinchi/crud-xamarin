@@ -2,10 +2,14 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:crud_xamarin"
+       xmlns:views="clr-namespace:crud_xamarin.Views"
        x:Class="crud_xamarin.AppShell">
 
-    <FlyoutItem Title="Inicio">
+    <FlyoutItem Title="Home">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Products">
+        <ShellContent ContentTemplate="{DataTemplate views:ProductsView}" Route="ProductsView"/>
     </FlyoutItem>
 
 </Shell>
