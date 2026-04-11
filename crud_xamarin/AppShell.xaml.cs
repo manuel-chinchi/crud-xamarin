@@ -26,6 +26,7 @@ namespace crud_xamarin
         {
             Routing.RegisterRoute(nameof(ProductsView), typeof(ProductsView));
             Routing.RegisterRoute(nameof(ProductDetailView), typeof(ProductDetailView));
+            Routing.RegisterRoute(nameof(ProductCreateView), typeof(ProductCreateView));
         }
 
         private void RegisterServices()

@@ -23,12 +23,14 @@ namespace crud_xamarin.ViewModels
         private readonly IProductService<ProductModel> _productService;
 
         public ICommand ViewProductDetailsCommand { get; }
+        public ICommand AddProductCommand { get; }
 
         public ProductsViewModel()
         {
             _productService = DependencyService.Get<IProductService<ProductModel>>();
 
             ViewProductDetailsCommand = new Command<ProductModel>(ViewProductDetails);
+            AddProductCommand = new Command(AddProduct);
         }
 
         private async void ViewProductDetails(ProductModel product)
@@ -44,6 +46,11 @@ namespace crud_xamarin.ViewModels
             var items = await _productService.GetProductsAsync();
 
             Products = new ObservableCollection<ProductModel>(items);
+        }
+
+        private async void AddProduct(object obj)
+        {
+            await Shell.Current.GoToAsync($"{nameof(ProductCreateView)}");
         }
     }
 }

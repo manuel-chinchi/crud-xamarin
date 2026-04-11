@@ -9,6 +9,12 @@
                 <Setter Property="TextColor" Value="#232323"/>
                 <Setter Property="FontSize" Value="13"/>
             </Style>
+
+            <Style TargetType="Entry" x:Key="EntryDefaultStyle">
+                <Setter Property="TextColor" Value="#232323"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="PlaceholderColor" Value="#5f5f5f"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -16,6 +16,7 @@
     </ContentPage.Resources>
 
     <StackLayout Padding="10">
+        <Button Text="New" Command="{Binding AddProductCommand}"/>
         <Label Text="Products"
                Padding="10"
                TextColor="#232323"
