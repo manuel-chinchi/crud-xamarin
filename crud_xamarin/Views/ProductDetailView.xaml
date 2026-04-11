@@ -10,9 +10,12 @@
     </ContentPage.BindingContext>
     
     <StackLayout Padding="10">
-        <Label Text="{Binding Product.Id}"/>
-        <Label Text="{Binding Product.Name}"/>
-        <Label Text="{Binding Product.Description}"/>
+        <Label Text="{Binding Product.Id}"
+               Style="{StaticResource LabelDefaultStyle}"/>
+        <Label Text="{Binding Product.Name}"
+               Style="{StaticResource LabelDefaultStyle}"/>
+        <Label Text="{Binding Product.Description}"
+               Style="{StaticResource LabelDefaultStyle}"/>
     </StackLayout>
 
 </ContentPage>

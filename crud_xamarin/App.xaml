@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="crud_xamarin.App">
     <Application.Resources>
-
+        <!--estilos globales para controles-->
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="LabelDefaultStyle">
+                <Setter Property="TextColor" Value="#232323"/>
+                <Setter Property="FontSize" Value="13"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

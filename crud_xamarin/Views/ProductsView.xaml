@@ -9,23 +9,30 @@
         <viewmodels:ProductsViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="LabelCellStyle" BasedOn="{StaticResource LabelDefaultStyle}">
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+
     <StackLayout Padding="10">
         <Label Text="Products"
                Padding="10"
+               TextColor="#232323"
                HorizontalTextAlignment="Center"/>
         <CollectionView ItemsSource="{Binding Products}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ProductModel">
-                    <Grid HeightRequest="50" ColumnDefinitions="Auto,160,Auto">
+                    <Grid HeightRequest="50" ColumnDefinitions="40,160,Auto">
                         <Label Grid.Column="0"
-                               Text="{Binding Id}" 
-                               VerticalOptions="Center"/>
+                               Text="{Binding Id}"
+                               Style="{StaticResource LabelCellStyle}"/>
                         <Label Grid.Column="1" 
                                Text="{Binding Name}"
-                               VerticalOptions="Center"/>
+                               Style="{StaticResource LabelCellStyle}"/>
                         <Label Grid.Column="2" 
                                Text="{Binding Description}" 
-                               VerticalOptions="Center"/>
+                               Style="{StaticResource LabelCellStyle}"/>
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer 
                                 Command="{Binding
