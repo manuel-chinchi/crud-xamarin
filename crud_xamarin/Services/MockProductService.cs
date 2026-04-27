@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace crud_xamarin.Services
 {
-    class MockProductService : IProductService<ProductModel>
+    public class MockProductService : IProductService<ProductModel>
     {
-        private readonly List<ProductModel> s_products;
+        private static List<ProductModel> s_products;
 
         public MockProductService()
         {
