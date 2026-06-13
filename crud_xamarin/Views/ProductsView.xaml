@@ -3,11 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:crud_xamarin.ViewModels"
              xmlns:models="clr-namespace:crud_xamarin.Models"
-             x:Class="crud_xamarin.Views.ProductsView">
-
-    <ContentPage.BindingContext>
-        <viewmodels:ProductsViewModel/>
-    </ContentPage.BindingContext>
+             x:Class="crud_xamarin.Views.ProductsView"
+             x:DataType="viewmodels:ProductsViewModel">
 
     <ContentPage.Resources>
         <Style TargetType="Label" x:Key="LabelCellStyle" BasedOn="{StaticResource LabelDefaultStyle}">

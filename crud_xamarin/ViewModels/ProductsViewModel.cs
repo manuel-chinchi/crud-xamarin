@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace crud_xamarin.ViewModels
 {
-    class ProductsViewModel : BaseViewModel
+    public class ProductsViewModel : BaseViewModel
     {
         private ObservableCollection<ProductModel> _products;
         public ObservableCollection<ProductModel> Products
@@ -28,6 +28,14 @@ namespace crud_xamarin.ViewModels
         public ProductsViewModel()
         {
             _productService = DependencyService.Get<IProductService<ProductModel>>();
+
+            ViewProductDetailsCommand = new Command<ProductModel>(ViewProductDetails);
+            AddProductCommand = new Command(AddProduct);
+        }
+
+        public ProductsViewModel(IProductService<ProductModel> productService)
+        {
+            _productService = productService;
 
             ViewProductDetailsCommand = new Command<ProductModel>(ViewProductDetails);
             AddProductCommand = new Command(AddProduct);

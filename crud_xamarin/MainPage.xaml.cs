@@ -1,4 +1,5 @@
 ﻿using crud_xamarin.Views;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,9 @@ namespace crud_xamarin
 
         private async void btnGoToProducts_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"{nameof(ProductsView)}");
+            ProductsView view = App.Services.GetRequiredService<ProductsView>();
+
+            await Shell.Current.Navigation.PushAsync(view);
         }
     }
 }
