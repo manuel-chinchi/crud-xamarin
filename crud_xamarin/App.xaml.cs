@@ -12,8 +12,7 @@ namespace crud_xamarin
 {
     public partial class App : Application
     {
-        private static IServiceProvider _serviceProvider;
-        public static IServiceProvider Services => _serviceProvider;
+        public static IServiceProvider Services { get; private set; }
 
         public App()
         {
@@ -22,6 +21,7 @@ namespace crud_xamarin
             #region Configure DI
 
             var services = new ServiceCollection();
+
             // services
             services.AddTransient<IProductService<ProductModel>, MockProductService>();
 
@@ -31,11 +31,11 @@ namespace crud_xamarin
             // views
             services.AddTransient<ProductsView>();
 
-            _serviceProvider = services.BuildServiceProvider();
+            Services = services.BuildServiceProvider();
 
             DependencyResolver.ResolveUsing(type =>
             {
-                var service = _serviceProvider.GetService(type);
+                object service = Services.GetService(type);
                 return service;
             });
 
