@@ -11,7 +11,8 @@
         <Label Text="{Binding Product.Name}"
                Style="{StaticResource LabelDefaultStyle}"/>
         <Label Text="{Binding Product.Description}"
-               Style="{StaticResource LabelDefaultStyle}"/>
+               Style="{StaticResource LabelDefaultStyle}" TextColor="Black"/>
+        <Label Text="sss" TextColor="Black"/>
     </StackLayout>
 
 </ContentPage>

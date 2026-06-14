@@ -1,5 +1,6 @@
 ﻿using crud_xamarin.Services;
 using crud_xamarin.Views;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace crud_xamarin
             InitializeComponent();
 
             RegisterServices();
+
             RegisterRoutes();
         }
 
@@ -32,6 +34,21 @@ namespace crud_xamarin
         private void RegisterServices()
         {
             DependencyService.Register<MockProductService>();
+        }
+
+        public void Initialize()
+        {
+            // this method configure DI in the MainPage constructor
+            var mainPage = App.Services.GetRequiredService<MainPage>();
+            var navigationPage = new NavigationPage(mainPage);
+
+            NavigationPage.SetHasBackButton(navigationPage, false);
+
+            this.Items.Clear();
+            var shellContent = new ShellContent { Content = navigationPage };
+            var shellSection = new ShellSection { Items = { shellContent } };
+            var shellItem = new ShellItem { Items = { shellSection } };
+            this.Items.Add(shellItem);
         }
     }
 }

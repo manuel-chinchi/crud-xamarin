@@ -18,8 +18,6 @@ namespace crud_xamarin.Views
         public ProductCreateView()
         {
             InitializeComponent();
-
-            _viewModel = (ProductCreateViewModel)BindingContext;
         }
 
         public ProductCreateView(ProductCreateViewModel viewModel)

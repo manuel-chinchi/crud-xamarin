@@ -1,5 +1,5 @@
-﻿using crud_xamarin.Views;
-using Microsoft.Extensions.DependencyInjection;
+﻿using crud_xamarin.Services;
+using crud_xamarin.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,17 +12,25 @@ namespace crud_xamarin
 {
     public partial class MainPage : ContentPage
     {
+        private readonly INavigationService _navigationService;
+
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        public MainPage(INavigationService navigationService)
+        {
+            InitializeComponent();
+
+            _navigationService = navigationService;
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            var view = App.Services.GetRequiredService<ProductsView>();
-            await Shell.Current.Navigation.PushAsync(view);
+            await _navigationService.PushAsync<ProductsView>();
         }
     }
 }

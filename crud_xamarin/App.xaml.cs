@@ -24,6 +24,7 @@ namespace crud_xamarin
 
             // services
             services.AddSingleton<IProductService<ProductModel>, MockProductService>();
+            services.AddSingleton<INavigationService, NavigationService>();
 
             // viewmodels
             services.AddTransient<ProductsViewModel>();
@@ -31,6 +32,7 @@ namespace crud_xamarin
             services.AddTransient<ProductDetailViewModel>();
 
             // views
+            services.AddTransient<MainPage>(); // root view
             services.AddTransient<ProductsView>();
             services.AddTransient<ProductCreateView>();
             services.AddTransient<ProductDetailView>();
@@ -46,6 +48,7 @@ namespace crud_xamarin
             #endregion
 
             MainPage = new AppShell();
+            ((AppShell)MainPage).Initialize();
         }
 
         protected override void OnStart()

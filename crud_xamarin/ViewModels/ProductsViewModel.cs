@@ -1,7 +1,6 @@
 ﻿using crud_xamarin.Models;
 using crud_xamarin.Services;
 using crud_xamarin.Views;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +13,8 @@ namespace crud_xamarin.ViewModels
 {
     public class ProductsViewModel : BaseViewModel
     {
+        private readonly INavigationService _navigationService;
+
         private ObservableCollection<ProductModel> _products;
         public ObservableCollection<ProductModel> Products
         {
@@ -34,9 +35,10 @@ namespace crud_xamarin.ViewModels
             CreateProductCommand = new Command(CreateProduct);
         }
 
-        public ProductsViewModel(IProductService<ProductModel> productService)
+        public ProductsViewModel(IProductService<ProductModel> productService, INavigationService navigationService)
         {
             _productService = productService;
+            _navigationService = navigationService;
 
             GoToProductDetailCommand = new Command<ProductModel>(ViewProductDetails);
             CreateProductCommand = new Command(CreateProduct);
@@ -47,10 +49,10 @@ namespace crud_xamarin.ViewModels
             if (product == null)
                 return;
 
-            var view = App.Services.GetRequiredService<ProductDetailView>();
-            ProductDetailViewModel viewModel = (ProductDetailViewModel)view.BindingContext;
-            viewModel.Id = product.Id;
-            await Shell.Current.Navigation.PushAsync(view);
+            await _navigationService.PushAsync<ProductDetailView, ProductDetailViewModel>(viewModel =>
+            {
+                viewModel.Id = product.Id;
+            });
         }
 
         public async Task LoadProducts()
@@ -62,8 +64,7 @@ namespace crud_xamarin.ViewModels
 
         private async void CreateProduct(object obj)
         {
-            var view = App.Services.GetRequiredService<ProductCreateView>();
-            await Shell.Current.Navigation.PushAsync(view);
+            await _navigationService.PushAsync<ProductCreateView>();
         }
     }
 }
