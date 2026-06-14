@@ -23,7 +23,7 @@ namespace crud_xamarin
             var services = new ServiceCollection();
 
             // services
-            services.AddTransient<IProductService<ProductModel>, MockProductService>();
+            services.AddSingleton<IProductService<ProductModel>, MockProductService>();
 
             // viewmodels
             services.AddTransient<ProductsViewModel>();

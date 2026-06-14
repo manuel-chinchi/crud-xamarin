@@ -24,14 +24,14 @@ namespace crud_xamarin.ViewModels
         private readonly IProductService<ProductModel> _productService;
 
         public ICommand GoToProductDetailCommand { get; }
-        public ICommand AddProductCommand { get; }
+        public ICommand CreateProductCommand { get; }
 
         public ProductsViewModel()
         {
             _productService = DependencyService.Get<IProductService<ProductModel>>();
 
             GoToProductDetailCommand = new Command<ProductModel>(ViewProductDetails);
-            AddProductCommand = new Command(AddProduct);
+            CreateProductCommand = new Command(CreateProduct);
         }
 
         public ProductsViewModel(IProductService<ProductModel> productService)
@@ -39,7 +39,7 @@ namespace crud_xamarin.ViewModels
             _productService = productService;
 
             GoToProductDetailCommand = new Command<ProductModel>(ViewProductDetails);
-            AddProductCommand = new Command(AddProduct);
+            CreateProductCommand = new Command(CreateProduct);
         }
 
         private async void ViewProductDetails(ProductModel product)
@@ -60,9 +60,10 @@ namespace crud_xamarin.ViewModels
             Products = new ObservableCollection<ProductModel>(items);
         }
 
-        private async void AddProduct(object obj)
+        private async void CreateProduct(object obj)
         {
-            await Shell.Current.GoToAsync($"{nameof(ProductCreateView)}");
+            var view = App.Services.GetRequiredService<ProductCreateView>();
+            await Shell.Current.Navigation.PushAsync(view);
         }
     }
 }
