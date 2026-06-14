@@ -1,6 +1,7 @@
 ﻿using crud_xamarin.Models;
 using crud_xamarin.Services;
 using crud_xamarin.Views;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -42,7 +43,8 @@ namespace crud_xamarin.ViewModels
             {
                 _ = await _productService.AddProductAsync(product);
 
-                await Shell.Current.GoToAsync($"{nameof(ProductsView)}");
+                var view = App.Services.GetRequiredService<ProductsView>();
+                await Shell.Current.Navigation.PushAsync(view);
             }
         }
     }
