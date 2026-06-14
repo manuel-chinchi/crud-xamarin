@@ -8,8 +8,9 @@
     <FlyoutItem Title="Home">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
     </FlyoutItem>
-    <FlyoutItem Title="Products">
+
+    <!--<FlyoutItem Title="Products">
         <ShellContent ContentTemplate="{DataTemplate views:ProductsView}" Route="ProductsView"/>
-    </FlyoutItem>
+    </FlyoutItem>-->
 
 </Shell>

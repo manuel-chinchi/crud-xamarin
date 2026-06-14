@@ -1,6 +1,7 @@
 ﻿using crud_xamarin.Models;
 using crud_xamarin.Services;
 using crud_xamarin.Views;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,14 +23,14 @@ namespace crud_xamarin.ViewModels
 
         private readonly IProductService<ProductModel> _productService;
 
-        public ICommand ViewProductDetailsCommand { get; }
+        public ICommand GoToProductDetailCommand { get; }
         public ICommand AddProductCommand { get; }
 
         public ProductsViewModel()
         {
             _productService = DependencyService.Get<IProductService<ProductModel>>();
 
-            ViewProductDetailsCommand = new Command<ProductModel>(ViewProductDetails);
+            GoToProductDetailCommand = new Command<ProductModel>(ViewProductDetails);
             AddProductCommand = new Command(AddProduct);
         }
 
@@ -37,7 +38,7 @@ namespace crud_xamarin.ViewModels
         {
             _productService = productService;
 
-            ViewProductDetailsCommand = new Command<ProductModel>(ViewProductDetails);
+            GoToProductDetailCommand = new Command<ProductModel>(ViewProductDetails);
             AddProductCommand = new Command(AddProduct);
         }
 
@@ -46,7 +47,10 @@ namespace crud_xamarin.ViewModels
             if (product == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(ProductDetailView)}?Id={product.Id}");
+            var view = App.Services.GetRequiredService<ProductDetailView>();
+            ProductDetailViewModel viewModel = (ProductDetailViewModel)view.BindingContext;
+            viewModel.Id = product.Id;
+            await Shell.Current.Navigation.PushAsync(view);
         }
 
         public async Task LoadProducts()

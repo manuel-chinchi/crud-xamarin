@@ -9,7 +9,7 @@ using Xamarin.Forms;
 namespace crud_xamarin.ViewModels
 {
     [QueryProperty("Id", nameof(Id))]
-    class ProductDetailViewModel : BaseViewModel
+    public class ProductDetailViewModel : BaseViewModel
     {
         private int _id;
         public int Id
@@ -30,6 +30,11 @@ namespace crud_xamarin.ViewModels
         public ProductDetailViewModel()
         {
             _productService = DependencyService.Get<IProductService<ProductModel>>();
+        }
+
+        public ProductDetailViewModel(IProductService<ProductModel> productService)
+        {
+            _productService = productService;
         }
 
         public async Task LoadProduct()

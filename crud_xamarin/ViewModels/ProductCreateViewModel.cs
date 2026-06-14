@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace crud_xamarin.ViewModels
 {
-    class ProductCreateViewModel: BaseViewModel
+    public class ProductCreateViewModel: BaseViewModel
     {
         private ProductModel _product = new ProductModel();
         public ProductModel Product
@@ -25,6 +25,13 @@ namespace crud_xamarin.ViewModels
         public ProductCreateViewModel()
         {
             _productService = DependencyService.Get<IProductService<ProductModel>>();
+
+            CreateProductCommand = new Command<ProductModel>(CreateProduct);
+        }
+
+        public ProductCreateViewModel(IProductService<ProductModel> productService)
+        {
+            _productService = productService;
 
             CreateProductCommand = new Command<ProductModel>(CreateProduct);
         }

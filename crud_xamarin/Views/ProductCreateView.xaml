@@ -4,10 +4,6 @@
              xmlns:viewmodels="clr-namespace:crud_xamarin.ViewModels"
              x:Class="crud_xamarin.Views.ProductCreateView">
 
-    <ContentPage.BindingContext>
-        <viewmodels:ProductCreateViewModel/>
-    </ContentPage.BindingContext>
-
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="Name" 

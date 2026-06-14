@@ -27,9 +27,13 @@ namespace crud_xamarin
 
             // viewmodels
             services.AddTransient<ProductsViewModel>();
+            services.AddTransient<ProductCreateViewModel>();
+            services.AddTransient<ProductDetailViewModel>();
 
             // views
             services.AddTransient<ProductsView>();
+            services.AddTransient<ProductCreateView>();
+            services.AddTransient<ProductDetailView>();
 
             Services = services.BuildServiceProvider();
 
