@@ -17,10 +17,11 @@ namespace crud_xamarin
             InitializeComponent();
         }
 
-        private async void btnGoToProducts_Clicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            ProductsView view = App.Services.GetRequiredService<ProductsView>();
+            base.OnAppearing();
 
+            var view = App.Services.GetRequiredService<ProductsView>();
             await Shell.Current.Navigation.PushAsync(view);
         }
     }
