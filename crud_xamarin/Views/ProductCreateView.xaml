@@ -2,24 +2,26 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:crud_xamarin.ViewModels"
-             x:Class="crud_xamarin.Views.ProductCreateView">
-
-    <ContentPage.BindingContext>
-        <viewmodels:ProductCreateViewModel/>
-    </ContentPage.BindingContext>
+             x:Class="crud_xamarin.Views.ProductCreateView"
+             Background="White">
 
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="Name" 
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource DefaultTextColor}"
                    Style="{StaticResource LabelDefaultStyle}"/>
             <Entry Text="{Binding Product.Name, TargetNullValue=''}"
                    Placeholder="Phone" 
+                   PlaceholderColor="{StaticResource DefaultPlaceholderColor2}"
                    Style="{StaticResource EntryDefaultStyle}"/>
 
             <Label Text="Details" 
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource DefaultTextColor}"
                    Style="{StaticResource LabelDefaultStyle}"/>
             <Entry Text="{Binding Product.Description, TargetNullValue=''}"
-                   PlaceholderColor="Gray"
+                   PlaceholderColor="{StaticResource DefaultPlaceholderColor2}"
                    Style="{StaticResource EntryDefaultStyle}"
                    Placeholder="iPhone 17 Ultra Pro Max 6.7"/>
 

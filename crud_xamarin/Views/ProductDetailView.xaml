@@ -3,19 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:crud_xamarin.ViewModels"
              x:Class="crud_xamarin.Views.ProductDetailView"
-             x:DataType="viewmodels:ProductDetailViewModel">
+             x:DataType="viewmodels:ProductDetailViewModel"
+             Background="White">
 
-    <ContentPage.BindingContext>
-        <viewmodels:ProductDetailViewModel/>
-    </ContentPage.BindingContext>
-    
     <StackLayout Padding="10">
         <Label Text="{Binding Product.Id}"
                Style="{StaticResource LabelDefaultStyle}"/>
         <Label Text="{Binding Product.Name}"
                Style="{StaticResource LabelDefaultStyle}"/>
         <Label Text="{Binding Product.Description}"
-               Style="{StaticResource LabelDefaultStyle}"/>
+               Style="{StaticResource LabelDefaultStyle}" TextColor="Black"/>
+        <Label Text="sss" TextColor="Black"/>
     </StackLayout>
 
 </ContentPage>

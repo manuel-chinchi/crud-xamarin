@@ -11,8 +11,10 @@ using Xamarin.Forms;
 
 namespace crud_xamarin.ViewModels
 {
-    class ProductsViewModel : BaseViewModel
+    public class ProductsViewModel : BaseViewModel
     {
+        private readonly INavigationService _navigationService;
+
         private ObservableCollection<ProductModel> _products;
         public ObservableCollection<ProductModel> Products
         {
@@ -22,15 +24,22 @@ namespace crud_xamarin.ViewModels
 
         private readonly IProductService<ProductModel> _productService;
 
-        public ICommand ViewProductDetailsCommand { get; }
-        public ICommand AddProductCommand { get; }
+        public ICommand GoToProductDetailCommand { get; }
+        public ICommand CreateProductCommand { get; }
 
         public ProductsViewModel()
         {
-            _productService = DependencyService.Get<IProductService<ProductModel>>();
+            GoToProductDetailCommand = new Command<ProductModel>(ViewProductDetails);
+            CreateProductCommand = new Command(CreateProduct);
+        }
 
-            ViewProductDetailsCommand = new Command<ProductModel>(ViewProductDetails);
-            AddProductCommand = new Command(AddProduct);
+        public ProductsViewModel(IProductService<ProductModel> productService, INavigationService navigationService)
+        {
+            _productService = productService;
+            _navigationService = navigationService;
+
+            GoToProductDetailCommand = new Command<ProductModel>(ViewProductDetails);
+            CreateProductCommand = new Command(CreateProduct);
         }
 
         private async void ViewProductDetails(ProductModel product)
@@ -38,7 +47,10 @@ namespace crud_xamarin.ViewModels
             if (product == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(ProductDetailView)}?Id={product.Id}");
+            await _navigationService.PushAsync<ProductDetailView, ProductDetailViewModel>(viewModel =>
+            {
+                viewModel.Id = product.Id;
+            });
         }
 
         public async Task LoadProducts()
@@ -48,9 +60,9 @@ namespace crud_xamarin.ViewModels
             Products = new ObservableCollection<ProductModel>(items);
         }
 
-        private async void AddProduct(object obj)
+        private async void CreateProduct(object obj)
         {
-            await Shell.Current.GoToAsync($"{nameof(ProductCreateView)}");
+            await _navigationService.PushAsync<ProductCreateView>();
         }
     }
 }

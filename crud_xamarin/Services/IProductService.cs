@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace crud_xamarin.Services
 {
-    interface IProductService<T>
+    public interface IProductService<T>
     {
         Task<bool> AddProductAsync(T item);
         Task<bool> UpdateProductAsync(T item);

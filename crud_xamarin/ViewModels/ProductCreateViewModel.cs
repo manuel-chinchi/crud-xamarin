@@ -9,8 +9,10 @@ using Xamarin.Forms;
 
 namespace crud_xamarin.ViewModels
 {
-    class ProductCreateViewModel: BaseViewModel
+    public class ProductCreateViewModel : BaseViewModel
     {
+        private readonly INavigationService _navigationService;
+
         private ProductModel _product = new ProductModel();
         public ProductModel Product
         {
@@ -24,7 +26,13 @@ namespace crud_xamarin.ViewModels
 
         public ProductCreateViewModel()
         {
-            _productService = DependencyService.Get<IProductService<ProductModel>>();
+            CreateProductCommand = new Command<ProductModel>(CreateProduct);
+        }
+
+        public ProductCreateViewModel(IProductService<ProductModel> productService, INavigationService navigationService)
+        {
+            _productService = productService;
+            _navigationService = navigationService;
 
             CreateProductCommand = new Command<ProductModel>(CreateProduct);
         }
@@ -35,7 +43,7 @@ namespace crud_xamarin.ViewModels
             {
                 _ = await _productService.AddProductAsync(product);
 
-                await Shell.Current.GoToAsync($"{nameof(ProductsView)}");
+                await _navigationService.PushAsync<ProductsView>();
             }
         }
     }

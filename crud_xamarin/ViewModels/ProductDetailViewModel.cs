@@ -1,5 +1,6 @@
 ﻿using crud_xamarin.Models;
 using crud_xamarin.Services;
+using crud_xamarin.Shared;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,7 @@ using Xamarin.Forms;
 
 namespace crud_xamarin.ViewModels
 {
-    [QueryProperty("Id", nameof(Id))]
-    class ProductDetailViewModel : BaseViewModel
+    public class ProductDetailViewModel : BaseViewModel
     {
         private int _id;
         public int Id
@@ -29,7 +29,11 @@ namespace crud_xamarin.ViewModels
 
         public ProductDetailViewModel()
         {
-            _productService = DependencyService.Get<IProductService<ProductModel>>();
+        }
+
+        public ProductDetailViewModel(IProductService<ProductModel> productService)
+        {
+            _productService = productService;
         }
 
         public async Task LoadProduct()

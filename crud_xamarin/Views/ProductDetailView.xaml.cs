@@ -18,8 +18,14 @@ namespace crud_xamarin.Views
         public ProductDetailView()
         {
             InitializeComponent();
+        }
 
-            _viewModel = (ProductDetailViewModel)BindingContext;
+        public ProductDetailView(ProductDetailViewModel viewModel)
+        {
+            InitializeComponent();
+
+            _viewModel = viewModel;
+            BindingContext = viewModel;
         }
 
         protected override async void OnAppearing()
