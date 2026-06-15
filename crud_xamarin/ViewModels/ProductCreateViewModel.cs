@@ -43,7 +43,7 @@ namespace crud_xamarin.ViewModels
             {
                 _ = await _productService.AddProductAsync(product);
 
-                await _navigationService.PushAsync<ProductsView>(clearStack: true);
+                await _navigationService.PushAsync<ProductsView>();
             }
         }
     }

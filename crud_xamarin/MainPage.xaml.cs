@@ -34,7 +34,7 @@ namespace crud_xamarin
             if (_navigationService != null && !_hasNavigated)
             {
                 _hasNavigated = true;
-                await _navigationService.PushAsync<ProductsView>(clearStack: true);
+                await _navigationService.PushAsync<ProductsView>();
             }
         }
     }

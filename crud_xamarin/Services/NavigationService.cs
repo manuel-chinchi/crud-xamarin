@@ -29,31 +29,8 @@ namespace crud_xamarin.Services
             return mainPage;
         }
 
-        public async Task PushAsync<TView>(bool clearStack) where TView : ContentPage
+        private async Task DefaultNavigateTo<T>(T view) where T : Page
         {
-            TView view = App.Services.GetRequiredService<TView>();
-
-            var currentPage = GetCurrentPage();
-
-            if (clearStack && currentPage?.Navigation != null)
-            {
-                // Limpiar la pila y navegar
-                await currentPage.Navigation.PopToRootAsync(false);
-                await currentPage.Navigation.PushAsync(view);
-            }
-            else if (currentPage?.Navigation != null)
-            {
-                await currentPage.Navigation.PushAsync(view);
-            }
-        }
-
-        public async Task PushAsync<TView, TViewModel>(Action<TViewModel> configViewModel) where TView : ContentPage
-        {
-            TView view = App.Services.GetRequiredService<TView>();
-
-            var viewModel = (TViewModel)view.BindingContext;
-            configViewModel(viewModel);
-
             var currentPage = GetCurrentPage();
 
             if (currentPage?.Navigation != null)
@@ -65,6 +42,23 @@ namespace crud_xamarin.Services
             {
                 await currentPage.Navigation.PushAsync(view);
             }
+        }
+
+        public async Task PushAsync<TView>() where TView : ContentPage
+        {
+            TView view = App.Services.GetRequiredService<TView>();
+
+            await DefaultNavigateTo(view);
+        }
+
+        public async Task PushAsync<TView, TViewModel>(Action<TViewModel> configViewModel) where TView : ContentPage
+        {
+            TView view = App.Services.GetRequiredService<TView>();
+
+            var viewModel = (TViewModel)view.BindingContext;
+            configViewModel(viewModel);
+
+            await DefaultNavigateTo(view);
         }
     }
 }
