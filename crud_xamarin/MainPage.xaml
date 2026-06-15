@@ -3,10 +3,4 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="crud_xamarin.MainPage">
 
-    <StackLayout Padding="10">
-        <Button x:Name="btnGoToProducts" 
-                Text="Go to Products"
-                Clicked="btnGoToProducts_Clicked"/>
-    </StackLayout>
-
 </ContentPage>

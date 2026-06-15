@@ -3,35 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:crud_xamarin.ViewModels"
              xmlns:models="clr-namespace:crud_xamarin.Models"
-             x:Class="crud_xamarin.Views.ProductsView">
+             x:Class="crud_xamarin.Views.ProductsView"
+             x:DataType="viewmodels:ProductsViewModel"
+             Background="White">
 
-    <ContentPage.BindingContext>
-        <viewmodels:ProductsViewModel/>
-    </ContentPage.BindingContext>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="True"/>
+    </Shell.BackButtonBehavior>
+    
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="LabelCellStyle" BasedOn="{StaticResource LabelDefaultStyle}">
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
 
     <StackLayout Padding="10">
+        <Button Text="New" Command="{Binding CreateProductCommand}"/>
         <Label Text="Products"
                Padding="10"
+               TextColor="#232323"
                HorizontalTextAlignment="Center"/>
         <CollectionView ItemsSource="{Binding Products}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:ProductModel">
-                    <Grid HeightRequest="50" ColumnDefinitions="Auto,160,Auto">
+                    <Grid HeightRequest="50" ColumnDefinitions="40,160,Auto">
                         <Label Grid.Column="0"
-                               Text="{Binding Id}" 
-                               VerticalOptions="Center"/>
+                               Text="{Binding Id}"
+                               Style="{StaticResource LabelCellStyle}"/>
                         <Label Grid.Column="1" 
                                Text="{Binding Name}"
-                               VerticalOptions="Center"/>
+                               Style="{StaticResource LabelCellStyle}"/>
                         <Label Grid.Column="2" 
                                Text="{Binding Description}" 
-                               VerticalOptions="Center"/>
+                               Style="{StaticResource LabelCellStyle}"/>
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer 
                                 Command="{Binding
                                     Source={
                                         RelativeSource AncestorType={x:Type viewmodels:ProductsViewModel}
-                                    }, Path=ViewProductDetailsCommand}"
+                                    }, Path=GoToProductDetailCommand}"
                                 CommandParameter="{Binding .}"/>
                         </Grid.GestureRecognizers>
                     </Grid>

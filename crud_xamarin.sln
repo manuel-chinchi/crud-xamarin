@@ -9,7 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crud_xamarin.Android", "cru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crud_xamarin.iOS", "crud_xamarin.iOS\crud_xamarin.iOS.csproj", "{21D63D7E-40F7-4B93-B945-BC0209EC6296}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crud_xamarin", "crud_xamarin\crud_xamarin.csproj", "{9685A2BD-24A6-4275-9CB4-EC8F5A78C544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "crud_xamarin", "crud_xamarin\crud_xamarin.csproj", "{9685A2BD-24A6-4275-9CB4-EC8F5A78C544}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6773B13-5531-441E-B6A2-70FB7185C8E1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

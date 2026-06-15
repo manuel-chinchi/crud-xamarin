@@ -1,8 +1,8 @@
 ﻿using crud_xamarin.ViewModels;
 using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -11,28 +11,21 @@ using Xamarin.Forms.Xaml;
 namespace crud_xamarin.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProductsView : ContentPage
+    public partial class ProductCreateView : ContentPage
     {
-        private readonly ProductsViewModel _viewModel;
+        private readonly ProductCreateViewModel _viewModel;
 
-        public ProductsView()
+        public ProductCreateView()
         {
             InitializeComponent();
         }
 
-        public ProductsView(ProductsViewModel viewModel)
+        public ProductCreateView(ProductCreateViewModel viewModel)
         {
             InitializeComponent();
 
             _viewModel = viewModel;
             BindingContext = viewModel;
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            await _viewModel.LoadProducts();
         }
     }
 }

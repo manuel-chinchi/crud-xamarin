@@ -1,4 +1,5 @@
 ﻿using crud_xamarin.Models;
+using crud_xamarin.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace crud_xamarin.Services
 {
-    class MockProductService : IProductService<ProductModel>
+    public class MockProductService : IProductService<ProductModel>
     {
-        private readonly List<ProductModel> s_products;
+        private static List<ProductModel> s_products;
 
         public MockProductService()
         {
@@ -24,7 +25,9 @@ namespace crud_xamarin.Services
 
         public Task<bool> AddProductAsync(ProductModel item)
         {
-            throw new NotImplementedException();
+            item.Id = GlobalHelper.NewId();
+            s_products.Add(item);
+            return Task.FromResult(true);
         }
 
         public Task<bool> DeleteProductAsync(string id)

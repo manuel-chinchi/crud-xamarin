@@ -4,7 +4,7 @@ using System.Text;
 
 namespace crud_xamarin.Models
 {
-    class ProductModel
+    public class ProductModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
