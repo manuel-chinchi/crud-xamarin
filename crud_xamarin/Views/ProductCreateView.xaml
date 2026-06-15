@@ -30,8 +30,7 @@
             <Label Text="Category" FontAttributes="Bold" 
                    TextColor="{StaticResource DefaultTextColor}"
                    Style="{StaticResource LabelDefaultStyle}"/>
-            <Picker Title="Jeans"
-                    Style="{StaticResource PickerDefaultStyle}"
+            <Picker Style="{StaticResource PickerDefaultStyle}"
                     ItemsSource="{Binding Categories}" 
                     SelectedItem="{Binding Category}">
                 <Picker.ItemDisplayBinding>
