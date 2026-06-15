@@ -60,6 +60,7 @@ namespace crud_xamarin.ViewModels
                 if (Category != null)
                 {
                     // TODO agregar CategoryModel a ProductModel
+                    product.Category = Category;
                 }
                 _ = await _productService.AddProductAsync(product);
 

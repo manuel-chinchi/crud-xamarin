@@ -32,7 +32,7 @@ namespace crud_xamarin.Views
         {
             base.OnAppearing();
 
-            await _viewModel.LoadProduct();
+            await _viewModel.OnLoadView();
         }
     }
 }
