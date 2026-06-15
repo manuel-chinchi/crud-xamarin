@@ -32,7 +32,6 @@ namespace crud_xamarin
             services.AddTransient<ProductDetailViewModel>();
 
             // views
-            services.AddTransient<MainPage>(); // root view
             services.AddTransient<ProductsView>();
             services.AddTransient<ProductCreateView>();
             services.AddTransient<ProductDetailView>();

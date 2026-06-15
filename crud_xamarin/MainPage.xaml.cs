@@ -12,31 +12,9 @@ namespace crud_xamarin
 {
     public partial class MainPage : ContentPage
     {
-        private readonly INavigationService _navigationService;
-        private bool _hasNavigated;
-
         public MainPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
-        }
-
-        public MainPage(INavigationService navigationService)
-        {
-            InitializeComponent();
-
-            _navigationService = navigationService;
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (_navigationService != null && !_hasNavigated)
-            {
-                _hasNavigated = true;
-                await _navigationService.PushAsync<ProductsView>();
-            }
         }
     }
 }

@@ -8,6 +8,7 @@
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="Name" 
+                   FontAttributes="Bold"
                    TextColor="{StaticResource DefaultTextColor}"
                    Style="{StaticResource LabelDefaultStyle}"/>
             <Entry Text="{Binding Product.Name, TargetNullValue=''}"
@@ -16,6 +17,7 @@
                    Style="{StaticResource EntryDefaultStyle}"/>
 
             <Label Text="Details" 
+                   FontAttributes="Bold"
                    TextColor="{StaticResource DefaultTextColor}"
                    Style="{StaticResource LabelDefaultStyle}"/>
             <Entry Text="{Binding Product.Description, TargetNullValue=''}"
