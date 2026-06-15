@@ -1,5 +1,4 @@
-﻿using crud_xamarin.Services;
-using crud_xamarin.Views;
+﻿using crud_xamarin.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -27,21 +26,6 @@ namespace crud_xamarin
             Routing.RegisterRoute(nameof(ProductsView), typeof(ProductsView));
             Routing.RegisterRoute(nameof(ProductDetailView), typeof(ProductDetailView));
             Routing.RegisterRoute(nameof(ProductCreateView), typeof(ProductCreateView));
-        }
-
-        [Obsolete]
-        public void Initialize()
-        {
-            // this method configure DI in the MainPage constructor
-            var mainPage = App.Services.GetRequiredService<MainPage>();
-
-            var navigationPage = new NavigationPage(mainPage);
-
-            this.Items.Clear();
-            var shellContent = new ShellContent { Content = navigationPage };
-            var shellSection = new ShellSection { Items = { shellContent } };
-            var shellItem = new ShellItem { Items = { shellSection } };
-            this.Items.Add(shellItem);
         }
     }
 }
