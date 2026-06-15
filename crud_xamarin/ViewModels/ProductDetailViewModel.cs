@@ -29,7 +29,6 @@ namespace crud_xamarin.ViewModels
 
         public ProductDetailViewModel()
         {
-            _productService = DependencyService.Get<IProductService<ProductModel>>();
         }
 
         public ProductDetailViewModel(IProductService<ProductModel> productService)

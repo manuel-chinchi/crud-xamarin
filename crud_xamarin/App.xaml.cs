@@ -47,8 +47,8 @@ namespace crud_xamarin
 
             #endregion
 
-            MainPage = new AppShell();
-            ((AppShell)MainPage).Initialize();
+            var view = Services.GetRequiredService<ProductsView>();
+            MainPage = new NavigationPage(view);
         }
 
         protected override void OnStart()

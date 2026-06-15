@@ -13,10 +13,38 @@ namespace crud_xamarin.Services
         {
         }
 
-        public async Task PushAsync<TView>() where TView : ContentPage
+        private Page GetCurrentPage()
+        {
+            Page mainPage = Application.Current.MainPage;
+
+            if (mainPage is NavigationPage navigationPage)
+            {
+                return navigationPage.CurrentPage;
+            }
+            else if (mainPage is Shell shell)
+            {
+                return shell.CurrentPage;
+            }
+
+            return mainPage;
+        }
+
+        public async Task PushAsync<TView>(bool clearStack) where TView : ContentPage
         {
             TView view = App.Services.GetRequiredService<TView>();
-            await Shell.Current.Navigation.PushAsync(view);
+
+            var currentPage = GetCurrentPage();
+
+            if (clearStack && currentPage?.Navigation != null)
+            {
+                // Limpiar la pila y navegar
+                await currentPage.Navigation.PopToRootAsync(false);
+                await currentPage.Navigation.PushAsync(view);
+            }
+            else if (currentPage?.Navigation != null)
+            {
+                await currentPage.Navigation.PushAsync(view);
+            }
         }
 
         public async Task PushAsync<TView, TViewModel>(Action<TViewModel> configViewModel) where TView : ContentPage
@@ -26,7 +54,17 @@ namespace crud_xamarin.Services
             var viewModel = (TViewModel)view.BindingContext;
             configViewModel(viewModel);
 
-            await Shell.Current.Navigation.PushAsync(view);
+            var currentPage = GetCurrentPage();
+
+            if (currentPage?.Navigation != null)
+            {
+                await currentPage.Navigation.PopToRootAsync(false);
+                await currentPage.Navigation.PushAsync(view);
+            }
+            else if (currentPage?.Navigation != null)
+            {
+                await currentPage.Navigation.PushAsync(view);
+            }
         }
     }
 }

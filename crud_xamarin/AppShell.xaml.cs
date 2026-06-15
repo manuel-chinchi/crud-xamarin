@@ -19,8 +19,6 @@ namespace crud_xamarin
         {
             InitializeComponent();
 
-            RegisterServices();
-
             RegisterRoutes();
         }
 
@@ -31,18 +29,15 @@ namespace crud_xamarin
             Routing.RegisterRoute(nameof(ProductCreateView), typeof(ProductCreateView));
         }
 
-        private void RegisterServices()
-        {
-            DependencyService.Register<MockProductService>();
-        }
-
         public void Initialize()
         {
             // this method configure DI in the MainPage constructor
             var mainPage = App.Services.GetRequiredService<MainPage>();
+
             var navigationPage = new NavigationPage(mainPage);
 
-            NavigationPage.SetHasBackButton(navigationPage, false);
+            //NavigationPage.SetHasBackButton(navigationPage, false);
+            //NavigationPage.SetHasNavigationBar(navigationPage, false);
 
             this.Items.Clear();
             var shellContent = new ShellContent { Content = navigationPage };

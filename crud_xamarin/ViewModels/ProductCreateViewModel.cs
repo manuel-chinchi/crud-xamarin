@@ -26,8 +26,6 @@ namespace crud_xamarin.ViewModels
 
         public ProductCreateViewModel()
         {
-            _productService = DependencyService.Get<IProductService<ProductModel>>();
-
             CreateProductCommand = new Command<ProductModel>(CreateProduct);
         }
 
@@ -45,7 +43,7 @@ namespace crud_xamarin.ViewModels
             {
                 _ = await _productService.AddProductAsync(product);
 
-                await _navigationService.PushAsync<ProductsView>();
+                await _navigationService.PushAsync<ProductsView>(clearStack: true);
             }
         }
     }
