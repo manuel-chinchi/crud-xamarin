@@ -16,7 +16,7 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid>
+    <Grid Padding="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0"
-               Text="Product list"
+               Text="product list"
                HeightRequest="35"
                FontAttributes="Bold"
                TextTransform="Uppercase"
@@ -35,14 +35,13 @@
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"/>
 
-        <Grid Grid.Row="1" ColumnDefinitions="40,160,Auto" Padding="10"
-              Background="LightGray">
+        <Grid Grid.Row="1" ColumnDefinitions="40,160,Auto" Padding="10" Background="LightGray" Margin="10,0">
             <Label Grid.Column="0" Text="Id" Style="{StaticResource LabelHeaderStyle}"/>
             <Label Grid.Column="1" Text="Name" Style="{StaticResource LabelHeaderStyle}"/>
             <Label Grid.Column="2" Text="Description" Style="{StaticResource LabelHeaderStyle}"/>
         </Grid>
 
-        <ScrollView Grid.Row="2" Padding="10">
+        <ScrollView Grid.Row="2" Margin="10,0" Padding="10,0">
             <CollectionView ItemsSource="{Binding Products}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:ProductModel">
@@ -71,7 +70,7 @@
         </ScrollView>
 
         <Button Grid.Row="3"
-                Padding="10"
+                Margin="10"
                 Text="new product" 
                 TextTransform="Uppercase" 
                 Command="{Binding CreateProductCommand}"/>
