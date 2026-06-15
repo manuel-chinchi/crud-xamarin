@@ -32,7 +32,7 @@ namespace crud_xamarin.Services
             return mainPage;
         }
 
-        private async Task DefaultNavigateTo<T>(T view) where T : Page
+        private async Task DefaultNavigateTo<TView>(TView view) where TView : ContentPage
         {
             var currentPage = GetCurrentPage();
 
