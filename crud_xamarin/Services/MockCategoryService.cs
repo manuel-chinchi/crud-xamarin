@@ -15,9 +15,9 @@ namespace crud_xamarin.Services
         {
             s_categories = new List<CategoryModel>()
             {
-                new CategoryModel() { Id = 200, Name = "Reneras H/M", Description = "Remeras unisex" },
-                new CategoryModel() { Id = 201, Name = "Jeans Clasico", Description = "Jeans corte recto"},
-                new CategoryModel() { Id = 202, Name = "Buzos Clasico", Description="Busos lisos"}
+                new CategoryModel() { Id = 200, Name = "Remeras H/M", Code = "REMS-U" },
+                new CategoryModel() { Id = 201, Name = "Jeans Clasico", Code = "JEAN-C"},
+                new CategoryModel() { Id = 202, Name = "Buzos Clasico", Code = "BUZS-C"}
             };
         }
 
@@ -49,7 +49,7 @@ namespace crud_xamarin.Services
             if (editItem != null)
             {
                 editItem.Name = item.Name;
-                editItem.Description = item.Description;
+                editItem.Code = item.Code;
             }
             await Task.CompletedTask;
         }

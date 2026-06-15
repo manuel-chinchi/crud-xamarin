@@ -27,5 +27,12 @@ namespace crud_xamarin.Views
             _viewModel = viewModel;
             BindingContext = viewModel;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            _viewModel.OnLoadView();
+        }
     }
 }

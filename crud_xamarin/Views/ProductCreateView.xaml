@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:crud_xamarin.ViewModels"
+             xmlns:models="clr-namespace:crud_xamarin.Models"
              x:Class="crud_xamarin.Views.ProductCreateView"
+             x:DataType="viewmodels:ProductCreateViewModel"
              Background="White">
 
     <ScrollView>
@@ -24,6 +26,20 @@
                    PlaceholderColor="{StaticResource DefaultPlaceholderColor2}"
                    Style="{StaticResource EntryDefaultStyle}"
                    Placeholder="iPhone 17 Ultra Pro Max 6.7"/>
+
+            <Label Text="Category" FontAttributes="Bold" 
+                   TextColor="{StaticResource DefaultTextColor}"
+                   Style="{StaticResource LabelDefaultStyle}"/>
+            <Picker Title="Jeans"
+                    TitleColor="{StaticResource DefaultPlaceholderColor2}"
+                    TextColor="Black"
+                    ItemsSource="{Binding Categories}" 
+                    FontSize="13"
+                    SelectedItem="{Binding Category}">
+                <Picker.ItemDisplayBinding>
+                    <Binding Path="Name" x:DataType="models:CategoryModel"/>
+                </Picker.ItemDisplayBinding>
+            </Picker>
 
             <Button Text="Accept"
                     Command="{Binding CreateProductCommand}" 
