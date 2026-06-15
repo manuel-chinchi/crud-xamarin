@@ -9,8 +9,11 @@ namespace crud_xamarin.Services
 {
     public sealed class NavigationService : INavigationService
     {
-        public NavigationService()
+        private readonly IServiceProvider _serviceProvider;
+
+        public NavigationService(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
         }
 
         private Page GetCurrentPage()
@@ -46,14 +49,14 @@ namespace crud_xamarin.Services
 
         public async Task PushAsync<TView>() where TView : ContentPage
         {
-            TView view = App.Services.GetRequiredService<TView>();
+            TView view = _serviceProvider.GetRequiredService<TView>();
 
             await DefaultNavigateTo(view);
         }
 
         public async Task PushAsync<TView, TViewModel>(Action<TViewModel> configViewModel) where TView : ContentPage
         {
-            TView view = App.Services.GetRequiredService<TView>();
+            TView view = _serviceProvider.GetRequiredService<TView>();
 
             var viewModel = (TViewModel)view.BindingContext;
             configViewModel(viewModel);
