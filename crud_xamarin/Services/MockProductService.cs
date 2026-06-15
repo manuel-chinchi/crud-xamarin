@@ -20,6 +20,18 @@ namespace crud_xamarin.Services
                 new ProductModel() { Id = 101, Name = "remera lisa", Description = "Adidas" },
                 new ProductModel() { Id = 102, Name = "remera", Description = "China" },
                 new ProductModel() { Id = 103, Name = "camisa", Description = "China" },
+                new ProductModel() 
+                {
+                    Id = 104,
+                    Name = "gorra",
+                    Description = "Lisa",
+                    Category = new CategoryModel()
+                    {
+                        Id = 105,
+                        Name = "indumentaria",
+                        Code = "INDU-00"
+                    }
+                }
             };
         }
 

@@ -24,6 +24,7 @@ namespace crud_xamarin
 
             // services
             services.AddSingleton<IProductService<ProductModel>, MockProductService>();
+            services.AddSingleton<ICategoryService<CategoryModel>, MockCategoryService>();
             services.AddSingleton<INavigationService, NavigationService>();
 
             // viewmodels

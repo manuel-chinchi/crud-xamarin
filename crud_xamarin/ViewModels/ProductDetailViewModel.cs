@@ -36,7 +36,12 @@ namespace crud_xamarin.ViewModels
             _productService = productService;
         }
 
-        public async Task LoadProduct()
+        public async Task OnLoadView()
+        {
+            await LoadProduct();
+        }
+
+        private async Task LoadProduct()
         {
             var product = await _productService.GetProductById(Id.ToString());
             Product = product;

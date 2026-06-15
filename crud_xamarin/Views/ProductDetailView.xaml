@@ -7,13 +7,26 @@
              Background="White">
 
     <StackLayout Padding="10">
+        <Label Text="Id:"
+               FontAttributes="Bold"
+               Style="{StaticResource LabelDefaultStyle}"/>
         <Label Text="{Binding Product.Id}"
+               Style="{StaticResource LabelDefaultStyle}"/>
+        <Label Text="Name:"
+               FontAttributes="Bold"
                Style="{StaticResource LabelDefaultStyle}"/>
         <Label Text="{Binding Product.Name}"
                Style="{StaticResource LabelDefaultStyle}"/>
+        <Label Text="Description:"
+               FontAttributes="Bold"
+               Style="{StaticResource LabelDefaultStyle}"/>
         <Label Text="{Binding Product.Description}"
-               Style="{StaticResource LabelDefaultStyle}" TextColor="Black"/>
-        <Label Text="sss" TextColor="Black"/>
+               Style="{StaticResource LabelDefaultStyle}"/>
+        <Label Text="Category:"
+               FontAttributes="Bold"
+               Style="{StaticResource LabelDefaultStyle}" />
+        <Label Text="{Binding Product.Category.Name}"
+               Style="{StaticResource LabelDefaultStyle}"/>
     </StackLayout>
 
 </ContentPage>
