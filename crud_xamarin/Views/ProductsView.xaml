@@ -7,46 +7,73 @@
              x:DataType="viewmodels:ProductsViewModel"
              Background="White">
 
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="True"/>
-    </Shell.BackButtonBehavior>
-    
     <ContentPage.Resources>
         <Style TargetType="Label" x:Key="LabelCellStyle" BasedOn="{StaticResource LabelDefaultStyle}">
             <Setter Property="VerticalOptions" Value="Center"/>
         </Style>
+        <Style TargetType="Label" x:Key="LabelHeaderStyle" BasedOn="{StaticResource LabelDefaultStyle}">
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
     </ContentPage.Resources>
 
-    <StackLayout Padding="10">
-        <Button Text="New" Command="{Binding CreateProductCommand}"/>
-        <Label Text="Products"
-               Padding="10"
-               TextColor="#232323"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Text="Product list"
+               HeightRequest="35"
+               FontAttributes="Bold"
+               TextTransform="Uppercase"
+               TranslationY="2"
+               FontSize="16"
+               TextColor="{StaticResource DefaultTextColor}"
+               VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"/>
-        <CollectionView ItemsSource="{Binding Products}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:ProductModel">
-                    <Grid HeightRequest="50" ColumnDefinitions="40,160,Auto">
-                        <Label Grid.Column="0"
-                               Text="{Binding Id}"
-                               Style="{StaticResource LabelCellStyle}"/>
-                        <Label Grid.Column="1" 
-                               Text="{Binding Name}"
-                               Style="{StaticResource LabelCellStyle}"/>
-                        <Label Grid.Column="2" 
-                               Text="{Binding Description}" 
-                               Style="{StaticResource LabelCellStyle}"/>
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                Command="{Binding
-                                    Source={
-                                        RelativeSource AncestorType={x:Type viewmodels:ProductsViewModel}
-                                    }, Path=GoToProductDetailCommand}"
-                                CommandParameter="{Binding .}"/>
-                        </Grid.GestureRecognizers>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+
+        <Grid Grid.Row="1" ColumnDefinitions="40,160,Auto" Padding="10"
+              Background="LightGray">
+            <Label Grid.Column="0" Text="Id" Style="{StaticResource LabelHeaderStyle}"/>
+            <Label Grid.Column="1" Text="Name" Style="{StaticResource LabelHeaderStyle}"/>
+            <Label Grid.Column="2" Text="Description" Style="{StaticResource LabelHeaderStyle}"/>
+        </Grid>
+
+        <ScrollView Grid.Row="2" Padding="10">
+            <CollectionView ItemsSource="{Binding Products}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ProductModel">
+                        <Grid HeightRequest="50" ColumnDefinitions="40,160,Auto">
+                            <Label Grid.Column="0"
+                                   Text="{Binding Id}"
+                                   Style="{StaticResource LabelCellStyle}"/>
+                            <Label Grid.Column="1"
+                                   Text="{Binding Name}"
+                                   Style="{StaticResource LabelCellStyle}"/>
+                            <Label Grid.Column="2"
+                                   Text="{Binding Description}" 
+                                   Style="{StaticResource LabelCellStyle}"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding
+                                        Source={
+                                            RelativeSource AncestorType={x:Type viewmodels:ProductsViewModel}
+                                        }, Path=GoToProductDetailCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <Button Grid.Row="3"
+                Padding="10"
+                Text="new product" 
+                TextTransform="Uppercase" 
+                Command="{Binding CreateProductCommand}"/>
+    </Grid>
 </ContentPage>
