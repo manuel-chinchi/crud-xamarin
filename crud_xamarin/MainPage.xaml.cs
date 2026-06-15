@@ -14,6 +14,7 @@ namespace crud_xamarin
     {
         private readonly INavigationService _navigationService;
         private bool _hasNavigated;
+
         public MainPage()
         {
             InitializeComponent();
