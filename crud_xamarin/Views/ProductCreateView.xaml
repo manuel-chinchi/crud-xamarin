@@ -8,15 +8,18 @@
     <ScrollView>
         <StackLayout Padding="10">
             <Label Text="Name" 
+                   TextColor="{StaticResource DefaultTextColor}"
                    Style="{StaticResource LabelDefaultStyle}"/>
             <Entry Text="{Binding Product.Name, TargetNullValue=''}"
                    Placeholder="Phone" 
+                   PlaceholderColor="{StaticResource DefaultPlaceholderColor2}"
                    Style="{StaticResource EntryDefaultStyle}"/>
 
             <Label Text="Details" 
+                   TextColor="{StaticResource DefaultTextColor}"
                    Style="{StaticResource LabelDefaultStyle}"/>
             <Entry Text="{Binding Product.Description, TargetNullValue=''}"
-                   PlaceholderColor="Gray"
+                   PlaceholderColor="{StaticResource DefaultPlaceholderColor2}"
                    Style="{StaticResource EntryDefaultStyle}"
                    Placeholder="iPhone 17 Ultra Pro Max 6.7"/>
 
