@@ -6,12 +6,4 @@
        x:Class="crud_xamarin.AppShell"
        FlyoutBehavior="Disabled">
 
-    <FlyoutItem Title="Home">
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
-    </FlyoutItem>
-
-    <!--<FlyoutItem Title="Products">
-        <ShellContent ContentTemplate="{DataTemplate views:ProductsView}" Route="ProductsView"/>
-    </FlyoutItem>-->
-
 </Shell>
