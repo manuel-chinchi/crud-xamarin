@@ -31,10 +31,8 @@
                    TextColor="{StaticResource DefaultTextColor}"
                    Style="{StaticResource LabelDefaultStyle}"/>
             <Picker Title="Jeans"
-                    TitleColor="{StaticResource DefaultPlaceholderColor2}"
-                    TextColor="Black"
+                    Style="{StaticResource PickerDefaultStyle}"
                     ItemsSource="{Binding Categories}" 
-                    FontSize="13"
                     SelectedItem="{Binding Category}">
                 <Picker.ItemDisplayBinding>
                     <Binding Path="Name" x:DataType="models:CategoryModel"/>
