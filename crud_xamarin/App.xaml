@@ -19,7 +19,6 @@
             <Style TargetType="Picker" x:Key="PickerDefaultStyle">
                 <Setter Property="TextColor" Value="#212121"/>
                 <Setter Property="FontSize" Value="13"/>
-                <Setter Property="TitleColor" Value="#A9A9A9"/>
             </Style>
         </ResourceDictionary>
 

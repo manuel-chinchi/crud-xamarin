@@ -3,45 +3,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:crud_xamarin.ViewModels"
              xmlns:models="clr-namespace:crud_xamarin.Models"
+             xmlns:converters="clr-namespace:crud_xamarin.Components.Converters"
+             xmlns:components="clr-namespace:crud_xamarin.Components"
              x:Class="crud_xamarin.Views.ProductCreateView"
              x:DataType="viewmodels:ProductCreateViewModel"
              Background="White">
 
-    <ScrollView>
-        <StackLayout Padding="10">
-            <Label Text="Name" 
-                   FontAttributes="Bold"
-                   TextColor="{StaticResource DefaultTextColor}"
-                   Style="{StaticResource LabelDefaultStyle}"/>
-            <Entry Text="{Binding Product.Name, TargetNullValue=''}"
-                   Placeholder="Phone" 
-                   PlaceholderColor="{StaticResource DefaultPlaceholderColor2}"
-                   Style="{StaticResource EntryDefaultStyle}"/>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
+            <converters:IsNullConverter x:Key="IsNullConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <Label Text="Details" 
-                   FontAttributes="Bold"
-                   TextColor="{StaticResource DefaultTextColor}"
-                   Style="{StaticResource LabelDefaultStyle}"/>
-            <Entry Text="{Binding Product.Description, TargetNullValue=''}"
-                   PlaceholderColor="{StaticResource DefaultPlaceholderColor2}"
-                   Style="{StaticResource EntryDefaultStyle}"
-                   Placeholder="iPhone 17 Ultra Pro Max 6.7"/>
+        <Label Grid.Row="0"
+               Text="create product"
+               FontAttributes="Bold"
+               TextTransform="Uppercase"
+               FontSize="16"
+               HorizontalTextAlignment="Center"
+               Style="{StaticResource LabelDefaultStyle}"/>
 
-            <Label Text="Category" FontAttributes="Bold" 
-                   TextColor="{StaticResource DefaultTextColor}"
-                   Style="{StaticResource LabelDefaultStyle}"/>
-            <Picker Title="Jeans"
-                    Style="{StaticResource PickerDefaultStyle}"
-                    ItemsSource="{Binding Categories}" 
-                    SelectedItem="{Binding Category}">
-                <Picker.ItemDisplayBinding>
-                    <Binding Path="Name" x:DataType="models:CategoryModel"/>
-                </Picker.ItemDisplayBinding>
-            </Picker>
+        <ScrollView Grid.Row="1">
+            <StackLayout>
+                <Label Text="Name" 
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource DefaultTextColor}"
+                       Style="{StaticResource LabelDefaultStyle}"/>
+                <Entry Text="{Binding Product.Name, TargetNullValue=''}"
+                       Placeholder="Phone" 
+                       PlaceholderColor="{StaticResource DefaultPlaceholderColor2}"
+                       Style="{StaticResource EntryDefaultStyle}"/>
 
-            <Button Text="Accept"
-                    Command="{Binding CreateProductCommand}" 
-                    CommandParameter="{Binding Product}"/>
-        </StackLayout>
-    </ScrollView>
+                <Label Text="Details" 
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource DefaultTextColor}"
+                       Style="{StaticResource LabelDefaultStyle}"/>
+                <Entry Text="{Binding Product.Description, TargetNullValue=''}"
+                       PlaceholderColor="{StaticResource DefaultPlaceholderColor2}"
+                       Style="{StaticResource EntryDefaultStyle}"
+                       Placeholder="iPhone 17 Ultra Pro Max 6.7"/>
+
+                <Label Text="Category" FontAttributes="Bold" 
+                       TextColor="{StaticResource DefaultTextColor}"
+                       Style="{StaticResource LabelDefaultStyle}"/>
+                
+                <!--custom Picker control with placeholder!!! (only Android, other platforms use the native control)-->
+                <components:PickerEx x:Name="myPicker"
+                                     ItemsSource="{Binding Categories}"
+                                     SelectedItem="{Binding Category}"
+                                     PlaceholderText="(Select Category)"
+                                     DisplayMemberPath="Name"/>
+                
+            </StackLayout>
+
+        </ScrollView>
+
+        <Button Grid.Row="2"
+                Text="Accept"
+                Command="{Binding CreateProductCommand}" 
+                CommandParameter="{Binding Product}"/>
+    </Grid>
 </ContentPage>
