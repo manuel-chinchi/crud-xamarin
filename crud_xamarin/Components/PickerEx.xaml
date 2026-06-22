@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="crud_xamarin.Components.PickerEx"
+             xmlns:components="clr-namespace:crud_xamarin.Components"
+             xmlns:converters="clr-namespace:crud_xamarin.Components.Converters"
+             x:DataType="components:PickerEx">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
+            <converters:IsNullConverter x:Key="IsNullConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <OnPlatform x:TypeArguments="View">
+            <On Platform="Android">
+                <StackLayout>
+                    <Label x:Name="lblSelectCategory"
+                           Padding="5,10"
+                           Text="{Binding PlaceholderText}"
+                           IsVisible="{Binding SelectedItem, Converter={StaticResource IsNullConverter}}"
+                           Style="{StaticResource LabelDefaultStyle}"
+                           TextColor="{StaticResource DefaultPlaceholderColor2}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ctrlTouchSelectCategory_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Picker x:Name="picSelectCategory"
+                            IsVisible="{Binding SelectedItem,Converter={StaticResource IsNotNullConverter}}"
+                            Unfocused="picSelectCategory_Unfocused"
+                            Style="{StaticResource PickerDefaultStyle}"
+                            ItemsSource="{Binding ItemsSource}"
+                            SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
+                    </Picker>
+                </StackLayout>
+            </On>
+
+            <On Platform="iOS, UWP">
+                <Picker x:Name="picSelectCategoryNative"
+                       Style="{StaticResource PickerDefaultStyle}"
+                        ItemsSource="{Binding ItemsSource}"
+                        SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
+                </Picker>
+            </On>
+
+        </OnPlatform>
+    </ContentView.Content>
+</ContentView>
