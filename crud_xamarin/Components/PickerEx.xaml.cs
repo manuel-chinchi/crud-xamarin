@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace crud_xamarin.Components
 {
+    /// <summary>
+    /// Control tipo <c>Picker</c> personalizado que permite uso de <c>Placeholder</c> (solo para Android) 
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PickerEx : ContentView
     {
