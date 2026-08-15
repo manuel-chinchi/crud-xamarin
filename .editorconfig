@@ -9,3 +9,8 @@
 
 # IDE0008: Usar un tipo explícito
 csharp_style_var_elsewhere = false
+
+# IDE0008: Usar un tipo explicito en lugar de var
+dotnet_diagnostic.IDE0008.severity = none
+
+dotnet_diagnostic.IDE0058.severity = none
